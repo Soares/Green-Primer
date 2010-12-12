@@ -179,10 +179,17 @@ CLOSURE_COMPILER_PATH = os.path.join(MEDIA_ROOT, 'closure', 'compiler.jar')
 # TEMPLATES :::1
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
+@setting
+def TEMPLATE_LOADERS():
+    template_loaders = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )
+    hisp_loaders = (
+        ('hisp.loaders.convert.Loader', template_loaders),
+    )
+    loaders = hisp_loaders + template_loaders
+    return loaders if DEBUG else ('django.templates.loaders.cached.Loader', loaders)
 
 @setting
 def TEMPLATE_CONTEXT_PROCESSORS():
@@ -255,6 +262,7 @@ def INSTALLED_APPS():
     yield 'sentry'
     yield 'sentry.client'
     yield 'south'
+    yield 'hisp'
     yield 'xframeoptions'
     if DEBUG:
         yield 'debug_toolbar'
