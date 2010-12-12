@@ -112,7 +112,7 @@ MEDIA_BUNDLES = (
         'analyzer/sass/base.sass',
         'analyzer/sass/key.sass',
         'analyzer/sass/tools.sass',
-        'analyzer/sass/dassboard.sass',
+        'analyzer/sass/dashboard.sass',
         'analyzer/sass/layout.sass',
     ),
     ('main.js',
@@ -255,6 +255,7 @@ def INSTALLED_APPS():
     yield 'django.contrib.webdesign' # lorem ipsum generator
     
     # Third-Party
+    yield 'django_html'
     yield 'django_extensions'
     yield 'indexer'
     yield 'mediagenerator'

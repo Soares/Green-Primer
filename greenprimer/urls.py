@@ -4,13 +4,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^equatize/', include('equatize.foo.urls')),
-
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
-    (r'^$', 'django.views.generic.simple.direct_to_template',
-        {'template': 'main.html'}),
+    (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'main.hisp'}),
 )
 
 if settings.DEBUG:

@@ -1,6 +1,7 @@
-{% extends "base.html" %}
+{%extends "base.hisp"}
+{%load html}
 
-{% block body %
+{%block body ~
     (#key
         (button.upper.left#save (:title "Save Now"))
         (button.upper.right#load (:title "Load"))
@@ -56,14 +57,12 @@
     (#dashboard
         (#bounds (#joystick))
         (ul#layers
-            {% for layer in lower ~ (li.lower {layer.name})}
+            {%for layer in lower ~ (li.lower {layer.name})}
             (li.active {active.name})
-            {% for layer in upper ~ (li.upper {layer.name})}))
+            {%for layer in upper ~ (li.upper {layer.name})}))
 
     (#layout (canvas#underlay))}
 
-{% load media %}
-{% block links % {block.super} ~
-    {% include_media "analyze.css" %}}
-{% block scripts % {block.super} ~
-    {% include_media "analyze.js" %}}
+{%load media}
+(%addto links ~ {%include_media "analyzer.css"})
+(%addto scripts ~ {%include_media "analyzer.js"})
