@@ -3,7 +3,7 @@ import socket
 setting = lambda generator: tuple(generator())
 path = lambda *args: os.path.normpath(os.path.realpath(os.path.join(*args)))
 
-# SETUP :::1
+# SETUP {{{1
 
 PROJECT_NAME = 'greenprimer'
 PROJECT_ROOT = path(os.path.dirname(__file__))
@@ -23,14 +23,14 @@ DATABASES = {
 }
 
 
-# RESTRICTED :::1
+# RESTRICTED {{{1
 
 from restricted.settings import SECRET_KEY, DATABASE_PASSWORDS
 
 DATABASES['default']['password'] = DATABASE_PASSWORDS['default']
 
 
-# ENVIRONMENT :::1
+# ENVIRONMENT {{{1
 
 # Hostname lists for local/dev/staging/production machines
 SERVERS = {
@@ -56,7 +56,7 @@ if DEBUG:
 TEMPLATE_DEBUG = True
 
 
-# PREFERENCES :::1
+# PREFERENCES {{{1
 
 ROOT_URLCONF = PROJECT_NAME + '.urls'
 
@@ -80,13 +80,13 @@ LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 
 
-# WEBSITE :::1
+# WEBSITE {{{1
 
 SITE_ID = 1
 INTERNAL_IPS = ('127.0.0.1',)
 
 
-# STATIC FILES :::1
+# STATIC FILES {{{1
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -176,7 +176,7 @@ YUICOMPRESSOR_PATH = os.path.join(MEDIA_ROOT, 'yuicompressor', 'yuicompressor-2.
 CLOSURE_COMPILER_PATH = os.path.join(MEDIA_ROOT, 'closure', 'compiler.jar')
 
 
-# TEMPLATES :::1
+# TEMPLATES {{{1
 
 # List of callables that know how to import templates from various sources.
 @setting
@@ -209,7 +209,7 @@ def TEMPLATE_DIRS():
             yield path(root, 'templates')
 
 
-# MIDDLEWARE :::1
+# MIDDLEWARE {{{1
 
 @setting
 def MIDDLEWARE_CLASSES():
@@ -232,7 +232,7 @@ def MIDDLEWARE_CLASSES():
     # yield 'django.middleware.transaction.TransactionMiddleware',
 
 
-# APPS :::1
+# APPS {{{1
 
 @setting
 def INSTALLED_APPS():
@@ -255,7 +255,6 @@ def INSTALLED_APPS():
     yield 'django.contrib.webdesign' # lorem ipsum generator
     
     # Third-Party
-    yield 'django_html'
     yield 'django_extensions'
     yield 'indexer'
     yield 'mediagenerator'
