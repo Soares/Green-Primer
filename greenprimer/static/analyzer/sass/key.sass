@@ -1,0 +1,80 @@
+#key
+  position: absolute
+  width: 220px
+  height: 90px
+  left: 50%
+  margin-left: -110px
+
+  button
+    background: gray
+
+  .upper
+    width: 60px
+    height: 30px
+    position: absolute
+    float: none
+    z-index: 2
+
+    &.right
+      right: 0
+      border-bottom-right-radius: 30px
+
+    &.left
+      left: 0
+      border-bottom-left-radius: 30px
+
+  .lower
+    width: 50px
+    height: 30px
+    position: absolute
+    float: none
+    z-index: 3
+    top: 30px
+
+    &.right
+      right: 20px
+      border-bottom-right-radius: 30px
+
+    &.left
+      left: 20px
+      border-bottom-left-radius: 30px
+
+
+  .center
+    z-index: 4
+    position: absolute
+    left: 50%
+    background: blue
+    border: 2px solid gray
+      top: 0
+    border-bottom-left-radius: 50px
+    border-bottom-right-radius: 50px
+    width: 100px
+    margin-left: -50px
+    height: 80px
+
+    .left, .right
+      position: absolute
+      bottom: 5px
+      width: 42px
+      height: 74px
+
+    .left
+      border-top-left-radius: 45px
+      border-bottom-left-radius: 45px
+      left: 6px
+
+    .right
+      border-top-right-radius: 45px
+      border-bottom-right-radius: 45px
+      right: 6px
+
+  .bottom
+    position: absolute
+    z-index: 3
+    height: 12px
+    bottom: 0
+    width: 12px
+    border-radius: 6px
+    left: 50%
+    margin-left: -6px
