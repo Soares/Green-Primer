@@ -6,49 +6,55 @@
     (button.upper.left#save (:title "Save Now"))
     (button.upper.right#load (:title "Load"))
     (button.lower.left#fullscreen (:title "Fullscreen"))
-    (button.lower.right#exit (:title "Exit"))
+    (button.lower.right#exit (:title "Exit") ⨂)
     (.center
-      (button.left#undo (:title "Undo"))
-      (button.right#redo (:title "Redo")))
-    (button.bottom#hide (:title "Hide"))
-    (button.bottom#show (:title "Show")))
+      (button.left#undo (:title "Undo") ◀)
+      (button.right#redo (:title "Redo") ▶))
+    (button.bottom#hide (:title "Hide") -)
+    (button.bottom#show (:title "Show") +))
 
   (#toolbar
     (#selector)
+    (.fadeup)
     (.buttons
-      (button#select (span.icon))
-      (button#wall (span.icon))
-      (button#window (span.icon))
-      (button#door (span.icon))
-      (button#stair (span.icon))
-      (button#vent (span.icon))))
+      (button#select (span.icon) Select)
+      (button#wall (span.icon) Walls)
+      (button#window (span.icon) Windows)
+      (button#door (span.icon) Doors)
+      (button#stair (span.icon) Stairways)
+      (button#vent (span.icon) Vents))
+    (.fadedown))
 
   (#optionbox
     (.options (a (:name '#select'))
       (.buttonset
         (button#split "Split")
         (button#merge "Merge")))
-      (.options (a (:name '#wall')))
-      (.options (a (:name '#window'))
-          (#window-width.slider (:title "width"))
-          (#window-height.slider (:title "height")))
-      (.options (a (:name '#door'))
-        (#door-width.slider (:title "width"))
-        (#door-height.slider (:title "height")))
-      (.options (a (:name '#stair'))
-        (#stair-width.slider (:title "width"))
-        (#stair-height.slider (:title "depth")))
-      (.options (a (:name '#vent'))
-        (.buttonset
-          (button#interior "Interior")
-          (button#exterior "Exterior"))))
+    (.options (a (:name '#wall')))
+    (.options (a (:name '#window'))
+        (#window-width.slider (:title "width"))
+        (#window-height.slider (:title "height")))
+    (.options (a (:name '#door'))
+      (#door-width.slider (:title "width"))
+      (#door-height.slider (:title "height")))
+    (.options (a (:name '#stair'))
+      (#stair-width.slider (:title "width"))
+      (#stair-height.slider (:title "depth")))
+    (.options (a (:name '#vent'))
+      (.buttonset
+        (button#interior "Interior")
+        (button#exterior "Exterior"))))
 
   (#dashboard
     (#bounds (#joystick))
     (ul#layers
       {%for layer in lower ~ (li.lower {layer.name})}
       (li.active {active.name})
-      {%for layer in upper ~ (li.upper {layer.name})})))
+      {%for layer in upper ~ (li.upper {layer.name})})
+    (#modes
+      (button.upper#internal-flow Internal)
+      (button.lower#external-flow External)
+      (button.middle#no-flow None))))
 
 (#layout
   (canvas)

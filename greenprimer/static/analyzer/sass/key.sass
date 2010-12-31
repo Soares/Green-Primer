@@ -1,12 +1,14 @@
+@import "analyzer/sass/constants"
+
 #key
-  position: absolute
+  position: fixed
   width: 220px
   height: 90px
   left: 50%
   margin-left: -110px
 
   button
-    background: gray
+    @include button
 
   .upper
     width: 60px
@@ -14,14 +16,19 @@
     position: absolute
     float: none
     z-index: 2
+    
+    &:hover
+      z-index: 4
 
     &.right
       right: 0
       border-bottom-right-radius: 30px
+      border-left: 0
 
     &.left
       left: 0
       border-bottom-left-radius: 30px
+      border-right: 0
 
   .lower
     width: 50px
@@ -29,23 +36,25 @@
     position: absolute
     float: none
     z-index: 3
-    top: 30px
+    top: 28px
 
     &.right
       right: 20px
       border-bottom-right-radius: 30px
+      border-left: 0
 
     &.left
       left: 20px
       border-bottom-left-radius: 30px
+      border-right: 0
 
 
   .center
     z-index: 4
     position: absolute
     left: 50%
-    background: blue
-    border: 2px solid gray
+    background-color: $main
+    border: 2px solid $lightest
       top: 0
     border-bottom-left-radius: 50px
     border-bottom-right-radius: 50px
@@ -72,9 +81,44 @@
   .bottom
     position: absolute
     z-index: 3
-    height: 12px
+    height: 16px
     bottom: 0
-    width: 12px
-    border-radius: 6px
+    width: 16px
+    border-radius: 8px
     left: 50%
-    margin-left: -6px
+    margin-left: -5px
+    padding: 0
+
+button#save
+  background:
+    image: url(analyzer/img/save.png)
+    position: 70% 50%
+
+button#load
+  background:
+    image: url(analyzer/img/open.png)
+    position: 30% 50%
+
+button#fullscreen
+  background:
+    image: url(analyzer/img/fullscreen.png)
+    position: 55% 50%
+
+button#exit
+  color: rgba(0, 0, 0, .8)
+  &:hover
+    color: black
+  &:active
+    color: black
+
+#key
+  #hide
+    display: block
+  #show
+    display: none
+#key.hidden
+  #hide
+    display: none
+  #show
+    display: block
+

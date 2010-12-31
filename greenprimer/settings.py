@@ -113,7 +113,7 @@ MEDIA_BUNDLES = (
         'analyzer/sass/key.sass',
         'analyzer/sass/toolbar.sass',
         'analyzer/sass/dashboard.sass',
-        'analyzer/sass/layout.sass',
+        'analyzer/sass/optionbox.sass',
     ),
     ('main.js',
         'jquery/1.4.4.min.js',

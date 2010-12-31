@@ -1,0 +1,62 @@
+$main: #00CC00
+$light: #39E639
+$lightest: #67E667
+$dark: #269926
+$darkest: #008500
+$cool: #009999
+$cool-light: #33CCCC
+$cool-lightest: #5CCCCC
+$cool-dark: #1D7373
+$cool-darkest: #006363
+$warm: #9FEE00
+$warm-light: #B9F73E
+$warm-lightest: #C9F76F
+$warm-dark: #86B32D
+$warm-darkest: #679B00
+
+@mixin button
+  background:
+    image: none
+    color: $warm
+    repeat: no-repeat
+  color: $warm-dark
+  font-size: 150%
+  font-weight: bold
+  border-radius: 0
+  border: 2px solid $warm-lightest
+
+  &:hover
+    background-color: $cool-light
+    border-color: $cool
+    color: $cool
+
+  &:active
+    background-color: $lightest
+    border-color: $light
+    color: $main
+
+
+@mixin darkbutton
+  background:
+    image: none
+    color: $dark
+    repeat: no-repeat
+  color: darken($darkest, 10%)
+  font-weight: bold
+  font-size: 150%
+  border-radius: 0
+  border: 2px solid $main
+
+  &:hover
+    background-color: $cool
+    border-color: $cool-darkest
+    color: darken($cool-darkest, 10%)
+
+  &:active
+    background-color: $cool-darkest
+    border-color: $cool
+    color: $cool-light
+
+$toolbar-width: 200px
+$dashboard-height: 150px
+$overlap: 0
