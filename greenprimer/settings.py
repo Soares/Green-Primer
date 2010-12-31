@@ -111,7 +111,7 @@ MEDIA_BUNDLES = (
     ('analyzer.css',
         'analyzer/sass/base.sass',
         'analyzer/sass/key.sass',
-        'analyzer/sass/tools.sass',
+        'analyzer/sass/toolbar.sass',
         'analyzer/sass/dashboard.sass',
         'analyzer/sass/layout.sass',
     ),

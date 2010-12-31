@@ -14,39 +14,34 @@
     (button.bottom#show (:title "Show")))
 
   (#toolbar
-    (#selector
+    (#selector)
+    (.buttons
       (button#select (span.icon))
-      (.options
-        (.buttonset
-          (button#split "Split")
-          (button#merge "Merge")))
       (button#wall (span.icon))
-      (.options)
-      (button#window)
-      (.options
-          (#window-width.slider (:title "width"))
-          (#window-height.slider (:title "height")))
+      (button#window (span.icon))
       (button#door (span.icon))
-      (.options
-        (#door-width.slider (:title "width"))
-        (#door-height.slider (:title "height")))
       (button#stair (span.icon))
-      (.options
-        (#stair-width.slider (:title "width"))
-        (#stair-height.slider (:title "depth")))
-      (button#stair (span.icon))
-      (.options
-        (#stair-width.slider (:title "width"))
-        (#stair-height.slider (:title "depth")))
-      (button#vent (span.icon))
-      (.options
-        (.buttonset
-          (button#interior "Interior")
-          (button#exterior "Exterior")))))
+      (button#vent (span.icon))))
 
   (#optionbox
-    (#optionbox-one)
-    (#optionbox-two))
+    (.options (a (:name '#select'))
+      (.buttonset
+        (button#split "Split")
+        (button#merge "Merge")))
+      (.options (a (:name '#wall')))
+      (.options (a (:name '#window'))
+          (#window-width.slider (:title "width"))
+          (#window-height.slider (:title "height")))
+      (.options (a (:name '#door'))
+        (#door-width.slider (:title "width"))
+        (#door-height.slider (:title "height")))
+      (.options (a (:name '#stair'))
+        (#stair-width.slider (:title "width"))
+        (#stair-height.slider (:title "depth")))
+      (.options (a (:name '#vent'))
+        (.buttonset
+          (button#interior "Interior")
+          (button#exterior "Exterior"))))
 
   (#dashboard
     (#bounds (#joystick))
