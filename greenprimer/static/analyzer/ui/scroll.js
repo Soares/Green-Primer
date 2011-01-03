@@ -13,14 +13,12 @@ var scroll = (function(self) {
             ui.position.left - ui.originalPosition.left,
             ui.position.top - ui.originalPosition.top]);
         var direction = getDirection(pos);
-        console.log('direction is', direction);
         left = direction[0] * SCROLL_AMOUNT;
         up = direction[1] * SCROLL_AMOUNT;
         setSpeed(getSpeed(pos));
     };
 
     self.stop = function(e, ui) {
-        console.log('ui stopped');
         if(interval) interval = clearInterval(interval);
     };
 
@@ -46,7 +44,6 @@ var scroll = (function(self) {
     var getDirection = function(unit) {
         var x = unit.elements[0], y = unit.elements[1], o = theta(x, y);
         var octant = Math.round(4*o/Math.PI);
-        console.log('octant is', octant);
         switch(octant) {
             case 0: return [1, 0];
             case 1: return [1, 1];

@@ -6,6 +6,7 @@ $circle: $dashboard-height - (2 * $pad)
 $joy: .4 * $circle
 
 #dashboard
+  text-align: center
   position: fixed
   bottom: 0
   left: 0
@@ -91,4 +92,75 @@ $joy: .4 * $circle
       padding: 0
   
   #layers
-    display: none
+    width: 286px
+    position: absolute
+    bottom: 0
+    left: 50%
+    margin-left: -140px
+    padding: 0
+    top: $pad
+
+    .list
+      overflow: hidden
+      height: $circle
+      width: 220px
+      position: relative
+      left: 30px
+      border: 3px solid $warm-light
+        top: 0
+        bottom: 0
+        radius: 2em
+
+    .items
+      width: 20000em
+      position: absolute
+      height: $circle
+
+      button
+        float: left
+        margin: 0
+        padding: 0
+        width: 200px
+        margin-left: 10px
+        margin-right: 10px
+        margin-top: $circle / 6
+        height: $circle * 2 / 3
+        line-height: $circle * 2 / 3
+        border: 0
+        color: $warm-dark
+        border-radius: 1em
+        box-sizing: border-box
+        background: $warm-lightest
+        text-decoration: none
+        font-size: 150%
+        font-weight: bold
+
+    #prevlayer, #nextlayer
+      position: absolute
+      height: 60px
+      margin-top: ($circle / 2) - 30px
+      cursor: pointer
+      line-height: 60px
+      font-weight: bold
+      font-size: 200%
+      text-align: center
+      width: 30px
+      background: $warm-light
+      color: $warm-darkest
+
+      &:hover
+        background: $warm-darkest
+        color: $warm
+
+      &:active
+        background: $darkest
+        color: $main
+
+    #prevlayer
+      left: 0
+      border-top-left-radius: 30px
+      border-bottom-left-radius: 30px
+    #nextlayer
+      right: 0
+      border-top-right-radius: 30px
+      border-bottom-right-radius: 30px

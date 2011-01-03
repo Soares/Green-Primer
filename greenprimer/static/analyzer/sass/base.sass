@@ -10,8 +10,8 @@
   overflow: auto
 
   &.fullscreen
-    bottom: 0
-    right: 0
+    bottom: $ui-border
+    right: $ui-border
 
 #layout
   background: url(analyzer/img/grid.png) repeat
@@ -30,3 +30,12 @@
 #viewport
   position: absolute
   z-index: 2
+
+.tooltip
+  display: none
+  background: transparent url(jquery/tools/img/black_arrow.png)
+  font-size: 12px
+  height: 70px
+  width: 160px
+  padding: 25px
+  color: #fff

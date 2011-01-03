@@ -5,7 +5,7 @@
   (#key
     (button.upper.left#save (:title "Save Now"))
     (button.upper.right#load (:title "Load"))
-    (button.lower.left#calculate (:title "Calculate") ⨀)
+    (button.lower.left#calculate (:title "Calculate") ⊙)
     (button.lower.right#exit (:title "Exit") ⨂)
     (.center
       (button.left#undo (:title "Undo") ◀)

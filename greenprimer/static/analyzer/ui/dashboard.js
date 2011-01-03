@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+  /* Joystick */
   $('#view').scrollTo('50%');
   $('#joystick').draggable({
     'revert': true,
@@ -9,5 +11,11 @@ $(document).ready(function() {
   });
   $(document).mouseup(function() {
     scroll.stop();
+  });
+
+  /* Layers */
+  $('#layers').scrollable({
+    next: '#nextlayer',
+    prev: '#prevlayer',
   });
 });

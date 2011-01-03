@@ -123,6 +123,7 @@ MEDIA_BUNDLES = (
     ('analyzer.js',
         'sylvester/0.1.3.js',
         'jquery/scrollTo-1.4.2.js',
+        'jquery/tools/tools.min.js',
 
         'analyzer/gp.js',
 
