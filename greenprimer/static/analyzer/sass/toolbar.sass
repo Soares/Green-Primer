@@ -1,60 +1,72 @@
 @import "analyzer/sass/constants"
 
-$buttonheight: 40px
-$innerpad: 0
-$outerpad: 1px
-$height: (($buttonheight + $innerpad) * 6) + ($outerpad * 2)
+$bheight: 40px
+$border: 2px
 
 #toolbar
   position: fixed
-  background: $main
-  border-left: 4px solid $warm-lightest
+  background: $warm
+  border-left: $ui-border solid $warm-lightest
   right: 0
   top: 0
   bottom: $dashboard-height
-  padding-bottom: $overlap
   width: $toolbar-width
   overflow: auto
 
-  .fadeup
+  table.buttons
+    width: 100%
+    height: 100%
     position: absolute
     top: 0
-    bottom: 50%
-    width: 100%
-    margin-bottom: $height / 2
-    background: $main
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$main}', endColorstr='#{$warm}')
-    background: -webkit-gradient(linear, left bottom, left top, from($warm), to($main))
-    background: -moz-linear-gradient(top, $main, $warm)
-
-  .fadedown
-    position: absolute
     bottom: 0
-    top: 50%
-    width: 100%
-    margin-top: $height / 2
-    background: $main
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$warm}', endColorstr='#{$main}')
-    background: -webkit-gradient(linear, left bottom, left top, from($main), to($warm))
-    background: -moz-linear-gradient(top, $warm, $main)
+    margin: 0
+    padding: 0
 
-  .buttons
-    position: absolute
-    height: $height - (2 * $outerpad)
-    top: 50%
-    margin-top: -$height / 2
-    border: $outerpad solid $warm-lightest
-      left: 0
-      right: 0
+    td
+      padding: 0
+      text-align: center
 
-    button
-      width: 100%
-      height: $buttonheight
-      @include button
-      border-width: 1px
-      border-left: 0
-      border-right: 0
-      margin-bottom: $innerpad
+    tr.button
+      height: $bheight
 
-      .icon
+      td
+        cursor: pointer
+        width: 100%
+        box-sizing: border-box
+        height: $bheight
+        line-height: $bheight
+        @include button
+        border: 0
+        border-top: $border solid $warm-lightest
+        margin: 0
+        text-align: center
+        text-decoration: none
+
+        .icon
+          display: none
+
+    tr.box
+      .options
+        width: 100%
+        background: $main
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$warm}', endColorstr='#{$dark}')
+        background: -webkit-gradient(linear, left top, left bottom, from($light), to($dark))
+        background: -moz-linear-gradient(top, $warm, $dark)
+        padding: 1em 0
         display: none
+
+        button
+          @include darkbutton
+          padding: 0
+          font-size: 110%
+
+    tr.box.active
+      display: table-row
+
+    tr.filldown td
+      height: 100%
+      background: $main
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$warm}', endColorstr='#{$main}')
+      background: -webkit-gradient(linear, left bottom, left top, from($main), to($warm))
+      background: -moz-linear-gradient(top, $warm, $main)
+      border-top: $border solid $warm-lightest

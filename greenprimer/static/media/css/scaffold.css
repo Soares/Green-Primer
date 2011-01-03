@@ -133,7 +133,7 @@ a:visited { color: grey; }
 a:hover { color: #036; }
 
 /*  j.mp/webkit-tap-highlight-color */
-a:link { -webkit-tap-highlight-color: #FF5E99; } 
+/*a:link { -webkit-tap-highlight-color: #FF5E99; } */
 
 small { font-size: 85%; }
 strong, th { font-weight: bold }
@@ -364,12 +364,12 @@ input:invalid, textarea:invalid {
   			Utility Classes
  ----------------------------------- */
  
-.left { float: left; }
-.right { float: right; }
-.center { margin: 0 auto; text-align: center; }
-.block { display: block; }
-.clear { clear: both; }
-.hidden { display: none; visibility:hidden; }
+/*.left { float: left; }*/
+/*.right { float: right; }*/
+/*.center { margin: 0 auto; text-align: center; }*/
+/*.block { display: block; }*/
+/*.clear { clear: both; }*/
+/*.hidden { display: none; visibility:hidden; }*/
 
 img.left { margin: 0 1em 1em 0; }
 img.right { margin: 0 0 1em 1em; !important }

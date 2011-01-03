@@ -22,41 +22,55 @@ $warm-darkest: #679B00
   color: $warm-dark
   font-size: 150%
   font-weight: bold
-  border-radius: 0
   border: 2px solid $warm-lightest
 
-  &:hover
+  &:hover:not([disabled]), &.hover:not([disabled])
     background-color: $cool-light
     border-color: $cool
     color: $cool
 
-  &:active
+  &:active:not([disabled]), &.active:not([disabled])
     background-color: $lightest
     border-color: $light
     color: $main
 
+  &[disabled], &.disabled
+    opacity: .4
+    cursor: default
+
 
 @mixin darkbutton
-  background:
-    image: none
-    color: $dark
-    repeat: no-repeat
+  @include button
+  background-color: $dark
   color: darken($darkest, 10%)
-  font-weight: bold
-  font-size: 150%
-  border-radius: 0
-  border: 2px solid $main
+  border-color: $main
 
-  &:hover
+  &:hover:not([disabled]), &.hover:not([disabled])
     background-color: $cool
     border-color: $cool-darkest
     color: darken($cool-darkest, 10%)
 
-  &:active
+  &:active:not([disabled]), &.active:not([disabled])
     background-color: $cool-darkest
     border-color: $cool
     color: $cool-light
 
+@mixin coolbutton
+  @include button
+  background-color: $cool-light
+  color: $cool
+  border-color: $cool
+
+  &:hover:not([disabled]), &.hover:not([disabled])
+    background-color: $cool
+    border-color: $cool-darkest
+    color: $cool-darkest
+
+  &:active:not([disabled]), &.active:not([disabled])
+    background-color: $cool-lightest
+    border-color: $cool
+    color: $cool
+
 $toolbar-width: 200px
 $dashboard-height: 150px
-$overlap: 0
+$ui-border: 4px

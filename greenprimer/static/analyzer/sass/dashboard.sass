@@ -1,55 +1,63 @@
 @import "analyzer/sass/constants"
 
 $pad: 8px
-$joy: 40%
+$border: 3px
+$circle: $dashboard-height - (2 * $pad)
+$joy: .4 * $circle
 
 #dashboard
   position: fixed
   bottom: 0
   left: 0
-  right: $toolbar-width
-  padding-right: $overlap
+  right: 0
   background: $main
   height: $dashboard-height
-  border-top: 4px solid $warm-lightest
+  border-top: $ui-border solid $warm-lightest
 
   #bounds, #modes
     position: absolute
-    bottom: $pad
-    top: $pad
+    bottom: $pad - $border
+    top: $pad - $border
     width: $dashboard-height - (2 * $pad)
     height: $dashboard-height - (2 * $pad)
-    border: 3px solid $darkest
+    border: $border solid $darkest
     border-radius: 50%
 
   #bounds
     left: $pad
-    background: rgba(0, 0, 0, .7)
+
+    .inner
+      position: absolute
+      background: rgba(0, 0, 0, .7)
+      top: 0
+      left: 0
+      width: $circle
+      height: $circle
+      border-radius: 50%
 
     #joystick
       position: absolute
       left: 50%
       top: 50%
-      margin-top: -($joy / 2)
-      margin-left: -($joy / 2)
+      margin-top: -($joy / 2) - $border
+      margin-left: -($joy / 2) - $border
       width: $joy
       height: $joy
       background: #222222
       background-image: url(analyzer/img/thatch.png)
-      border: 3px solid black
-      box-sizing: border-box
+      border: $border solid black
       border-radius: 50%
 
   #modes
-    right: $pad + $overlap
+    right: $pad
 
     .upper, .lower, .middle
       text-align: center
       position: absolute
       @include darkbutton
 
-    $half: ($dashboard-height - (2 * $pad)) / 2
-    $third: ($dashboard-height - (2 * $pad)) / 2.5
+    $half: $circle / 2
+    $third: $circle / 2.5
 
     .upper, .lower
       width: 100%

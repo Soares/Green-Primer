@@ -15,38 +15,36 @@
 
   (#toolbar
     (#selector)
-    (.fadeup)
-    (.buttons
-      (button#select (span.icon) Select)
-      (button#wall (span.icon) Walls)
-      (button#window (span.icon) Windows)
-      (button#door (span.icon) Doors)
-      (button#stair (span.icon) Stairways)
-      (button#vent (span.icon) Vents))
-    (.fadedown))
-
-  (#optionbox
-    (.options (a (:name '#select'))
-      (.buttonset
-        (button#split "Split")
-        (button#merge "Merge")))
-    (.options (a (:name '#wall')))
-    (.options (a (:name '#window'))
-        (#window-width.slider (:title "width"))
-        (#window-height.slider (:title "height")))
-    (.options (a (:name '#door'))
-      (#door-width.slider (:title "width"))
-      (#door-height.slider (:title "height")))
-    (.options (a (:name '#stair'))
-      (#stair-width.slider (:title "width"))
-      (#stair-height.slider (:title "depth")))
-    (.options (a (:name '#vent'))
-      (.buttonset
-        (button#interior "Interior")
-        (button#exterior "Exterior"))))
+    (table.buttons
+      (tr.button (td#select (span.icon) Select))
+      (tr.box (td (.options
+            (.buttonset
+              (button#split "Split" (:disabled))
+              (button#merge "Merge" (:disabled))
+              (button#delete "Delete" (:disabled))))))
+      (tr.button (td#wall (span.icon) Walls))
+      (tr.box (td (.options)))
+      (tr.button (td#window (span.icon) Windows))
+      (tr.box (td (.options
+            (#window-width.slider (:title "width"))
+            (#window-height.slider (:title "height")))))
+      (tr.button (td#door (span.icon) Doors))
+      (tr.box (td (.options
+          (#door-width.slider (:title "width"))
+          (#door-height.slider (:title "height")))))
+      (tr.button (td#stair (span.icon) Stairways))
+      (tr.box (td (.options
+          (#stair-width.slider (:title "width"))
+          (#stair-height.slider (:title "depth")))))
+      (tr.button (td#vent (span.icon) Vents))
+      (tr.box (td (.options
+          (.buttonset
+            (button#interior "Interior")
+            (button#exterior "Exterior")))))
+      (tr.filldown (td))))
 
   (#dashboard
-    (#bounds (#joystick))
+    (#bounds (.inner (#joystick)))
     (ul#layers
       {%for layer in lower ~ (li.lower {layer.name})}
       (li.active {active.name})
@@ -56,9 +54,10 @@
       (button.lower#external-flow External)
       (button.middle#no-flow None))))
 
-(#layout
-  (canvas)
-  (svg))}
+(#view
+  (#layout
+    (canvas)
+    (svg)))}
 
 {%load media}
 (%addto[links] {%include_media "analyzer.css"})
