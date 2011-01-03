@@ -7,4 +7,7 @@ $(document).ready(function() {
   }).click(function() {
     $('#view').scrollTo('50%');
   });
+  $(document).mouseup(function() {
+    scroll.stop();
+  });
 });

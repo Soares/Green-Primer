@@ -2,20 +2,26 @@ var scroll = (function(self) {
     self.MAX_DIST = 35; // pixels to edge of circle
 
     var SCALE_THRESHOLD = 20; // pixels before scrolling begins
-    var SCALE_RANGE = self.MAX_DIST - SCALE_THRESHOLD
-    var ANGLE_THRESHOLD = .3 // Radians off axis before scrolling diagonally
-    var SCROLL_THRESHOLD = 200; // Milliseconds between scrolls
-    var lastscroll = (new Date()).getTime();
+    var SCALE_RANGE = self.MAX_DIST - SCALE_THRESHOLD;
+    var ANGLE_THRESHOLD = .3; // Radians off axis before scrolling diagonally
+    var SCROLL_AMOUNT = 10; // How much to scroll each time
+    var MAX_SPEED = 100; // Miliseconds between max speed scroll
+    var left, up, speed, interval;
 
     self.drag = function(e, ui) {
-        if(!okToScroll()) return;
         var pos = $V([
             ui.position.left - ui.originalPosition.left,
             ui.position.top - ui.originalPosition.top]);
-        var dist = pos.distanceFrom([0, 0]);
-        if(dist > SCALE_THRESHOLD) {
-            scroll(getWhich(pos.toUnitVector()), getScale(dist));
-        }
+        var direction = getDirection(pos);
+        console.log('direction is', direction);
+        left = direction[0] * SCROLL_AMOUNT;
+        up = direction[1] * SCROLL_AMOUNT;
+        setSpeed(getSpeed(pos));
+    };
+
+    self.stop = function(e, ui) {
+        console.log('ui stopped');
+        if(interval) interval = clearInterval(interval);
     };
 
     var theta = function(x, y) {
@@ -26,43 +32,43 @@ var scroll = (function(self) {
         return 0;
     };
 
-    var okToScroll = function() {
-        var now = (new Date()).getTime(), delta = now - lastscroll;
-        if(delta < SCROLL_THRESHOLD) return false;
-        lastscroll = now;
-        return true;
+    var getSpeed = function(pos) {
+        var distance = Math.round(pos.distanceFrom([0, 0]));
+        if(distance < SCALE_THRESHOLD) return 0;
+        var lowToHigh = (distance - SCALE_THRESHOLD);
+        var highToLow = SCALE_RANGE - lowToHigh;
+        var ratio = highToLow / SCALE_RANGE;
+        var scale = ((ratio * ratio * 4) + 1);
+        var speed = MAX_SPEED * scale;
+        return parseInt(speed);
     };
 
-    var getWhich = function(unit) {
+    var getDirection = function(unit) {
         var x = unit.elements[0], y = unit.elements[1], o = theta(x, y);
-        switch(Math.round(4*o/Math.PI)) {
-            case 0: return 'E';
-            case 1: return 'SE';
-            case 2: return 'S';
-            case 3: return 'SW';
+        var octant = Math.round(4*o/Math.PI);
+        console.log('octant is', octant);
+        switch(octant) {
+            case 0: return [1, 0];
+            case 1: return [1, 1];
+            case 2: return [0, 1];
+            case 3: return [-1, 1];
             case 4:
-            case -4: return 'W';
-            case -3: return 'NW';
-            case -2: return 'N';
-            case -1: return 'NE';
+            case -4: return [-1, 0];
+            case -3: return [-1, -1];
+            case -2: return [0, -1];
+            case -1: return [1, -1];
         }
     };
 
-    var getScale = function(dist) {
-        return (dist - SCALE_THRESHOLD) / SCALE_RANGE;
+    var setSpeed = function(s) {
+        if(interval && speed === s) return;
+        speed = s;
+        if(interval) interval = clearInterval(interval);
+        if(speed) interval = setInterval("scroll.scroll()", speed);
     };
 
-    var scroll = function(which, scale) {
-      var x = 0, y = 0;
-      if(which.indexOf('N') != -1) y = -1;
-      if(which.indexOf('S') != -1) y = 1;
-      if(which.indexOf('W') != -1) x = -1;
-      if(which.indexOf('E') != -1) x = 1;
-      var scroll = parseInt(scale * scale * (gp.GRID / 2));
-      $('#view').scrollTo({
-          top: '+='+(scroll * y) + 'px',
-          left: '+=' + (scroll * x) + 'px'
-      });
+    self.scroll = function() {
+        $('#view').scrollTo({top: '+=' + up + 'px', left: '+=' + left + 'px'});
     };
 
     return self;

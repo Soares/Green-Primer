@@ -3,10 +3,11 @@ $(document).ready(function() {
     $('#key').addClass('hidden').animate({'top': '-82px'});
   });
   $('#show').click(function() {
-    $('#view.fullscreen').removeClass('fullscreen');
     $('#key.hidden').removeClass('hidden').animate({'top': '0'});
     $('#dashboard.hidden').removeClass('hidden').animate({'bottom': '0'});
-    $('#toolbar.hidden').removeClass('hidden').animate({'right': '0'});
+    $('#toolbar.hidden').removeClass('hidden').animate({'right': '0'}, function() {
+      $('#view.fullscreen').removeClass('fullscreen');
+    });
   });
   $('#fullscreen').click(function() {
     $('#view').addClass('fullscreen');
