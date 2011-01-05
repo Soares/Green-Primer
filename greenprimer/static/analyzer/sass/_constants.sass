@@ -71,6 +71,22 @@ $warm-darkest: #679B00
     border-color: $cool
     color: $cool
 
-$toolbar-width: 200px
+@mixin warmbutton
+  @include button
+  background-color: $warm-light
+  color: $warm
+  border-color: $warm
+
+  &:hover:not([disabled]), &.hover:not([disabled])
+    background-color: $warm
+    border-color: $warm-darkest
+    color: $warm-darkest
+
+  &:active:not([disabled]), &.active:not([disabled])
+    background-color: $warm-lightest
+    border-color: $warm
+    color: $warm
+
+$toolbar-width: 150px
 $dashboard-height: 150px
 $ui-border: 4px

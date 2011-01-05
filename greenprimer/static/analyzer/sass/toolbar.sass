@@ -2,71 +2,135 @@
 
 $bheight: 40px
 $border: 2px
+$bwidth: .9 * $toolbar-width
+$bradius: 8px
+$space: .5em
 
 #toolbar
   position: fixed
   background: $warm
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$warm}', endColorstr='#{$main}')
+  background: -webkit-gradient(linear, left top, left bottom, from($warm), to($main))
+  background: -moz-linear-gradient(top, $warm, $main)
   border-left: $ui-border solid $warm-lightest
   right: 0
   top: 0
   bottom: $dashboard-height
   width: $toolbar-width
   overflow: auto
+  text-align: center
+  box-sizing: border-box
+  padding-top: 1em
 
-  table.buttons
+  .options
     width: 100%
-    height: 100%
-    position: absolute
-    top: 0
-    bottom: 0
-    margin: 0
-    padding: 0
+    display: block
+    margin: .5em auto
 
-    td
-      padding: 0
-      text-align: center
+    button
+      @include darkbutton
+      display: inline-block
+      font-size: 90%
+      margin: 0
+      box-sizing: border-box
+      border-radius: 0
+      border-width: 1px
 
-    tr.button
-      height: $bheight
+    #select
+      width: $bwidth
+      border-top-left-radius: $bradius
+      border-top-right-radius: $bradius
+      border-top-width: 2px
+      border-left-width: 2px
+      border-right-width: 2px
 
-      td
-        cursor: pointer
-        width: 100%
-        box-sizing: border-box
-        height: $bheight
-        line-height: $bheight
-        @include button
-        border: 0
-        border-top: $border solid $warm-lightest
-        margin: 0
-        text-align: center
-        text-decoration: none
+    #wall
+      width: ($bwidth / 2) + 1
+      margin-right: -2px
+      border-left-width: 2px
 
-        .icon
-          display: none
+    #window
+      width: $bwidth / 2
+      margin-left: -1px
+      border-right-width: 2px
 
-    tr.box
-      .options
-        width: 100%
-        background: $main
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$warm}', endColorstr='#{$dark}')
-        background: -webkit-gradient(linear, left top, left bottom, from($light), to($dark))
-        background: -moz-linear-gradient(top, $warm, $dark)
-        padding: 1em 0
-        display: none
+    #door
+      width: $bwidth / 3
+      margin-right: -2px
+      border-left-width: 2px
+      border-bottom-width: 2px
+      border-bottom-left-radius: $bradius
 
-        button
-          @include darkbutton
-          padding: 0
-          font-size: 110%
+    #vent
+      width: $bwidth/3
+      margin-left: -1px
+      margin-right: -1px
+      border-bottom-width: 2px
 
-    tr.box.active
-      display: table-row
+  #stair
+    width: $bwidth/3
+    margin-left: -2px
+    border-right-width: 2px
+    border-bottom-width: 2px
+    border-bottom-right-radius: $bradius
 
-    tr.filldown td
-      height: 100%
-      background: $main
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$warm}', endColorstr='#{$main}')
-      background: -webkit-gradient(linear, left bottom, left top, from($main), to($warm))
-      background: -moz-linear-gradient(top, $warm, $main)
-      border-top: $border solid $warm-lightest
+  #select-options .buttonset
+    width: $bwidth
+    margin: .5em auto
+    margin-top: 2em
+
+    #cut, #copy, #paste
+      width: $bwidth / 3
+      margin: 0
+      border-left-width: 1px
+      border-right-width: 1px
+      border-top-width: 2px
+      border-bottom-width: 1px
+
+    #cut
+      border-left-width: 2px
+      border-top-left-radius: $bradius
+      margin-right: -2px
+
+    #copy
+      margin-left: -1px
+      margin-right: -1px
+
+    #paste
+      margin-left: -2px
+      border-right-width: 2px
+      border-top-right-radius: $bradius
+
+    #delete
+      width: $bwidth
+      border-width: 2px
+      border-top-width: 1px
+      border-bottom-left-radius: $bradius
+      border-bottom-right-radius: $bradius
+
+  #wall-options
+    width: $bwidth
+    margin: .5em auto
+    margin-top: 2em
+
+    #split, #merge
+      margin: 0
+
+    #split
+      width: $bwidth / 2 + 1
+      margin-right: -2px
+      border-width: 2px
+      border-right-width: 1px
+      border-top-left-radius: $bradius
+      border-bottom-left-radius: $bradius
+
+    #merge
+      width: $bwidth / 2
+      margin-left: -1px
+      border-width: 2px
+      border-left-width: 1px
+      border-top-right-radius: $bradius
+      border-bottom-right-radius: $bradius
+
+  ul
+    display: none

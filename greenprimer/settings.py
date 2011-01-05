@@ -228,8 +228,8 @@ def MIDDLEWARE_CLASSES():
     yield 'django.middleware.csrf.CsrfViewMiddleware'
     # yield 'django.middleware.locale.LocaleMiddleware',
     yield 'django.contrib.auth.middleware.AuthenticationMiddleware'
-    if DEBUG:
-        yield 'debug_toolbar.middleware.DebugToolbarMiddleware'
+    #if DEBUG:
+    #    yield 'debug_toolbar.middleware.DebugToolbarMiddleware'
     yield 'django.contrib.messages.middleware.MessageMiddleware'
     # yield 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # yield 'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
@@ -269,8 +269,8 @@ def INSTALLED_APPS():
     yield 'south'
     yield 'hisp'
     yield 'xframeoptions'
-    if DEBUG:
-        yield 'debug_toolbar'
+    #if DEBUG:
+    #   yield 'debug_toolbar'
 
     # Equatize
 

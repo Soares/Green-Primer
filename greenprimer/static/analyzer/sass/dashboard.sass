@@ -148,13 +148,18 @@ $joy: .4 * $circle
       background: $warm-light
       color: $warm-darkest
 
-      &:hover
+      &:hover:not(.disabled)
         background: $warm-darkest
         color: $warm
 
-      &:active
+      &:active:not(.disabled)
         background: $darkest
         color: $main
+
+      &.disabled
+        opacity: .5
+        cursor: default
+        display: none
 
     #prevlayer
       left: 0

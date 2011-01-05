@@ -5,7 +5,7 @@
   (#key
     (button.upper.left#save (:title "Save Now"))
     (button.upper.right#load (:title "Load"))
-    (button.lower.left#calculate (:title "Calculate") ⨀)
+    (button.lower.left#data (:title "Data") ⨀)
     (button.lower.right#exit (:title "Exit") ⨂)
     (.center
       (button.left#undo (:title "Undo") ◀)
@@ -14,34 +14,41 @@
     (button.bottom#show (:title "Show") +))
 
   (#toolbar
-    (#selector)
-    (table.buttons
-      (tr.button (td#select (span.icon) Select))
-      (tr.box (td (.options
-            (.buttonset
-              (button#split "Split" (:disabled))
-              (button#merge "Merge" (:disabled))
-              (button#delete "Delete" (:disabled))))))
-      (tr.button (td#wall (span.icon) Walls))
-      (tr.box (td (.options)))
-      (tr.button (td#window (span.icon) Windows))
-      (tr.box (td (.options
-            (#window-width.slider (:title "width"))
-            (#window-height.slider (:title "height")))))
-      (tr.button (td#door (span.icon) Doors))
-      (tr.box (td (.options
-          (#door-width.slider (:title "width"))
-          (#door-height.slider (:title "height")))))
-      (tr.button (td#stair (span.icon) Stairways))
-      (tr.box (td (.options
-          (#stair-width.slider (:title "width"))
-          (#stair-height.slider (:title "depth")))))
-      (tr.button (td#vent (span.icon) Vents))
-      (tr.box (td (.options
-          (.buttonset
-            (button#interior "Interior")
-            (button#exterior "Exterior")))))
-      (tr.filldown (td))))
+    (#types.options
+      (button#select Select)
+      (button#wall Walls)
+      (button#window Windows)
+      (button#door Doors)
+      (button#vent Vents)
+      (button#stair Stairs))
+    (.options#select-options
+      (.buttonset
+        (button#cut Cut)
+        (button#copy Copy)
+        (button#paste Paste)
+        (button#delete Delete)))
+    (.options#wall-options.buttonset
+      (button#split Split)
+      (button#merge Merge))
+    (.options#window-options
+      (ul#window-type
+        (li These)
+        (li Are)
+        (li User)
+        (li Defined)))
+    (.options#door-options
+      (ul#door-type
+        (li These)
+        (li Are)
+        (li User)
+        (li Defined)))
+    (.options#vent-options)
+    (.options#stair-options
+      (ul#stair-type
+        (li These)
+        (li Are)
+        (li User)
+        (li Defined))))
 
   (#dashboard
     (#bounds (.inner (#joystick)))
@@ -67,8 +74,8 @@
 
 (#view
   (#layout
-    (canvas)
-    (svg)))}
+    (canvas#canvas)
+    (svg#svg)))}
 
 {%load media}
 (%addto[links] {%include_media "analyzer.css"})
