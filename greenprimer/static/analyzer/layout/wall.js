@@ -1,11 +1,14 @@
 var Wall = function(source, dest) {
-    this = layout.register(layout.WALL, this);
+    layout.register(layout.WALL, this);
     this.source = source.attach(this);
     this.dest = dest.attach(this);;
-    this.line = gp.paper.path('M0 0L1 1');
+    this.line = gp.svg.path('M0 0L1 1');
+    this.$ = $(this.line.node);
     this.update();
 
-    $(this.line.node).addClass('wall').attr('id', this.id);
+    this.$.addClass('wall').attr('id', this.id).click(function(e) {
+        gp.body.trigger('gp.wall.click', e, this);
+    });
 
     return this;
 };
@@ -13,6 +16,11 @@ Wall.prototype.update = function() {
     this.line.animate({path: [
         ['M', this.source.position.x, this.source.position.y],
         ['L', this.dest.position.x, this.dest.position.y]]});
+    this.line.backward(3);
+    return this;
+};
+Wall.prototype.placeholder = function() {
+    this.$.addClass('surreal');
     return this;
 };
 Wall.prototype.move = function(source, dest) {
@@ -51,7 +59,7 @@ Wall.prototype.not = function(joint) {
 Wall.prototype.cut = function() {
     var x = (this.source.position.x + this.dest.position.x) / 2;
     var y = (this.source.position.y + this.dest.position.y) / 2;
-    var mid = new Joint(new Vector(x, y));
+    var mid = new Joint(new Point(x, y));
     var child = new Wall(mid, this.dest);
     this.swap(this.dest, mid);
     this.update();

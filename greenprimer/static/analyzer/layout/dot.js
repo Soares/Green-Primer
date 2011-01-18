@@ -1,24 +1,45 @@
-/* Dot Object
- * A dot represented on the green primer paper
- * can be moved around the page */
 var Dot = function() {
-    // Private
-    this.circle = gp.paper.circle(0, 0, 4);
+    this.position = new Point(0, 0);
+    this.circle = gp.svg.circle(0, 0, 4);
+    this.$ = $(this.circle.node);
+    this.$.addClass('guide');
+    this.deactivate();
     return this;
 };
 Dot.prototype.move = function(point) {
+    this.position.set(point);
     this.circle.animate({cx: point.x, cy: point.y});
     return this;
+};
+Dot.prototype.show = function() {
+    if(this.active) this.$.show();
+};
+Dot.prototype.hide = function() {
+    if(this.active) this.$.hide();
+};
+Dot.prototype.activate = function() {
+    this.active = true;
+};
+Dot.prototype.deactivate = function() {
+    this.active = false;
+    this.$.hide();
+};
+Dot.prototype.jointsUnder = function() {
+    return layout.joints.at(this.position);
 };
 
 
 /* Package
  * Will be initialized to contain a follower dot */
 var dot = (function(self) {
-    $(document).ready(function() {
+    $(function() {
         self.follower = new Dot();
-        gp.canvas.mousemove(function(e) {
-            self.follower.move(new Vector(e));
+        $('#layout, #key').mouseover(function(e) {
+            self.follower.show();
+        }).mouseout(function(e) {
+            self.follower.hide();
+        }).mousemove(function(e) {
+            self.follower.move(new Point(e));
         });
     });
 

@@ -110,6 +110,7 @@ MEDIA_BUNDLES = (
     ),
     ('analyzer.css',
         'analyzer/sass/base.sass',
+        'analyzer/sass/layout.sass',
         'analyzer/sass/key.sass',
         'analyzer/sass/toolbar.sass',
         'analyzer/sass/dashboard.sass',
@@ -121,23 +122,27 @@ MEDIA_BUNDLES = (
         'modernizr/1.6.min.js',
     ),
     ('analyzer.js',
+        'raphael/raphael.js',
+        'raphael/arrange.js',
         'sylvester/0.1.3.js',
         'jquery/scrollTo-1.4.2.js',
         'jquery/tools/tools.min.js',
+        'jquery/svg.js',
+        'jquery/svgdom.js',
 
         'analyzer/gp.js',
+
+        'analyzer/base/exceptions.js',
+        'analyzer/base/utilities.js',
+        'analyzer/base/notify.js',
 
         'analyzer/ui/key.js',
         'analyzer/ui/toolbar.js',
         'analyzer/ui/dashboard.js',
             'analyzer/ui/scroll.js',
 
-        'analyzer/base/exceptions.js',
-        'analyzer/base/utilities.js',
-        'analyzer/base/notify.js',
-
         'analyzer/layout/layout.js',
-        'analyzer/layout/vector.js',
+        'analyzer/layout/point.js',
         'analyzer/layout/dot.js',
         'analyzer/layout/joint.js',
         'analyzer/layout/wall.js',
@@ -148,7 +153,11 @@ MEDIA_BUNDLES = (
         'analyzer/layout/save.js',
         'analyzer/layout/load.js',
 
+        'analyzer/actions/action.js',
+        'analyzer/actions/stack.js',
+
         'analyzer/mode/modes.js',
+        'analyzer/mode/mode.js',
         'analyzer/mode/select.js',
         'analyzer/mode/wall.js',
         'analyzer/mode/window.js',
@@ -158,12 +167,12 @@ MEDIA_BUNDLES = (
         'analyzer/mode/heatflow.js',
         'analyzer/mode/ventilate.js',
 
-        'analyzer/persistance/stack.js',
-
         'analyzer/analyze/graph.js',
         'analyzer/analyze/pressure.js',
 
         'analyzer/simulate/fluids.js',
+
+        'analyzer/init.js',
     ),
 )
 

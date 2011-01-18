@@ -12,22 +12,25 @@ var layout = (function(self) {
 
     self.register = function(type, object) {
         var array = arrayFor(type);
-        object.id = type + '-' + array.length;
-        object.index = array.length;
+        object.id = type + '-' + (id++);
         object.type = type;
         array.push(object);
         return object;
     };
 
     self.forget = function(object) {
-        arrayFor(object.type).splice(object.index, 1);
+        var array = arrayFor(object.type);
+        for(var i = 0; i < array.length; i++) {
+            if(array[i].id == object.id) break;
+        }
+        array.splice(i, 1);
     };
 
     self.joints = {
-        at: function(vector) {
+        at: function(point) {
             return $.grep(joints, function(joint) {
-                return j.position.equals(vector);
-            };
+                return joint.position.equals(point) && !joint.$.is('.surreal');
+            });
         },
         merge: function(vector) {
             var joints = self.joints.at(vector);
@@ -35,6 +38,28 @@ var layout = (function(self) {
             $.each(joints, function(key, joint) { joint.dieInto(survivor); });
         },
     };
+
+    self.snap = function() {
+        return $.map(arguments, function(x) {
+            return Math.round(x / gp.GRID) * gp.GRID;
+        });
+    };
+
+    $(function() {
+        $('#layout, #key').click(function(e) {
+            var joints = dot.follower.jointsUnder();
+            if(joints.length > 0) {
+                gp.layout.trigger('joint.click', [e, joints]);
+                return;
+            }
+            var target = $(e.originalEvent.target);
+            if(target.is('button')) return;
+            if(target.is('div:not(#key, #layout)')) return;
+            gp.layout.trigger('canvas.click', [e]);
+        }).mousemove(function(e) {
+            gp.layout.trigger('canvas.mousemove', [e]);
+        });
+    });
 
     return self;
 })(layout || {});

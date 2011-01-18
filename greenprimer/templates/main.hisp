@@ -52,16 +52,12 @@
 
   (#dashboard
     (#bounds (.inner (#joystick)))
-    {!
-    (ul#layers
-      {%for layer in lower ~ (li.lower {layer.name})}
-      (li.active {active.name})
-      {%for layer in upper ~ (li.upper {layer.name})})!}
     (#layers
       (a#prevlayer ◀)
       (a#nextlayer ▶)
       (.list
         (.items
+          {!{% for layer in layers ~ (button {layer})}!}
           (button SubBasement)
           (button Basement)
           (button First Floor)
@@ -74,8 +70,7 @@
 
 (#view
   (#layout
-    (canvas#canvas)
-    (svg#svg)))}
+    (canvas#canvas)))}
 
 {%load media}
 (%addto[links] {%include_media "analyzer.css"})

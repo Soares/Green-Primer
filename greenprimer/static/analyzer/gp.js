@@ -1,16 +1,18 @@
 var gp = (function(self) {
     self.GRID = 20;
 
-    $(document).ready(function() {
+    $(function() {
+        self.view = $('#view');
         self.layout = $('#layout');
-        self.svg = $('#svg');
         self.canvas = $('#canvas');
 
-        self.WIDTH = layout.outerWidth();
-        self.HEIGHT = layout.outerHeight();
+        self.WIDTH = self.layout.outerWidth();
+        self.HEIGHT = self.layout.outerHeight();
 
-        self.paper = Raphael(document.getElementById('svg'), gp.WIDTH, gp.HEIGHT);
-        self.paper.canvas.id = 'interface';
+        self.svg = Raphael(document.getElementById('layout'), gp.WIDTH, gp.HEIGHT);
+        self.svg.canvas.id = 'svg';
+
+        self.body = $('body');
     });
 
     return self;
