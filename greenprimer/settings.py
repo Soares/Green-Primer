@@ -124,7 +124,6 @@ MEDIA_BUNDLES = (
     ('analyzer.js',
         'raphael/raphael.js',
         'raphael/arrange.js',
-        'sylvester/0.1.3.js',
         'jquery/scrollTo-1.4.2.js',
         'jquery/tools/tools.min.js',
         'jquery/svg.js',
@@ -134,6 +133,7 @@ MEDIA_BUNDLES = (
 
         'analyzer/base/exceptions.js',
         'analyzer/base/utilities.js',
+        'analyzer/base/vector.js',
         'analyzer/base/notify.js',
 
         'analyzer/ui/key.js',
@@ -142,7 +142,9 @@ MEDIA_BUNDLES = (
             'analyzer/ui/scroll.js',
 
         'analyzer/layout/layout.js',
-        'analyzer/layout/point.js',
+        'analyzer/layout/vector.js',
+        'analyzer/layout/particle.js',
+        'analyzer/layout/line.js',
         'analyzer/layout/dot.js',
         'analyzer/layout/joint.js',
         'analyzer/layout/wall.js',
@@ -171,6 +173,7 @@ MEDIA_BUNDLES = (
         'analyzer/analyze/pressure.js',
 
         'analyzer/simulate/fluids.js',
+        'analyzer/simulate/fds.js',
 
         'analyzer/init.js',
     ),

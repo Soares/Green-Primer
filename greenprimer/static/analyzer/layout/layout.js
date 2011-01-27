@@ -1,4 +1,13 @@
 var layout = (function(self) {
+    var PRECISION = 1e-6;
+    self.eq = function(x, y) { return Math.abs(x - y) < PRECISION; };
+    self.neq = function(x, y) { return Math.abs(x - y) > PRECISION; };
+    self.lt = function(x, y) { return (y - x) > PRECISION; };
+    self.gt = function(x, y) { return (x - y) > PRECISION; };
+    self.lte = function(x, y) { return self.lt(x, y) || self.eq(x, y); };
+    self.gte = function(x, y) { return self.gt(x, y) || self.eq(x, y); };
+    self.isZero = function(x) { return self.eq(x, 0); };
+
     var id = 0, TYPE_ERR = 'Unrecognized Layout Type';
     var joints = [], walls = [];
     var arrayFor = function(type) {

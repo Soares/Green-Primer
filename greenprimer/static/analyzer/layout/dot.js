@@ -1,5 +1,5 @@
 var Dot = function() {
-    this.position = new Point(0, 0);
+    this.position = new Vector();
     this.circle = gp.svg.circle(0, 0, 4);
     this.$ = $(this.circle.node);
     this.$.addClass('guide');
@@ -39,7 +39,7 @@ var dot = (function(self) {
         }).mouseout(function(e) {
             self.follower.hide();
         }).mousemove(function(e) {
-            self.follower.move(new Point(e));
+            self.follower.move(Vector.from(e).snapToGrid());
         });
     });
 

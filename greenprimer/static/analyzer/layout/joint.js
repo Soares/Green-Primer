@@ -1,7 +1,7 @@
-var Joint = function(point) {
+var Joint = function(/* point */) {
     layout.register(layout.JOINT, this);
     this.walls = [];
-    this.position = new Point(point);
+    this.position = Vector.from(arguments);
     this.circle = gp.svg.circle(this.position.x, this.position.y, 4);
     this.$ = $(this.circle.node);
 
@@ -44,7 +44,7 @@ Joint.prototype.move = function(point) {
 };
 Joint.prototype.shift = function(point) {
     /* Shift this joint and all attached walls */
-    return this.move(point.add(this.position));
+    return this.move(point.plus(this.position));
 };
 
 Joint.prototype.split = function() {
@@ -52,7 +52,7 @@ Joint.prototype.split = function() {
     var self = this, usedSelf = false;
     $.each(this.walls, function(key, wall) {
         self.detach(wall);
-        var next = usedSelf? new Joint(self.position) : self;
+        var next = usedSelf? new Joint(self.position.copy()) : self;
         wall.swap(self, next);
         usedSelf = true;
     });

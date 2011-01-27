@@ -59,7 +59,7 @@ Wall.prototype.not = function(joint) {
 Wall.prototype.cut = function() {
     var x = (this.source.position.x + this.dest.position.x) / 2;
     var y = (this.source.position.y + this.dest.position.y) / 2;
-    var mid = new Joint(new Point(x, y));
+    var mid = new Joint(x, y);
     var child = new Wall(mid, this.dest);
     this.swap(this.dest, mid);
     this.update();

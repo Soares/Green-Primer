@@ -9,9 +9,9 @@ var scroll = (function(self) {
     var left, up, speed, interval;
 
     self.drag = function(e, ui) {
-        var pos = $V([
+        var pos = new Vector(
             ui.position.left - ui.originalPosition.left,
-            ui.position.top - ui.originalPosition.top]);
+            ui.position.top - ui.originalPosition.top);
         var direction = getDirection(pos);
         left = direction[0] * SCROLL_AMOUNT;
         up = direction[1] * SCROLL_AMOUNT;
@@ -31,7 +31,7 @@ var scroll = (function(self) {
     };
 
     var getSpeed = function(pos) {
-        var distance = Math.round(pos.distanceFrom([0, 0]));
+        var distance = Math.round(pos.distanceFrom(0, 0));
         if(distance < SCALE_THRESHOLD) return 0;
         var lowToHigh = (distance - SCALE_THRESHOLD);
         var highToLow = SCALE_RANGE - lowToHigh;
@@ -42,7 +42,7 @@ var scroll = (function(self) {
     };
 
     var getDirection = function(unit) {
-        var x = unit.elements[0], y = unit.elements[1], o = theta(x, y);
+        var o = theta(unit.x, unit.y);
         var octant = Math.round(4*o/Math.PI);
         switch(octant) {
             case 0: return [1, 0];
