@@ -1,7 +1,7 @@
 var Wall = function(source, dest) {
     layout.register(layout.WALL, this);
     this.source = source.attach(this);
-    this.dest = dest.attach(this);;
+    this.dest = dest.attach(this);
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
     this.update();
@@ -39,12 +39,12 @@ Wall.prototype.remove = function() {
     this.dest.detach(this);
     this.line.remove();
     layout.forget(this);
-    return undefined;
+    return null;
 };
 Wall.prototype.swap = function(current, next) {
     if(current.id === this.source.id) {
         this.source = next;
-    } else if(current.id == this.dest.id) {
+    } else if(current.id === this.dest.id) {
         this.dest = next;
     } else throw "Bad swap: no such joint.";
     current.detach(this);
@@ -63,4 +63,8 @@ Wall.prototype.cut = function() {
     var child = new Wall(mid, this.dest);
     this.swap(this.dest, mid);
     this.update();
+    return this;
+};
+Wall.prototype.geomLine = function() {
+    return new Line(this.source.position, this.dest.position);
 };

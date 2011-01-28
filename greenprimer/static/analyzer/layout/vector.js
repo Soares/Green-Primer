@@ -6,29 +6,15 @@ function Vector(x, y) {
     return this;
 };
 
-Vector.prototype.set = function() {
-    var coords = util.coords(a, b);
-    var snapped = layout.snap(coords[0], coords[1]);
-    this.x = snapped[0];
-    this.y = snapped[1];
-    return this;
-};
-
 // Make sure that the arguments are a vector
-Vector.from = function(args) {
-    var arg = args.length === 1? args[0] : false;
+Vector.from = function(/* arguments */) {
+    var arg = arguments.length === 1? arguments[0] : false;
     if(arg instanceof Vector) return arg;
     if($.isArray(arg)) return Vector.fromArray(arg);
-    if(arg) return Vector.fromEvent(arg);
-    return new Vector(args[0], args[1]);
+    return new Vector(arguments[0], arguments[1]);
 };
 Vector.fromArray = function(array) {
     return new Vector(array[0], array[1]);
-};
-Vector.fromEvent = function(e) {
-    var coords = utils.eventCoords(e);
-    return new Vector(coords[0] + gp.view.scrollLeft(),
-                      coords[1] + gp.view.scrollTop());
 };
 
 Vector.prototype.snapToGrid = function() {
@@ -38,10 +24,10 @@ Vector.prototype.snapToGrid = function() {
     return this;
 };
 Vector.prototype.length = function() {
-    return Math.sqrt(this.dot(this));
+    return Math.sqrt(this.x * this.x + this.y * this.y);
 };
 Vector.prototype.equals = function(/* vector */) {
-    var vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     return this.x == vector.x && this.y == vector.y;
 };
 Vector.prototype.copy = function() {
@@ -56,40 +42,40 @@ Vector.prototype.unit = function() {
     return this.map(function(i) { return i / d; });
 };
 Vector.prototype.angleFrom = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     var a = this.length(), b = vector.length(), c = this.dot(vector);
     if(a * b === 0) return null;
     var theta = c / (a * b);
     return Math.acos(Math.min(1, Math.max(-1, theta)));
 };
 Vector.prototype.isParallelTo = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     var angle = this.angleFrom(vector);
     if(angle === null) return null;
     return layout.isZero(angle);
 };
 Vector.prototype.isAntiparallelTo = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     var angle = this.angleFrom(vector);
     if(angle === null) return null;
     return layout.isZero(angle - Math.PI);
 };
 Vector.prototype.isPerpindicularTo = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     var dot = this.dot(vector);
     if(dot === null) return null;
     return layout.isZero(Math.abs(dot));
 };
 Vector.prototype.plus = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     return new Vector(this.x + vector.x, this.y + vector.y);
 };
 Vector.prototype.minus = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     return new Vector(this.x - vector.x, this.y - vector.y);
 };
 Vector.prototype.multiply = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     return new Vector(this.x * vector.x, this.y * vector.y);
 };
 Vector.prototype.scale = function(k) {
@@ -99,7 +85,7 @@ Vector.prototype.shift = function(k) {
     return new Vector(this.x + k, this.y + k);
 };
 Vector.prototype.dot = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     return (this.x * vector.x) + (this.y * vector.y);
 };
 Vector.prototype.round = function(/* vector */) {
@@ -110,7 +96,7 @@ Vector.prototype.snap = function(a, b) {
     return new Vector(parseInt(this.x/a)*a, parseInt(this.y/b)*b);
 };
 Vector.prototype.distanceFrom = function(/* vector */) {
-    vector = Vector.from(arguments);
+    var vector = Vector.from.apply(this, arguments);
     var dx = this.x - vector.x, dy = this.y - vector.y;
     return Math.sqrt((dx * dx) + (dy * dy));
 };
@@ -123,4 +109,8 @@ Vector.prototype.liesOn = function(line) {
     above = Math.max(line.start.y, line.end.y);
     return this.x >= left && this.x <= right &&
            this.y >= below && this.y <= above;
+};
+Vector.prototype.project = function(vector, lines) {
+    /* TODO: Make this actually work */
+    return this.add(vector);
 };

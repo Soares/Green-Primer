@@ -1,7 +1,7 @@
 var Joint = function(/* point */) {
     layout.register(layout.JOINT, this);
     this.walls = [];
-    this.position = Vector.from(arguments);
+    this.position = Vector.from.apply(this, arguments);
     this.circle = gp.svg.circle(this.position.x, this.position.y, 4);
     this.$ = $(this.circle.node);
 
@@ -33,11 +33,11 @@ Joint.prototype.destroy = function() {
     /* Destructor. Clean up all resources. */
     this.circle.remove();
     layout.forget(this);
-    return undefined;
+    return null;
 };
 Joint.prototype.move = function(point) {
     /* Move the joint and all attached walls */
-    this.position.set(point);
+    this.position = Vector.from(point);
     this.circle.animate({cx: this.position.x, cy: this.position.y});
     $.each(this.walls, function(key, wall) { wall.update(); });
     return this;
@@ -56,7 +56,7 @@ Joint.prototype.split = function() {
         wall.swap(self, next);
         usedSelf = true;
     });
-    return undefined;
+    return null;
 };
 Joint.prototype.combine = function() {
     /* If there are only two attached lines, combine them and die.
@@ -72,12 +72,12 @@ Joint.prototype.remove = function() {
     /* Remove this joint and all attached walls */
     // The last call to wall.remove() will trigger the joint's destroy().
     $.each(this.walls, function(key, wall) { wall.remove(); });
-    return undefined;
+    return null;
 };
 Joint.prototype.dieInto = function(dest) {
     /* Die after giving the `dest` joint all your walls */
     var self = this;
     $.each(this.walls, function(key, wall) { wall.swap(self, dest); });
     // The last call to wall.swap() will trigger the joint's destroy().
-    return undefined;
+    return null;
 };

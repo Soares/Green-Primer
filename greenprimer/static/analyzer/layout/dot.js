@@ -7,8 +7,8 @@ var Dot = function() {
     return this;
 };
 Dot.prototype.move = function(point) {
-    this.position.set(point);
-    this.circle.animate({cx: point.x, cy: point.y});
+    this.position = Vector.from(point);
+    this.circle.animate({cx: this.position.x, cy: this.position.y});
     return this;
 };
 Dot.prototype.show = function() {
@@ -39,7 +39,7 @@ var dot = (function(self) {
         }).mouseout(function(e) {
             self.follower.hide();
         }).mousemove(function(e) {
-            self.follower.move(Vector.from(e).snapToGrid());
+            self.follower.move(layout.point(e));
         });
     });
 

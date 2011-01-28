@@ -1,8 +1,7 @@
 modes.wall = (function(self) {
     var wall = null;
 
-    var getJoint = function(position) {
-        var point = new Point(position);
+    var getJoint = function(point) {
         var joints = layout.joints.at(point);
         return joints.length == 1? joints[0] : new Joint(point);
     };
@@ -27,32 +26,31 @@ modes.wall = (function(self) {
 
     /* Start drawing a new wall from that joint */
     self.jointClick = function(e, click, joints) {
+        var point = layout.point(click);
         if(wall) {
-            var end = new Point(click);
-            if(!wall.source.position.equals(end)) {
-                recordWall(wall.source.position, new Point(click));
+            if(!wall.source.position.equals(point)) {
+                recordWall(wall.source.position, point);
             }
-            wall.remove();
-            wall = null;
-        } else startWall(click);
+            wall = wall.remove();
+        } else startWall(point);
     };
 
     /* Add a new joint */
     self.canvasClick = function(e, click) {
+        var point = layout.point(click);
         if(wall) {
-            var end = new Point(click);
-            if(!wall.source.position.equals(end)) {
-                recordWall(wall.source.position, new Point(click));
+            if(!wall.source.position.equals(point)) {
+                recordWall(wall.source.position, point);
             }
             wall.remove();
-            startWall(wall.dest, click);
-        } else startWall(click);
+            startWall(wall.dest, point);
+        } else startWall(point);
     };
 
     /* Move the current wall if any */
     self.canvasMove = function(e, click) {
         if(!wall) return;
-        wall.dest.move(click);
+        wall.dest.move(layout.point(click));
     };
 
     self.wallClick = function(e, click, wall) {

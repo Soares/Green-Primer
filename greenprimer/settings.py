@@ -133,7 +133,7 @@ MEDIA_BUNDLES = (
 
         'analyzer/base/exceptions.js',
         'analyzer/base/utilities.js',
-        'analyzer/base/vector.js',
+        'analyzer/base/geom.js',
         'analyzer/base/notify.js',
 
         'analyzer/ui/key.js',

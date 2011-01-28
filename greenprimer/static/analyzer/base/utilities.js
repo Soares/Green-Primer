@@ -1,6 +1,6 @@
 var util = (function(self) {
 
-    self.eventCoords = function(e) {
+    self.eventCoords = function(e, adjust) {
         var x = 0, y = 0;
         if(e.pageX || e.pageY) {
             x = e.pageX;
@@ -11,18 +11,11 @@ var util = (function(self) {
             y = e.clientY + document.body.scrollTop
                           + document.documentElement.scrollTop;
         }
-        return [x, y];
-    };
-
-    self.coords = function(a, b) {
-        if(a instanceof Point) {
-            return [a.x, a.y];
-        } else if(b === undefined) {
-            var coords = self.eventCoords(a);
-            return [coords[0] + gp.view.scrollLeft(),
-                    coords[1] + gp.view.scrollTop()];
+        if(adjust) {
+            x += gp.view.scrollLeft();
+            y += gp.view.scrollTop();
         }
-        return [a, b];
+        return [x, y];
     };
 
     self.array = function(args) {
