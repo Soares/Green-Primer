@@ -133,7 +133,6 @@ MEDIA_BUNDLES = (
 
         'analyzer/base/exceptions.js',
         'analyzer/base/utilities.js',
-        'analyzer/base/geom.js',
         'analyzer/base/notify.js',
 
         'analyzer/ui/key.js',
@@ -141,10 +140,12 @@ MEDIA_BUNDLES = (
         'analyzer/ui/dashboard.js',
             'analyzer/ui/scroll.js',
 
+        'analyzer/geom/geom.js',
+        'analyzer/geom/vector.js',
+        'analyzer/geom/line.js',
+        'analyzer/geom/particle.js',
+
         'analyzer/layout/layout.js',
-        'analyzer/layout/vector.js',
-        'analyzer/layout/particle.js',
-        'analyzer/layout/line.js',
         'analyzer/layout/dot.js',
         'analyzer/layout/joint.js',
         'analyzer/layout/wall.js',
