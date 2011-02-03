@@ -15,7 +15,7 @@ Particle.prototype.update = function(delta) {
     var trajectory = new Line(this.position, this.position.plus(this.direction));
     var intersect = geom.nearestIntersection(trajectory, layout.walls.lines());
     if(intersect) {
-        var direction = geom.reflect(trajectory, intersect[0], intersect[1]);
+        var direction = geom.reflect(this.direction, intersect[0]);
         this.direction = direction.scale(this.direction.length() * this.elacticity);
     }
     this.position = this.position.plus(this.direction);

@@ -21,7 +21,7 @@ var Vent = function(point, direction, id) {
     return this;
 };
 Vent.load = function(dump) {
-    return new Vent(dump.point, dump.direction, dump.id);
+    return Vent.find(dump) || new Vent(dump.point, dump.direction, dump.id);
 };
 Vent.find = function(dump) {
     return layout.vents.get(dump.id);

@@ -4,7 +4,9 @@ var Wall = function(source, dest, id) {
     this.source = source.attach(this);
     this.dest = dest.attach(this);
     this.line = gp.svg.path('M0 0L1 1');
+    this.geom = 
     this.$ = $(this.line.node);
+    this.elements = [];
     this.update();
 
     this.$.addClass('wall').click(function(e) {
@@ -18,7 +20,7 @@ Wall.find = function(dump) {
     return layout.walls.get(dump.id);
 };
 Wall.load = function(dump) {
-    return new Wall(
+    return Wall.find(dump) || new Wall(
         Joint.load(dump.source),
         Joint.load(dump.dest),
         dump.id);
@@ -32,6 +34,7 @@ Wall.prototype.update = function() {
         ['M', this.source.position.x, this.source.position.y],
         ['L', this.dest.position.x, this.dest.position.y]]});
     this.line.backward(3);
+    this.segment = new Line(this.source.position, this.dest.position);
     return this;
 };
 Wall.prototype.placeholder = function() {
@@ -79,9 +82,6 @@ Wall.prototype.cut = function() {
     this.swap(this.dest, mid);
     this.update();
     return this;
-};
-Wall.prototype.geomLine = function() {
-    return new Line(this.source.position, this.dest.position);
 };
 Wall.prototype.dump = function() {
     return {

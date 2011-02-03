@@ -114,7 +114,12 @@ Vector.prototype.liesOn = function(line) {
     return this.x >= left && this.x <= right &&
            this.y >= below && this.y <= above;
 };
-Vector.prototype.project = function(vector, lines) {
-    /* TODO: Make this actually work */
-    return this.add(vector);
+Vector.prototype.rotate = function(theta) {
+    var v = this.normalize();
+    v.x = (v.x * Math.cos(theta)) - (v.y * Math.sin(theta));
+    v.y = (v.x * Math.sin(theta)) - (v.y * Math.cos(theta));
+    return v;
+};
+Vector.prototype.dot = function(vector) {
+    return (this.x * vector.x) + (this.y * vector.y);
 };

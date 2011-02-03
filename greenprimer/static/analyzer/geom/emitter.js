@@ -17,7 +17,7 @@
 var Emitter = function(position, direction) {
     this.particles = [];
     this.active = true;
-    this.maxParticles = 500;
+    this.maxParticles = 1//500;
     this.position = position;
     this.direction = direction;
 
@@ -29,7 +29,7 @@ var Emitter = function(position, direction) {
     this.speedRandom = 4;
     this.lifeSpan = 300;
     this.lifeSpanRandom = 100;
-    this.angleRandom = Math.PI / 6;
+    this.angleRandom = 0//Math.PI / 6;
     this.startColour = [ 20, 200, 50, 1 ];
     this.startColourRandom = [ 0, 0, 60, .1 ];
     this.endColour = [ 128, 255, 200, 0 ];  
@@ -40,12 +40,12 @@ var Emitter = function(position, direction) {
     this.particleCount = 0;
     this.elapsedTime = 0;
     this.duration = -1;
-    this.emissionRate = 0;
+    this.emissionRate = 1//0;
     this.emitCounter = 0;
     this.particleIndex = 0;
 
     this.init = function(){
-        this.emissionRate = this.maxParticles / this.lifeSpan;
+        //this.emissionRate = this.maxParticles / this.lifeSpan;
         this.emitCounter = 0;
         var x = this.direction.x, y = this.direction.y;
         if(x === 0) x = 0; // -0 === 0, but y/-0 != y/0
@@ -155,7 +155,7 @@ var Emitter = function(position, direction) {
                 if( this.particleIndex != this.particleCount - 1 ){
                     this.particles[ this.particleIndex ] = this.particles[ this.particleCount-1 ];
                 }
-                this.particleCount--;
+                //this.particleCount--;
             }
         }
     };

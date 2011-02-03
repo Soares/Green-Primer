@@ -4,6 +4,7 @@ var modes = (function(self) {
     self.VENT = 2;
     self.VENTILATE = 3;
     self.DELETE = 4;
+    self.WINDOW = 5;
 
     return self;
 })(modes || {});

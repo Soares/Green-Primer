@@ -3,7 +3,8 @@ var Line = function(start, end) {
     this.end = end;
     this.m = (this.start.y - this.end.y) / (this.start.x - this.end.x);
     this.b = (this.start.y) - (this.m * this.start.x);
-    this.angle = geom.angle(Math.atan(Math.abs(this.m)));
+    this.angle = Math.atan(this.m);
+    if(this.angle < 0) this.angle += Math.PI;
 };
 
 Line.from = function(args) {
@@ -35,4 +36,7 @@ Line.prototype.angleBetween = function(line) {
     else if(Math.abs(line.m) === Infinity) theta = 1 / this.m;
     else theta = (this.m - line.m) / (1 + (this.m * line.m));
     return geom.angle(Math.atan(Math.abs(theta)));
+};
+Line.prototype.normal = function() {
+    return new Vector(1, -1/this.m).normalize();
 };

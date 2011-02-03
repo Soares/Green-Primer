@@ -13,12 +13,13 @@ var layout = (function(self) {
 
     // id must not start as zero, or ident||id++ would break.
     var id = 1, TYPE_ERR = 'Unrecognized Layout Type';
-    var joints = [], walls = [], vents = [];
+    var joints = [], walls = [], vents = [], windows = [];
     var arrayFor = function(type) {
         switch(type) {
             case self.JOINT: return joints;
             case self.WALL: return walls;
             case self.VENT: return vents;
+            case self.WINDOW: return windows;
         }
     };
     var get = function(array, id) {
@@ -31,6 +32,7 @@ var layout = (function(self) {
     self.JOINT = 'joint';
     self.WALL = 'wall';
     self.VENT = 'vent';
+    self.WINDOW = 'window';
 
     self.register = function(type, object, ident) {
         var array = arrayFor(type);
@@ -64,7 +66,7 @@ var layout = (function(self) {
             var survivor = joints.pop();
             $.each(joints, function(key, joint) { joint.dieInto(survivor); });
         },
-        get: function(point, id) { return get(joints, id) || new Joint(point, id); },
+        get: function(id) { return get(joints, id) },
     };
 
     self.walls = {
@@ -72,7 +74,7 @@ var layout = (function(self) {
             var lines = [];
             $.each(walls, function(key, wall) {
                 if(wall.$.is('.surreal')) return;
-                lines.push(wall.geomLine());
+                lines.push(wall.segment);
             });
             return lines;
         },
@@ -96,6 +98,10 @@ var layout = (function(self) {
             $.each(vents, function(key, vent) { vent.draw(context); });
         },
         get: function(id) { return get(vents, id); },
+    };
+
+    self.windows = {
+        get: function(id) { return get(windows, id); },
     };
 
     self.snap = function() {

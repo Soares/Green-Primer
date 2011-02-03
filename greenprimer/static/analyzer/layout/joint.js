@@ -9,7 +9,10 @@ var Joint = function(position, id) {
 };
 
 Joint.load = function(dump) {
-    return layout.joints.get(dump.point, dump.id);
+    return Joint.find(dump) || new Joint(dump.point, dump.id);
+};
+Joint.find = function(dump) {
+    return layout.joints.get(dump.id);
 };
 
 Joint.prototype.placeholder = function() {

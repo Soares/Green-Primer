@@ -19,21 +19,20 @@ var geom = (function(self) {
     };
 
     self.angle = function(theta) {
-        return theta;
         while(theta > twopi) theta -= twopi;
         while(theta < 0) theta += twopi;
         return theta;
     };
 
-    self.reflect = function(trajectory, line, point) {
-        var before = new Line(trajectory.start, point);
-        var angle = before.angleBetween(line);
-        var theta = self.angle(Math.PI - angle + line.angle);
-        var x = Math.cos(theta);
-        var y = Math.sin(theta);
-        if(trajectory.end.x < trajectory.start.x) x = -x;
-        if(trajectory.end.y > trajectory.start.y) y = -y;
-        return new Vector(x, y).normalize();
+    self.reflect = function(velocity, line) {
+        console.log('velocity is', velocity.x, velocity.y);
+        var normal = line.normal();
+        console.log('normal is', normal.x, normal.y);
+        var scalar = 2 * velocity.dot(normal);
+        console.log('scalar is', scalar);
+        var reactor = normal.scale(scalar);
+        console.log('reactor is', reactor.x, reactor.y);
+        return velocity.minus(reactor).normalize();
     };
 
     return self;
