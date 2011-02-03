@@ -19,18 +19,17 @@ var Emitter = function(position, direction) {
     this.active = true;
     this.maxParticles = 500;
     this.position = position;
-    this.gravity = direction;
+    this.direction = direction;
 
     // Tweak these
-    this.positionRandom = new Vector();
-    this.size = 15;
+    this.positionRandom = new Vector(0, 0);
+    this.size = 8;
     this.sizeRandom = 3;
-    this.speed = 4;
-    this.speedRandom = .005;
+    this.speed = 8;
+    this.speedRandom = 4;
     this.lifeSpan = 300;
     this.lifeSpanRandom = 100;
-    this.angle = 0;
-    this.angleRandom = 360;
+    this.angleRandom = Math.PI / 6;
     this.startColour = [ 20, 200, 50, 1 ];
     this.startColourRandom = [ 0, 0, 60, .1 ];
     this.endColour = [ 128, 255, 200, 0 ];  
@@ -48,6 +47,10 @@ var Emitter = function(position, direction) {
     this.init = function(){
         this.emissionRate = this.maxParticles / this.lifeSpan;
         this.emitCounter = 0;
+        var x = this.direction.x, y = this.direction.y;
+        if(x === 0) x = 0; // -0 === 0, but y/-0 != y/0
+        this.theta = Math.atan(y / x);
+        if(x < 0) this.theta += Math.PI;
     };
 
     this.addParticle = function(){
@@ -68,11 +71,12 @@ var Emitter = function(position, direction) {
     this.initParticle = function( particle ){
         var RANDM1TO1 = function(){ return Math.random() * 2 - 1; };
 
-        particle.position.x = this.position.x + this.positionRandom.x * RANDM1TO1();
-        particle.position.y = this.position.y + this.positionRandom.y * RANDM1TO1();
+        particle.position = new Vector(
+                this.position.x + this.positionRandom.x * RANDM1TO1(),
+                this.position.y + this.positionRandom.y * RANDM1TO1());
 
-        var newAngle = (this.angle + this.angleRandom * RANDM1TO1() ) * ( Math.PI / 180 ); // convert to radians
-        var vector = new Vector(Math.cos( newAngle ), Math.sin( newAngle )); // Could move to lookup for speed
+        var angle = this.theta + this.angleRandom * RANDM1TO1();
+        var vector = new Vector(Math.cos(angle), Math.sin(angle));
         var vectorSpeed = this.speed + this.speedRandom * RANDM1TO1();
         particle.direction = vector.scale(vectorSpeed);
 
@@ -128,8 +132,8 @@ var Emitter = function(position, direction) {
             // If the current particle is alive then update it
             if( currentParticle.timeToLive > 0 ){
 
-                // Calculate the new direction based on gravity
-                currentParticle.update(delta, this.gravity);
+                // Calculate the new direction based on direction
+                currentParticle.update(delta);
 
                 // Update colours based on delta
                 var r = currentParticle.colour[ 0 ] += ( currentParticle.deltaColour[ 0 ] * delta );
@@ -156,10 +160,11 @@ var Emitter = function(position, direction) {
         }
     };
 
-    this.stop = function(){
-        this.active = false;
+    this.reset = function() {
         this.elapsedTime = 0;
         this.emitCounter = 0;
+        this.particles = [];
+        this.particleCount = 0;
     };
 
     this.render = function( context ){
@@ -177,4 +182,7 @@ var Emitter = function(position, direction) {
             context.fillRect( x, y, size, size );
         }
     };	
+
+    this.init();
+    return this;
 };

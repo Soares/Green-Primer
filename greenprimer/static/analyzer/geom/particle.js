@@ -1,7 +1,7 @@
 var Particle = function() {
     this.elacticity = .9;
-    this.position = new Vector();
-    this.direction = new Vector(1, 0);
+    this.position = null;
+    this.direction = null;
     this.size = 0;
     this.sizeSmall = 0;
     this.timeToLive = 0;
@@ -11,8 +11,7 @@ var Particle = function() {
     this.sharpness = 0;
     return this;
 };
-Particle.prototype.update = function(delta, gravity) {
-    this.direction = this.direction.plus(gravity);
+Particle.prototype.update = function(delta) {
     var trajectory = new Line(this.position, this.position.plus(this.direction));
     var intersect = geom.nearestIntersection(trajectory, layout.walls.lines());
     if(intersect) {

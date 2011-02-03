@@ -12,15 +12,18 @@ var layout = (function(self) {
     self.isZero = function(x) { return self.eq(x, 0); };
 
     var id = 0, TYPE_ERR = 'Unrecognized Layout Type';
-    var joints = [], walls = [];
+    var joints = [], walls = [], vents = [];
     var arrayFor = function(type) {
         switch(type) {
             case self.JOINT: return joints;
             case self.WALL: return walls;
+            case self.VENT: return vents;
         }
     };
 
-    self.JOINT = 'joint'; self.WALL = 'wall';
+    self.JOINT = 'joint';
+    self.WALL = 'wall';
+    self.VENT = 'vent';
 
     self.register = function(type, object) {
         var array = arrayFor(type);
@@ -67,6 +70,24 @@ var layout = (function(self) {
         },
     };
 
+    self.vents = {
+        open: function() {
+            $.each(vents, function(key, vent) { vent.open(); });
+        },
+        close: function() {
+            $.each(vents, function(key, vent) { vent.close(); });
+        },
+        reset: function() {
+            $.each(vents, function(key, vent) { vent.reset(); });
+        },
+        update: function() {
+            $.each(vents, function(key, vent) { vent.update(); });
+        },
+        draw: function(context) {
+            $.each(vents, function(key, vent) { vent.draw(context); });
+        },
+    };
+
     self.snap = function() {
         return $.map(arguments, function(x) {
             return Math.round(x / gp.GRID) * gp.GRID;
@@ -86,6 +107,12 @@ var layout = (function(self) {
             gp.layout.trigger('canvas.click', [e]);
         }).mousemove(function(e) {
             gp.layout.trigger('canvas.mousemove', [e]);
+        });
+        $('#dashboard, #toolbar').click(function(e) {
+            gp.body.trigger('off.click', [e]);
+        });
+        $(document).keydown(function(e) {
+            if(e.which === 27) gp.body.trigger('esc.keypress', [e]);
         });
     });
 

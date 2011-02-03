@@ -15,21 +15,23 @@
 
   (#toolbar
     (#types.options
-      (button#select Select)
+      {!(button#select Select)!}
+      (button#move Move)
+      (button#delete Delete)
       (button#wall Walls)
       (button#window Windows)
       (button#door Doors)
       (button#vent Vents)
       (button#stair Stairs))
-    (.options#select-options
+    {!(.options#select-options
       (.buttonset
         (button#cut Cut)
         (button#copy Copy)
         (button#paste Paste)
-        (button#delete Delete)))
-    (.options#wall-options.buttonset
+        (button#delete Delete)))!}
+    {!(.options#wall-options.buttonset
       (button#split Split)
-      (button#merge Merge))
+      (button#merge Merge))!}
     (.options#window-options
       (ul#window-type
         (li These)

@@ -162,7 +162,8 @@ MEDIA_BUNDLES = (
 
         'analyzer/mode/modes.js',
         'analyzer/mode/mode.js',
-        'analyzer/mode/select.js',
+        'analyzer/mode/delete.js',
+        'analyzer/mode/move.js',
         'analyzer/mode/wall.js',
         'analyzer/mode/window.js',
         'analyzer/mode/door.js',

@@ -21,8 +21,12 @@ modes.wall = (function(self) {
     });
 
     self.type = modes.WALL;
-    self.button = $('#wall');
+    self.button = '#wall';
     self.dot = true;
+
+    self.disengage = function() {
+        if(wall) wall = wall.remove();
+    };
 
     /* Start drawing a new wall from that joint */
     self.jointClick = function(e, click, joints) {
@@ -58,13 +62,8 @@ modes.wall = (function(self) {
     };
 
     /* Cancel any wall being drawn */
-    self.escPress = function() {
-        wall = wall.remove();
-    };
-
-    /* Cancel any wall being drawn */
-    self.offClick = function() {
-        wall = wall.remove();
+    self.escPress = self.offClick = function() {
+        if(wall) wall = wall.remove();
     };
 
     return mode(self);

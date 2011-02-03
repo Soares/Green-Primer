@@ -23,10 +23,15 @@ var mode = function(self) {
     };
 
     $(function() {
+        self.button = $(self.button).click(function() {
+            gp.body.trigger('disengage.mode');
+            gp.body.trigger('engage.mode', self.type);
+        });
+
         gp.body.bind('engage.mode', function(e, type) {
             if(type != self.type) return;
             if(engaged) return;
-            //self.buttons.engage();
+            self.button.addClass('active');
             eachEvent(function(source, name, fn) { source.bind(name, fn); });
             if(self.engage) self.engage();
             if(self.dot) dot.follower.activate();
@@ -35,7 +40,7 @@ var mode = function(self) {
 
         gp.body.bind('disengage.mode', function() {
             if(!engaged) return;
-            //self.buttons.disengage();
+            self.button.removeClass('active');
             eachEvent(function(source, name, fn) { source.unbind(name, fn); });
             if(self.disengage) self.disengage();
             if(self.dot) dot.follower.deactivate();

@@ -1,7 +1,7 @@
-modes.select = (function(self) {
+modes['delete'] = (function(self) {
     self.type = modes.SELECT;
 
-    self.buttons = [];
+    self.button = '#delete';
 
     self.engage = function() {};
     self.disengage = function() {};
@@ -14,3 +14,4 @@ modes.select = (function(self) {
 
     return mode(self);
 })({});
+
