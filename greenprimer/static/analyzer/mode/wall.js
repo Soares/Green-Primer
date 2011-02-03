@@ -1,24 +1,21 @@
 modes.wall = (function(self) {
     var wall = null;
 
+    var recordWall = actions.make(function(dump) {
+        Wall.load(dump);
+    }, function(dump) {
+        Wall.find(dump).remove();
+    });
+
     var getJoint = function(point) {
         var joints = layout.joints.at(point);
         return joints.length == 1? joints[0] : new Joint(point);
     };
-    var startWall = function(start, end) {
-        var source = end? start : getJoint(start);
-        var dest = new Joint(end || start).placeholder();
+    var startWall = function(start) {
+        var source = getJoint(start), dest = new Joint(start).placeholder();
         wall = new Wall(source, dest).placeholder();
         return wall;
     };
-
-    var recordWall = actions.make(function(start, end) {
-        var source = getJoint(start);
-        var dest = getJoint(end);
-        return new Wall(source, dest);
-    }, function(wall) {
-        wall.remove();
-    });
 
     self.type = modes.WALL;
     self.button = '#wall';
@@ -33,9 +30,12 @@ modes.wall = (function(self) {
         var point = layout.point(click);
         if(wall) {
             if(!wall.source.position.equals(point)) {
-                recordWall(wall.source.position, point);
-            }
-            wall = wall.remove();
+                wall.dest.move(point);
+                var dump = wall.dump();
+                // Must remove placeholder before recording
+                wall = wall.remove();
+                recordWall(dump);
+            } else wall = wall.remove();
         } else startWall(point);
     };
 
@@ -44,11 +44,14 @@ modes.wall = (function(self) {
         var point = layout.point(click);
         if(wall) {
             if(!wall.source.position.equals(point)) {
-                recordWall(wall.source.position, point);
-            }
-            wall.remove();
-            startWall(wall.dest, point);
-        } else startWall(point);
+                wall.dest.move(point);
+                var dump = wall.dump();
+                // Must remove placeholder before recording
+                wall = wall.remove();
+                recordWall(dump);
+            } else wall = wall.remove();
+        }
+        startWall(point);
     };
 
     /* Move the current wall if any */
@@ -58,7 +61,7 @@ modes.wall = (function(self) {
     };
 
     self.wallClick = function(e, click, wall) {
-        return this.canvasClick(e, click);
+        return self.canvasClick(e, click);
     };
 
     /* Cancel any wall being drawn */

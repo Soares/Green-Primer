@@ -5,6 +5,7 @@ var mode = function(self) {
         '#layout': {
             'joint.click': self.jointClick || function() {},
             'wall.click': self.wallClick || function() {},
+            'vent.click': self.ventClick || function() {},
             'canvas.click': self.canvasClick || function() {},
             'canvas.mousemove': self.canvasMove || function() {},
         },

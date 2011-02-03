@@ -9,17 +9,18 @@ modes.vent = (function(self) {
         return new Vent(point).placeholder();
     };
 
-    var makeVent = actions.make(function(start, end) {
-        return new Vent(start, end.minus(start));
-    }, function(vent) {
-        vent.remove();
+    var makeVent = actions.make(function(dump) {
+        Vent.load(dump);
+    }, function(dump) {
+        Vent.find(dump).remove();
     });
 
     self.canvasClick = function(e, click) {
         var point = layout.point(click);
         if(vent) {
-            makeVent(vent.position, point);
+            var dump = vent.dump();
             vent = vent.remove();
+            makeVent(dump);
         } else vent = startVent(point);
     };
 

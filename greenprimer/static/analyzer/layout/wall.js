@@ -1,17 +1,29 @@
-var Wall = function(source, dest) {
-    layout.register(layout.WALL, this);
+var Wall = function(source, dest, id) {
+    var handle = this;
+    layout.register(layout.WALL, this, id);
     this.source = source.attach(this);
     this.dest = dest.attach(this);
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
     this.update();
 
-    this.$.addClass('wall').attr('id', this.id).click(function(e) {
-        gp.body.trigger('gp.wall.click', e, this);
+    this.$.addClass('wall').click(function(e) {
+        gp.layout.trigger('wall.click', [e, handle]);
     });
 
     return this;
 };
+
+Wall.find = function(dump) {
+    return layout.walls.get(dump.id);
+};
+Wall.load = function(dump) {
+    return new Wall(
+        Joint.load(dump.source),
+        Joint.load(dump.dest),
+        dump.id);
+};
+
 Wall.prototype.update = function() {
     this.line.animate({path: [
         ['M', this.source.position.x, this.source.position.y],
@@ -59,7 +71,7 @@ Wall.prototype.not = function(joint) {
 Wall.prototype.cut = function() {
     var x = (this.source.position.x + this.dest.position.x) / 2;
     var y = (this.source.position.y + this.dest.position.y) / 2;
-    var mid = new Joint(x, y);
+    var mid = new Joint(new Vector(x, y).snapToGrid());
     var child = new Wall(mid, this.dest);
     this.swap(this.dest, mid);
     this.update();
@@ -67,4 +79,12 @@ Wall.prototype.cut = function() {
 };
 Wall.prototype.geomLine = function() {
     return new Line(this.source.position, this.dest.position);
+};
+Wall.prototype.dump = function() {
+    return {
+        maker: Wall,
+        id: this.id,
+        source: this.source.dump(),
+        dest: this.dest.dump(),
+    };
 };

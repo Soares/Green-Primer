@@ -3,14 +3,23 @@ modes['delete'] = (function(self) {
 
     self.button = '#delete';
 
-    self.engage = function() {};
-    self.disengage = function() {};
+    var remove = actions.make(function(dump) {
+        dump.maker.find(dump).remove();
+    }, function(dump) {
+        dump.maker.load(dump);
+    });
 
-    self.jointClick = function() {};
-    self.wallClick = function() {};
-    self.canvasClick = function() {};
-    self.escPress = function() {};
-    self.offClick = function() {};
+    /*
+    self.jointClick = function(e, click, joints) {
+        $.each(joints, function(key, joint) {
+            joint.remove();
+        });
+    };
+    */
+
+    self.wallClick = self.ventClick = function(e, click, elem) {
+        remove(elem.dump());
+    };
 
     return mode(self);
 })({});

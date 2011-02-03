@@ -11,7 +11,8 @@ var layout = (function(self) {
 
     self.isZero = function(x) { return self.eq(x, 0); };
 
-    var id = 0, TYPE_ERR = 'Unrecognized Layout Type';
+    // id must not start as zero, or ident||id++ would break.
+    var id = 1, TYPE_ERR = 'Unrecognized Layout Type';
     var joints = [], walls = [], vents = [];
     var arrayFor = function(type) {
         switch(type) {
@@ -20,14 +21,20 @@ var layout = (function(self) {
             case self.VENT: return vents;
         }
     };
+    var get = function(array, id) {
+        for(var i = 0; i < array.length; i++) {
+            if(array[i].id === id) return array[i];
+        }
+        return undefined;
+    };
 
     self.JOINT = 'joint';
     self.WALL = 'wall';
     self.VENT = 'vent';
 
-    self.register = function(type, object) {
+    self.register = function(type, object, ident) {
         var array = arrayFor(type);
-        object.id = type + '-' + (id++);
+        object.id = ident || (id++);
         object.type = type;
         array.push(object);
         return object;
@@ -57,6 +64,7 @@ var layout = (function(self) {
             var survivor = joints.pop();
             $.each(joints, function(key, joint) { joint.dieInto(survivor); });
         },
+        get: function(point, id) { return get(joints, id) || new Joint(point, id); },
     };
 
     self.walls = {
@@ -68,6 +76,7 @@ var layout = (function(self) {
             });
             return lines;
         },
+        get: function(id) { return get(walls, id); },
     };
 
     self.vents = {
@@ -86,6 +95,7 @@ var layout = (function(self) {
         draw: function(context) {
             $.each(vents, function(key, vent) { vent.draw(context); });
         },
+        get: function(id) { return get(vents, id); },
     };
 
     self.snap = function() {

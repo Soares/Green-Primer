@@ -1,14 +1,17 @@
-var Joint = function(/* point */) {
-    layout.register(layout.JOINT, this);
+var Joint = function(position, id) {
+    layout.register(layout.JOINT, this, id);
     this.walls = [];
-    this.position = Vector.from.apply(this, arguments);
+    this.position = Vector.from(position);
     this.circle = gp.svg.circle(this.position.x, this.position.y, 4);
     this.$ = $(this.circle.node);
-
-    this.$.addClass('joint').attr('id', this.id);
-
+    this.$.addClass('joint');
     return this;
 };
+
+Joint.load = function(dump) {
+    return layout.joints.get(dump.point, dump.id);
+};
+
 Joint.prototype.placeholder = function() {
     this.$.addClass('surreal');
     return this;
@@ -80,4 +83,7 @@ Joint.prototype.dieInto = function(dest) {
     $.each(this.walls, function(key, wall) { wall.swap(self, dest); });
     // The last call to wall.swap() will trigger the joint's destroy().
     return null;
+};
+Joint.prototype.dump = function() {
+    return {point: this.position, id: this.id};
 };

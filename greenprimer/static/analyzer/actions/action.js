@@ -7,8 +7,7 @@ var actions = (function(self) {
     self.redo = function() {
         if(pointer >= max) return;
         var handle = stack[pointer + 1];
-        var redo = handle[0], args = handle[1];
-        handle[3] = redo.apply(this, args);
+        handle[0](handle[2]);
         pointer += 1;
         self.update();
     };
@@ -16,15 +15,14 @@ var actions = (function(self) {
     self.undo = function() {
         if(pointer < 0) return;
         var handle = stack[pointer];
-        var undo = handle[2], arg = handle[3];
-        undo(arg);
+        handle[1](handle[2]);
         pointer -= 1;
         self.update();
     };
 
     self.make = function(redo, undo) {
-        return function() {
-            var handle = [redo, arguments, undo, undefined];
+        return function(arg) {
+            var handle = [redo, undo, arg];
             stack[pointer + 1] = handle;
             max = pointer + 1;
             self.redo();
@@ -39,6 +37,9 @@ var actions = (function(self) {
     $(function() {
         undoButton = $('#undo').click(util.noBubble(self.undo));
         redoButton = $('#redo').click(util.noBubble(self.redo));
+        $('#undo, #redo').click(function(e) {
+            gp.body.trigger('off.click', [e]);
+        });
         self.update();
     });
 
