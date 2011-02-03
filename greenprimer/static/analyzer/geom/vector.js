@@ -26,6 +26,10 @@ Vector.prototype.snapToGrid = function() {
 Vector.prototype.length = function() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
 };
+Vector.prototype.normalize = function() {
+    var mag = this.length();
+    return this.map(function(i) { return i / mag; });
+};
 Vector.prototype.equals = function(/* vector */) {
     var vector = Vector.from.apply(this, arguments);
     return this.x == vector.x && this.y == vector.y;

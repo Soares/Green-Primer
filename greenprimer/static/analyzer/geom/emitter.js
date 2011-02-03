@@ -14,26 +14,26 @@
     the files within this installation.
 */
 
-var ParticleSystem = function() {
-    this.maxParticles = 150;
+var Emitter = function(position, direction) {
     this.particles = [];
     this.active = true;
+    this.maxParticles = 500;
+    this.position = position;
+    this.gravity = direction;
 
-    // Properties
-    this.position = new Vector(100, 100);
-    this.positionRandom = new Vector(10, 10);
-    this.size = 45;
-    this.sizeRandom = 15;
-    this.speed = 5;
-    this.speedRandom = 1.5;
-    this.lifeSpan = 9;
-    this.lifeSpanRandom = 7;
+    // Tweak these
+    this.positionRandom = new Vector();
+    this.size = 15;
+    this.sizeRandom = 3;
+    this.speed = 4;
+    this.speedRandom = .005;
+    this.lifeSpan = 300;
+    this.lifeSpanRandom = 100;
     this.angle = 0;
     this.angleRandom = 360;
-    this.gravity = new Vector(0.4, 0.2);
-    this.startColour = [ 250, 218, 68, 1 ];
-    this.startColourRandom = [ 62, 60, 60, 0 ];
-    this.endColour = [ 245, 35, 0, 0 ];  
+    this.startColour = [ 20, 200, 50, 1 ];
+    this.startColourRandom = [ 0, 0, 60, .1 ];
+    this.endColour = [ 128, 255, 200, 0 ];  
     this.endColourRandom = [ 60, 60, 60, 0 ];
     this.sharpness = 40;
     this.sharpnessRandom = 10;

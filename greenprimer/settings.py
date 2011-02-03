@@ -144,6 +144,7 @@ MEDIA_BUNDLES = (
         'analyzer/geom/vector.js',
         'analyzer/geom/line.js',
         'analyzer/geom/particle.js',
+        'analyzer/geom/emitter.js',
 
         'analyzer/layout/layout.js',
         'analyzer/layout/dot.js',
@@ -172,9 +173,6 @@ MEDIA_BUNDLES = (
 
         'analyzer/analyze/graph.js',
         'analyzer/analyze/pressure.js',
-
-        'analyzer/simulate/fluids.js',
-        'analyzer/simulate/fds.js',
 
         'analyzer/init.js',
     ),

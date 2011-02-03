@@ -58,9 +58,12 @@ var layout = (function(self) {
 
     self.walls = {
         lines: function() {
-            return $.map(walls, function(key, wall) {
-                return wall.geomLine();
+            var lines = [];
+            $.each(walls, function(key, wall) {
+                if(wall.$.is('.surreal')) return;
+                lines.push(wall.geomLine());
             });
+            return lines;
         },
     };
 
