@@ -9,14 +9,6 @@ modes['delete'] = (function(self) {
         dump.maker.load(dump);
     });
 
-    /*
-    self.jointClick = function(e, click, joints) {
-        $.each(joints, function(key, joint) {
-            joint.remove();
-        });
-    };
-    */
-
     self.wallClick = self.ventClick = function(e, click, elem) {
         remove(elem.dump());
     };

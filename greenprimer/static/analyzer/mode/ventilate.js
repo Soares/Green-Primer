@@ -6,7 +6,7 @@ modes.ventilate = (function(self) {
     self.dot = false;
 
     var update = function() {
-        layout.vents.update();
+        layout.vents.step();
         layout.vents.draw(context);
     };
 

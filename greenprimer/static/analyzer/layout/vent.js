@@ -12,8 +12,11 @@ var Vent = function(point, direction, id) {
     var onclick = function(e) {
         gp.layout.trigger('vent.click', [e, handle]);
     };
-    this.$c.click(onclick);
-    this.$l.click(onclick);
+    var onpress = function(e) {
+        gp.layout.trigger('vent.press', [e, handle]);
+    };
+    this.$c.click(onclick).data('id', this.id);;
+    this.$l.click(onclick).data('id', this.id);;
 
     return this;
 };
@@ -24,8 +27,22 @@ Vent.find = function(dump) {
     return layout.vents.get(dump.id);
 };
 
+Vent.prototype.is = function(elem) {
+    return elem.data('id') === this.id;
+};
+Vent.prototype.shift = function(delta) {
+    this.position.x += delta.x;
+    this.position.y += delta.y;
+    this.update();
+    return this;
+};
+Vent.prototype.update = function() {
+    this.reorient(this.direction);
+    this.circle.animate({cx: this.position.x, cy: this.position.y});
+};
 Vent.prototype.reorient = function(vector) {
     this.direction = vector.normalize().scale(9);
+    if(this.emitter) this.emitter.direction = this.direction;
     var dest = this.position.plus(this.direction);
     this.line.animate({path: [
         ['M', this.position.x, this.position.y],
@@ -40,7 +57,7 @@ Vent.prototype.placeholder = function() {
 Vent.prototype.reset = function() {
     this.emitter.reset();
 };
-Vent.prototype.update = function() {
+Vent.prototype.step = function() {
     this.emitter.update(1);
 };
 Vent.prototype.draw = function(context) {

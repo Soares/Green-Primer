@@ -9,7 +9,7 @@ var Wall = function(source, dest, id) {
 
     this.$.addClass('wall').click(function(e) {
         gp.layout.trigger('wall.click', [e, handle]);
-    });
+    }).data('id', this.id);
 
     return this;
 };
@@ -24,6 +24,9 @@ Wall.load = function(dump) {
         dump.id);
 };
 
+Wall.prototype.is = function(elem) {
+    return elem.data('id') === this.id;
+};
 Wall.prototype.update = function() {
     this.line.animate({path: [
         ['M', this.source.position.x, this.source.position.y],
@@ -40,9 +43,9 @@ Wall.prototype.move = function(source, dest) {
     this.dest.move(dest);
     return this;
 };
-Wall.prototype.shift = function(source, dest) {
-    this.source.shift(source);
-    this.dest.shift(source);
+Wall.prototype.shift = function(delta) {
+    this.source.shift(delta);
+    this.dest.shift(delta);
     return this;
 }
 Wall.prototype.remove = function() {

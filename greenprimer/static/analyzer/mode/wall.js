@@ -16,6 +16,14 @@ modes.wall = (function(self) {
         wall = new Wall(source, dest).placeholder();
         return wall;
     };
+    var endWall = function(end) {
+        var dest = getJoint(end);
+        var real = new Wall(wall.source, dest);
+        var dump = real.dump();
+        real.remove();
+        wall = wall.remove();
+        recordWall(dump);
+    };
 
     self.type = modes.WALL;
     self.button = '#wall';
@@ -29,13 +37,8 @@ modes.wall = (function(self) {
     self.jointClick = function(e, click, joints) {
         var point = layout.point(click);
         if(wall) {
-            if(!wall.source.position.equals(point)) {
-                wall.dest.move(point);
-                var dump = wall.dump();
-                // Must remove placeholder before recording
-                wall = wall.remove();
-                recordWall(dump);
-            } else wall = wall.remove();
+            if(!wall.source.position.equals(point)) endWall(point);
+            else wall = wall.remove();
         } else startWall(point);
     };
 
@@ -43,13 +46,8 @@ modes.wall = (function(self) {
     self.canvasClick = function(e, click) {
         var point = layout.point(click);
         if(wall) {
-            if(!wall.source.position.equals(point)) {
-                wall.dest.move(point);
-                var dump = wall.dump();
-                // Must remove placeholder before recording
-                wall = wall.remove();
-                recordWall(dump);
-            } else wall = wall.remove();
+            if(!wall.source.position.equals(point)) endWall(point);
+            else wall = wall.remove();
         }
         startWall(point);
     };

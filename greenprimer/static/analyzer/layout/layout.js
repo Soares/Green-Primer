@@ -89,8 +89,8 @@ var layout = (function(self) {
         reset: function() {
             $.each(vents, function(key, vent) { vent.reset(); });
         },
-        update: function() {
-            $.each(vents, function(key, vent) { vent.update(); });
+        step: function() {
+            $.each(vents, function(key, vent) { vent.step(); });
         },
         draw: function(context) {
             $.each(vents, function(key, vent) { vent.draw(context); });
@@ -105,17 +105,22 @@ var layout = (function(self) {
     };
 
     $(function() {
-        $('#layout, #key').click(function(e) {
-            var joints = dot.follower.jointsUnder();
-            if(joints.length > 0) {
-                gp.layout.trigger('joint.click', [e, joints]);
-                return;
-            }
-            var target = $(e.originalEvent.target);
-            if(target.is('button')) return;
-            if(target.is('div:not(#key, #layout)')) return;
-            gp.layout.trigger('canvas.click', [e]);
-        }).mousemove(function(e) {
+        var triggerer = function(type) {
+            return function(e) {
+                var joints = dot.follower.jointsUnder();
+                if(joints.length > 0) {
+                    gp.layout.trigger('joint.' + type, [e, joints]);
+                    return;
+                }
+                var target = $(e.originalEvent.target);
+                if(target.is('button')) return;
+                if(target.is('div:not(#key, #layout)')) return;
+                gp.layout.trigger('canvas.' + type, [e]);
+            };
+        };
+        var click = triggerer('click');
+
+        $('#layout, #key').click(click).mousemove(function(e) {
             gp.layout.trigger('canvas.mousemove', [e]);
         });
         $('#dashboard, #toolbar').click(function(e) {
