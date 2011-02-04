@@ -4,6 +4,14 @@ modes.move = (function(self) {
     self.type = modes.MOVE;
     self.button = '#move';
 
+    var recordMove = actions.make(function(dump) {
+        var elem = dump.maker.load(dump);
+        elem.shift(dump.delta);
+    }, function(dump) {
+        var elem = dump.maker.load(dump);
+        elem.shift(dump.delta.negate());
+    });
+
     self.jointClick = function(e, click, joints) {
         if(active) return self.canvasClick(e, click);
         active = joints[0];
@@ -51,9 +59,14 @@ modes.move = (function(self) {
     };
 
     self.canvasClick = function(e, click) {
+        var point = layout.point(click);
         if(!active) return;
-        if(layout.point(click).equals(origin)) return;
+        if(point.equals(origin)) return;
         self.canvasMove(e, click);
+        var dump = active.dump();
+        dump.delta = point.minus(origin);
+        active.shift(dump.delta.negate());
+        recordMove(dump);
         active = prev = origin = null;
     };
 

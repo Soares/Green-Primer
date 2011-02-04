@@ -87,5 +87,9 @@ Joint.prototype.dieInto = function(dest) {
     return null;
 };
 Joint.prototype.dump = function() {
-    return {point: this.position, id: this.id};
+    return {
+        maker: Joint,
+        point: this.position,
+        id: this.id,
+    };
 };

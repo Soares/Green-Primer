@@ -20,7 +20,7 @@ var actions = (function(self) {
         self.update();
     };
 
-    self.make = function(redo, undo) {
+    self.make = function(redo, undo, dofirst) {
         return function(arg) {
             var handle = [redo, undo, arg];
             stack[pointer + 1] = handle;

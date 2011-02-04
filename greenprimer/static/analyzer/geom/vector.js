@@ -120,6 +120,9 @@ Vector.prototype.rotate = function(theta) {
     v.y = (v.x * Math.sin(theta)) - (v.y * Math.cos(theta));
     return v;
 };
+Vector.prototype.negate = function() {
+    return new Vector(-this.x, -this.y);
+};
 Vector.prototype.dot = function(vector) {
     return (this.x * vector.x) + (this.y * vector.y);
 };
