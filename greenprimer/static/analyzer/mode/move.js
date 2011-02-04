@@ -21,10 +21,32 @@ modes.move = (function(self) {
     self.canvasMove = function(e, click) {
         if(!active) return;
         var next = layout.point(click);
+        if(click.shiftKey) {
+            // Allows you to 'catch up' the mouse
+            prev = next;
+            return;
+        }
         var delta = next.minus(prev);
         if(delta.x === 0 && delta.y === 0) return;
-        active.shift(delta);
-        if(active instanceof Wall) active.update();
+        if(active instanceof Wall) {
+            var valid = active.valid(active.source.position.plus(delta),
+                                     active.dest.position.plus(delta));
+            if(!valid) return;
+            active.shift(delta);
+            active.update();
+        } else if(active instanceof Joint) {
+            var pos = active.position;
+            active.shift(delta);
+            var valid = true;
+            for(var i = 0; i < layout.walls.all.length; i++) {
+                var wall = layout.walls.all[i];
+                valid = wall.valid(wall.source.position, wall.dest.position); 
+                if(!valid) break;
+            }
+            if(!valid) active.move(pos);
+        } else {
+            active.shift(delta);
+        }
         prev = next;
     };
 

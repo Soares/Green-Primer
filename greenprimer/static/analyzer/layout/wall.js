@@ -26,6 +26,36 @@ Wall.load = function(dump) {
         dump.id);
 };
 
+Wall.prototype.matches = function(source, dest) {
+    return this.source.position.equals(source) && this.dest.position.equals(dest)
+        || this.dest.position.equals(source) && this.source.position.equals(dest);
+};
+Wall.prototype.valid = function(source, dest) {
+    if(source.equals(dest)) return false;
+    source = source.snapToGrid(); dest = dest.snapToGrid();
+    var line = new Line(source, dest);
+    for(var i = 0; i < layout.walls.all.length; i++) {
+        var wall = layout.walls.all[i];
+        if(wall.id === this.id) continue;
+        if(wall.matches(source, dest)) return false;
+        if(Math.abs(line.m) === Math.abs(wall.segment.m)) {
+            var ss = wall.source.position.distanceFrom(source);
+            var sd = wall.source.position.distanceFrom(dest);
+            var ds = wall.dest.position.distanceFrom(source);
+            var dd = wall.dest.position.distanceFrom(dest);
+            var len = wall.segment.length;
+            if(wall.source.position.equals(source)) return dd > len;
+            if(wall.source.position.equals(dest)) return ds > len;
+            if(wall.dest.position.equals(source)) return sd > len;
+            if(wall.dest.position.equals(dest)) return ss > len;
+        } else if(wall.source.position.equals(source)
+               || wall.source.position.equals(dest)
+               || wall.dest.position.equals(source)
+               || wall.dest.position.equals(dest)) {
+        } else if(wall.segment.intersection(line)) return false;
+    }
+    return true;
+};
 Wall.prototype.is = function(elem) {
     return elem.data('id') === this.id;
 };

@@ -55,6 +55,7 @@ modes.wall = (function(self) {
     /* Move the current wall if any */
     self.canvasMove = function(e, click) {
         if(!wall) return;
+        if(!wall.valid(wall.source.position, layout.point(click))) return;
         wall.dest.move(layout.point(click));
     };
 

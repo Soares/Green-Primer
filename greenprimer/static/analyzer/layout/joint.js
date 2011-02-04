@@ -14,7 +14,6 @@ Joint.load = function(dump) {
 Joint.find = function(dump) {
     return layout.joints.get(dump.id);
 };
-
 Joint.prototype.placeholder = function() {
     this.$.addClass('surreal');
     return this;

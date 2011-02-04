@@ -70,6 +70,7 @@ var layout = (function(self) {
     };
 
     self.walls = {
+        all: walls,
         lines: function() {
             var lines = [];
             $.each(walls, function(key, wall) {
