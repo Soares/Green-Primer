@@ -4,10 +4,10 @@ var actions = (function(self) {
     var disable = function(button) { button.attr('disabled', true); };
     var enable = function(button) { button.removeAttr('disabled'); };
 
-    self.redo = function() {
+    self.redo = function(done) {
         if(pointer >= max) return;
         var handle = stack[pointer + 1];
-        handle[0](handle[2]);
+        if(!done) handle[0](handle[2]);
         pointer += 1;
         self.update();
     };
@@ -20,12 +20,12 @@ var actions = (function(self) {
         self.update();
     };
 
-    self.make = function(redo, undo, dofirst) {
+    self.make = function(redo, undo, done) {
         return function(arg) {
             var handle = [redo, undo, arg];
             stack[pointer + 1] = handle;
             max = pointer + 1;
-            self.redo();
+            self.redo(done);
         };
     };
 
