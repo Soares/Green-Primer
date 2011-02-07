@@ -23,14 +23,14 @@ var Emitter = function(position, direction) {
 
     // Tweak these
     this.positionRandom = new Vector(0, 0);
-    this.size = 8;
+    this.size = 13;
     this.sizeRandom = 3;
     this.speed = 8;
     this.speedRandom = 4;
     this.lifeSpan = 300;
     this.lifeSpanRandom = 100;
     this.angleRandom = Math.PI / 6;
-    this.startColour = [ 20, 200, 50, 1 ];
+    this.startColour = [ 20, 200, 50, .6 ];
     this.startColourRandom = [ 0, 0, 60, .1 ];
     this.endColour = [ 128, 255, 200, 0 ];  
     this.endColourRandom = [ 60, 60, 60, 0 ];
@@ -78,7 +78,7 @@ var Emitter = function(position, direction) {
         var angle = this.theta + this.angleRandom * RANDM1TO1();
         var vector = new Vector(Math.cos(angle), Math.sin(angle));
         var vectorSpeed = this.speed + this.speedRandom * RANDM1TO1();
-        particle.direction = vector.scale(vectorSpeed);
+        particle.velocity = vector.scale(vectorSpeed);
 
         particle.size = this.size + this.sizeRandom * RANDM1TO1();
         particle.size = particle.size < 0 ? 0 : ~~particle.size;

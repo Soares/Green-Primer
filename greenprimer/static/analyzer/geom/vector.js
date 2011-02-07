@@ -24,7 +24,7 @@ Vector.prototype.snapToGrid = function() {
     return this;
 };
 Vector.prototype.length = function() {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
+    return Math.sqrt(this.magSq());
 };
 Vector.prototype.normalize = function() {
     var mag = this.length();
@@ -116,8 +116,9 @@ Vector.prototype.liesOn = function(line) {
 };
 Vector.prototype.rotate = function(theta) {
     var v = this.normalize();
-    v.x = (v.x * Math.cos(theta)) - (v.y * Math.sin(theta));
-    v.y = (v.x * Math.sin(theta)) - (v.y * Math.cos(theta));
+    var cos = Math.cos(theta), sin = Math.sin(theta);
+    v.x = (v.x * cos) - (v.y * sin);
+    v.y = (v.x * sin) + (v.y * cos);
     return v;
 };
 Vector.prototype.negate = function() {
@@ -125,4 +126,26 @@ Vector.prototype.negate = function() {
 };
 Vector.prototype.dot = function(vector) {
     return (this.x * vector.x) + (this.y * vector.y);
+};
+Vector.prototype.magSq = function() {
+    return (this.x * this.x) + (this.y * this.y);
+};
+Vector.prototype.perpindicular = function() {
+    return this.rotate(Math.PI / 2);
+};
+Vector.prototype.add = function(other) {
+    this.x += other.x;
+    this.y += other.y;
+};
+Vector.prototype.subtract = function(other) {
+    this.x -= other.x;
+    this.y -= other.y;
+};
+Vector.prototype.multiply = function(other) {
+    this.x *= other.x;
+    this.y *= other.y;
+};
+Vector.prototype.divide = function(other) {
+    this.x /= other.x;
+    this.y /= other.y;
 };

@@ -17,7 +17,7 @@ modes.ventilate = (function(self) {
     self.disengage = function() {
         if(interval); clearInterval(interval);
         layout.vents.reset();
-        context.clearRect(0, 0, 4096, 4096);
+        context.clearRect(0, 0, gp.WIDTH, gp.HEIGHT);
     };
 
     $(function() {

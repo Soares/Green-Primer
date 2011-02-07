@@ -72,7 +72,7 @@
 
 (#view
   (#layout
-    (canvas#canvas (:width "4096") (:height "4096"))))}
+    (canvas#canvas (:width "1024") (:height "512"))))}
 
 {%load media}
 (%addto[links] {%include_media "analyzer.css"})
