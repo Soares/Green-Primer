@@ -21,10 +21,23 @@ var Wall = function(source, dest, id) {
 Elem(Wall, walls);
 
 Wall.deserialize = function(object, id) {
-    return new Wall(Elem.load(object.source), Elem.load(object.dest), id);
+    var elements = [];
+    var wall = new Wall(Elem.load(object.source), Elem.load(object.dest), id);
+    for(var i = 0; i < object.elements.length; i++) {
+        elements.push(Elem.load(object.elements[i]));
+    }
+    return wall;
 };
-Wall.prototype.serialize = function() {
-    return {source: this.source.dump(true), dest: this.dest.dump(true)};
+Wall.prototype.serialize = function(shallow) {
+    var object = {
+        source: this.source.dump(true),
+        dest: this.dest.dump(true),
+        elements: [],
+    };
+    if(!shallow) for(var i = 0; i < this.elements.length; i++) {
+        object.elements.push(this.elements[i].dump(true));
+    }
+    return object;
 };
 
 Wall.prototype.attach = function(element) {
@@ -92,6 +105,8 @@ Wall.prototype.remove = function() {
     /* Destroys joints if necessary */
     this.source.detach(this);
     this.dest.detach(this);
+    var elements = $.merge([], this.elements);
+    for(var i = 0; i < elements.length; i++) elements[i].remove();
     this.line.remove();
     walls.forget(this);
     return null;
