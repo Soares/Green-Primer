@@ -22,8 +22,13 @@ modes.wall = (function(self) {
         if(wall.source.point.equals(end)) {
             wall = wall.remove();
         } else {
-            wall.dest.move(end);
-            wall.dest.graduate();
+            var dest = getJoint(end);
+            if(!dest.isReal()) dest.graduate();
+            if(!wall.dest.is(dest)) {
+                var old = wall.dest;
+                wall.swap(wall.dest, dest);
+                old.remove();
+            }
             wall.graduate();
             recordWall(wall.dump());
             wall = null;
