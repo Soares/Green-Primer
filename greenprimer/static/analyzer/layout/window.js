@@ -9,7 +9,7 @@ var Window = function(wall, offset, length, id) {
     this.$ = $(this.line.node);
 
     var self = this;
-    this.$.addClass('window').click(function() {
+    this.$.addClass('window').click(function(e) {
         gp.layout.trigger('window.click', [e, self]);
     });
 

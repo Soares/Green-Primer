@@ -6,6 +6,11 @@ modes['window'] = (function(self) {
     }, function(dump) {
         Elem.load(dump).remove();
     });
+    var delWindow = actions.make(function(dump) {
+        Elem.load(dump).remove();
+    }, function(dump) {
+        Elem.load(dump);
+    });
 
     self.wallClick = function(e, click, wall) {
         var coords = util.eventCoords(click, true);
@@ -13,6 +18,10 @@ modes['window'] = (function(self) {
         var offset = vector.distanceFrom(wall.source.point);
         var win = new Window(wall, offset - 10, 20);
         makeWindow(win.dump());
+    };
+    self.windowClick = function(e, click, win) {
+        delWindow(win.dump());
+        win.remove();
     };
 
     return mode(self);
