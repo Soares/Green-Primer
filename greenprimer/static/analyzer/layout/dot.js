@@ -1,5 +1,5 @@
 var Dot = function() {
-    this.position = new Vector();
+    this.point = new Point();
     this.circle = gp.svg.circle(0, 0, 4);
     this.$ = $(this.circle.node);
     this.$.addClass('guide');
@@ -7,8 +7,8 @@ var Dot = function() {
     return this;
 };
 Dot.prototype.move = function(point) {
-    this.position = Vector.from(point);
-    this.circle.animate({cx: this.position.x, cy: this.position.y});
+    this.point.move(point);
+    this.circle.animate({cx: this.point.x, cy: this.point.y});
     return this;
 };
 Dot.prototype.show = function() {
@@ -25,7 +25,7 @@ Dot.prototype.deactivate = function() {
     this.$.hide();
 };
 Dot.prototype.jointsUnder = function() {
-    return layout.joints.at(this.position);
+    return joints.at(this.point);
 };
 
 

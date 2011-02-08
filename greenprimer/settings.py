@@ -209,20 +209,19 @@ MEDIA_BUNDLES = (
         'analyzer/ui/dashboard.js',
             'analyzer/ui/scroll.js',
 
-        'analyzer/geom/geom.js',
         'analyzer/geom/vector.js',
+        'analyzer/geom/point.js',
         'analyzer/geom/line.js',
-        'analyzer/geom/particle.js',
-        'analyzer/geom/emitter.js',
 
         'analyzer/layout/layout.js',
+        'analyzer/layout/element.js',
         'analyzer/layout/dot.js',
         'analyzer/layout/joint.js',
         'analyzer/layout/wall.js',
-        'analyzer/layout/window.js',
+        #'analyzer/layout/window.js',
         'analyzer/layout/door.js',
         'analyzer/layout/stair.js',
-        'analyzer/layout/vent.js',
+        #'analyzer/layout/vent.js',
         'analyzer/layout/save.js',
         'analyzer/layout/load.js',
 
@@ -245,7 +244,7 @@ MEDIA_BUNDLES = (
         'analyzer/analyze/pressure.js',
 
         'analyzer/init.js',
-        'analyzer/physics.js',
+        #'analyzer/physics.js',
     ),
 )
 

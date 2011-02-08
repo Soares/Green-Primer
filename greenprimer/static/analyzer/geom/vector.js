@@ -40,6 +40,12 @@ Vector.prototype.shift = function(k) {
     return new Vector(this.x + k, this.y + k);
 };
 
+/* Mutative Functions */
+Vector.prototype.snapToGrid = function() {
+    var snapped = layout.snap(this.x, this.y);
+    this.x = snapped[0];
+    this.y = snapped[1];
+};
 Vector.prototype.set = function(other) {
     this.x = other.x;
     this.y = other.y;
@@ -68,4 +74,15 @@ Vector.prototype.normalize = function() {
 Vector.prototype.scale = function(k) {
     this.x *= k;
     this.y *= k;
+};
+
+/* Geometric Functions */
+Vector.prototype.liesOn = function(line) {
+    if(layout.neq(line.y(this.x), this.y)) return false;
+    left = Math.min(line.start.x, line.end.x);
+    right = Math.max(line.start.x, line.end.x);
+    below = Math.min(line.start.y, line.end.y);
+    above = Math.max(line.start.y, line.end.y);
+    return this.x >= left && this.x <= right &&
+           this.y >= below && this.y <= above;
 };

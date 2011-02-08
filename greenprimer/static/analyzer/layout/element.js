@@ -11,7 +11,7 @@ var elements = function(self) {
 
     self.forget = function(object) {
         for(var i = 0; i < self.all.length; i++) {
-            if(object.equals(self.all[i])) break;
+            if(object.is(self.all[i])) break;
         }
         self.all.splice(i, 1);
     };
@@ -27,7 +27,7 @@ var elements = function(self) {
     return self;
 };
 
-var Element = function(type, group) {
+var Elem = function(type, group, binding) {
     type.prototype.init = function(id) {
         group.register(this, id);
         this.$.data('id', this.id);
@@ -43,7 +43,7 @@ var Element = function(type, group) {
     };
 
     /* Universal Functions */
-    type.prototype.equals = function(other) {
+    type.prototype.is = function(other) {
         return this.id === other.id;
     };
 

@@ -1,13 +1,12 @@
 var walls = (function(self) {
-    return element(self);
+    return elements(self);
 })(walls || {});
 
-var Wall = Element(function(source, dest, id) {
-    layout.register(layout.WALL, this, id);
+var Wall = Elem(function(source, dest, id) {
     this.source = source.attach(this);
     this.dest = dest.attach(this);
     this.line = gp.svg.path('M0 0L1 1');
-    this.geom = 
+    this.segment = new Line(source.point, dest.point);
     this.$ = $(this.line.node);
     this.elements = [];
     this.update();
@@ -19,59 +18,48 @@ var Wall = Element(function(source, dest, id) {
     this.init(id);
 }, walls);
 
-Wall.find = function(dump) {
-    return layout.walls.get(dump.id);
+Wall.deserialize = function(object, id) {
+    return new Wall(Element.load(dump.source), Element.load(dump.dest), id);
 };
-Wall.load = function(dump) {
-    return Wall.find(dump) || new Wall(
-        Joint.load(dump.source),
-        Joint.load(dump.dest),
-        dump.id);
+Wall.prototype.serialize = function() {
+    return {'source': this.source.dump(), 'dest': this.dest.dump()};
 };
 
 Wall.prototype.matches = function(source, dest) {
-    return this.source.position.equals(source) && this.dest.position.equals(dest)
-        || this.dest.position.equals(source) && this.source.position.equals(dest);
+    return this.source.point.equals(source) && this.dest.point.equals(dest)
+        || this.dest.point.equals(source) && this.source.point.equals(dest);
 };
 Wall.prototype.valid = function(source, dest) {
     if(source.equals(dest)) return false;
-    source = source.snapToGrid(); dest = dest.snapToGrid();
     var line = new Line(source, dest);
-    for(var i = 0; i < layout.walls.all.length; i++) {
-        var wall = layout.walls.all[i];
+    for(var i = 0; i < walls.all.length; i++) {
+        var wall = walls.all[i];
         if(wall.id === this.id) continue;
         if(wall.matches(source, dest)) return false;
         if(Math.abs(line.m) === Math.abs(wall.segment.m)) {
-            var ss = wall.source.position.distanceFrom(source);
-            var sd = wall.source.position.distanceFrom(dest);
-            var ds = wall.dest.position.distanceFrom(source);
-            var dd = wall.dest.position.distanceFrom(dest);
+            var ss = wall.source.point.distanceFrom(source);
+            var sd = wall.source.point.distanceFrom(dest);
+            var ds = wall.dest.point.distanceFrom(source);
+            var dd = wall.dest.point.distanceFrom(dest);
             var len = wall.segment.length;
-            if(wall.source.position.equals(source)) return dd > len;
-            if(wall.source.position.equals(dest)) return ds > len;
-            if(wall.dest.position.equals(source)) return sd > len;
-            if(wall.dest.position.equals(dest)) return ss > len;
-        } else if(wall.source.position.equals(source)
-               || wall.source.position.equals(dest)
-               || wall.dest.position.equals(source)
-               || wall.dest.position.equals(dest)) {
+            if(wall.source.point.equals(source)) return dd > len;
+            if(wall.source.point.equals(dest)) return ds > len;
+            if(wall.dest.point.equals(source)) return sd > len;
+            if(wall.dest.point.equals(dest)) return ss > len;
+        } else if(wall.source.point.equals(source)
+               || wall.source.point.equals(dest)
+               || wall.dest.point.equals(source)
+               || wall.dest.point.equals(dest)) {
         } else if(wall.segment.intersection(line)) return false;
     }
     return true;
 };
-Wall.prototype.is = function(elem) {
-    return elem.data('id') === this.id;
-};
 Wall.prototype.update = function() {
     this.line.animate({path: [
-        ['M', this.source.position.x, this.source.position.y],
-        ['L', this.dest.position.x, this.dest.position.y]]});
+        ['M', this.source.point.x, this.source.point.y],
+        ['L', this.dest.point.x, this.dest.point.y]]});
     this.line.backward(3);
-    this.segment = new Line(this.source.position, this.dest.position);
-    return this;
-};
-Wall.prototype.placeholder = function() {
-    this.$.addClass('surreal');
+    this.segment = new Line(this.source.point, this.dest.point);
     return this;
 };
 Wall.prototype.move = function(source, dest) {
@@ -89,38 +77,27 @@ Wall.prototype.remove = function() {
     this.source.detach(this);
     this.dest.detach(this);
     this.line.remove();
-    layout.forget(this);
+    walls.forget(this);
     return null;
 };
 Wall.prototype.swap = function(current, next) {
-    if(current.id === this.source.id) {
-        this.source = next;
-    } else if(current.id === this.dest.id) {
-        this.dest = next;
-    } else throw "Bad swap: no such joint.";
+    if(current.is(this.source)) this.source = next;
+    else this.dest = next;
     current.detach(this);
     next.attach(this);
     return this;
 };
 Wall.prototype.not = function(joint) {
-    if(this.source.id === joint.id) return this.source;
-    if(this.dest.id === joint.id) return this.dest;
+    if(joint.is(this.source)) return this.source;
+    if(joint.is(this.dest)) return this.dest;
     return false;
 };
 Wall.prototype.cut = function() {
-    var x = (this.source.position.x + this.dest.position.x) / 2;
-    var y = (this.source.position.y + this.dest.position.y) / 2;
-    var mid = new Joint(new Vector(x, y).snapToGrid());
+    var x = (this.source.point.x + this.dest.point.x) / 2;
+    var y = (this.source.point.y + this.dest.point.y) / 2;
+    var mid = new Joint(new Point(x, y));
     var child = new Wall(mid, this.dest);
     this.swap(this.dest, mid);
     this.update();
     return this;
-};
-Wall.prototype.dump = function() {
-    return {
-        maker: Wall,
-        id: this.id,
-        source: this.source.dump(),
-        dest: this.dest.dump(),
-    };
 };

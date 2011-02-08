@@ -23,3 +23,9 @@ Point.prototype.shift = function(delta) {
 Point.prototype.copy = function() {
     return new Point(this.x, this.y);
 };
+Point.prototype.equals = function(point) {
+    return this.x === point.x && this.y === point.y;
+};
+Point.prototype.distanceFrom = function(point) {
+    return Math.sqrt(this.x * point.x + this.y * point.y);
+};

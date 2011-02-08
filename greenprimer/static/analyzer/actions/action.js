@@ -20,12 +20,12 @@ var actions = (function(self) {
         self.update();
     };
 
-    self.make = function(redo, undo, done) {
+    self.make = function(redo, undo) {
         return function(arg) {
             var handle = [redo, undo, arg];
             stack[pointer + 1] = handle;
             max = pointer + 1;
-            self.redo(done);
+            self.redo(true);
         };
     };
 

@@ -11,13 +11,13 @@ var joints = (function(self) {
         $.each(joints, function(key, joint) { joint.dieInto(survivor); });
     };
 
-    return element(self);
+    return elements(self);
 })(joints || {});
 
 
-var Joint = Element(function(point, id) {
+var Joint = Elem(function(point, id) {
     this.walls = [];
-    this.point = point;
+    this.point = point.copy();
     this.circle = gp.svg.circle(this.point.x, this.point.y, 4);
     this.$ = $(this.circle.node);
     this.$.addClass('joint');
@@ -46,6 +46,9 @@ Joint.prototype.destroy = function() {
 };
 
 /* Joint Functions */
+Joint.prototype.isAt = function(point) {
+    return this.point.equals(point);
+};
 Joint.prototype.move = function(point) {
     this.point.move(point);
     return this.update();

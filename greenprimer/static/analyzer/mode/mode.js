@@ -29,11 +29,11 @@ var mode = function(self) {
     $(function() {
         self.button = $(self.button).click(function() {
             gp.body.trigger('disengage.mode');
-            gp.body.trigger('engage.mode', self.type);
+            gp.body.trigger('engage.mode', self);
         });
 
         gp.body.bind('engage.mode', function(e, type) {
-            if(type != self.type) return;
+            if(type != self) return;
             if(engaged) return;
             self.button.addClass('active');
             eachEvent(function(source, name, fn) { source.bind(name, fn); });

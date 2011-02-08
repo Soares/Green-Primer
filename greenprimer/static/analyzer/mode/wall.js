@@ -8,54 +8,49 @@ modes.wall = (function(self) {
     });
 
     var getJoint = function(point) {
-        var joints = layout.joints.at(point);
-        return joints.length == 1? joints[0] : new Joint(point);
+        var js = joints.at(point);
+        return js.length == 1? js[0] : new Joint(point);
     };
     var startWall = function(start) {
-        var source = getJoint(start), dest = new Joint(start).placeholder();
-        wall = new Wall(source, dest).placeholder();
+        var source = getJoint(start), dest = new Joint(start);
+        dest.placehold();
+        wall = new Wall(source, dest);
+        wall.placehold();
         return wall;
     };
     var endWall = function(end) {
-        var dest = getJoint(end);
-        var real = new Wall(wall.source, dest);
-        var dump = real.dump();
-        real.remove();
-        wall = wall.remove();
-        recordWall(dump);
+        if(wall.source.point.equals(end)) {
+            wall = wall.remove();
+        } else {
+            wall.dest.move(end);
+            wall.dest.graduate();
+            wall.graduate();
+            recordWall(wall.dump());
+            wall = null;
+        }
     };
 
-    self.type = modes.WALL;
     self.button = '#wall';
     self.dot = true;
-
-    self.disengage = function() {
-        if(wall) wall = wall.remove();
-    };
 
     /* Start drawing a new wall from that joint */
     self.jointClick = function(e, click, joints) {
         var point = layout.point(click);
-        if(wall) {
-            if(!wall.source.position.equals(point)) endWall(point);
-            else wall = wall.remove();
-        } else startWall(point);
+        if(wall) endWall(point);
+        else startWall(point);
     };
 
     /* Add a new joint */
     self.canvasClick = function(e, click) {
         var point = layout.point(click);
-        if(wall) {
-            if(!wall.source.position.equals(point)) endWall(point);
-            else wall = wall.remove();
-        }
+        if(wall) endWall(point);
         startWall(point);
     };
 
     /* Move the current wall if any */
     self.canvasMove = function(e, click) {
         if(!wall) return;
-        if(!wall.valid(wall.source.position, layout.point(click))) return;
+        if(!wall.valid(wall.source.point, layout.point(click))) return;
         wall.dest.move(layout.point(click));
     };
 
@@ -64,7 +59,7 @@ modes.wall = (function(self) {
     };
 
     /* Cancel any wall being drawn */
-    self.escPress = self.offClick = function() {
+    self.disengage = self.escPress = self.offClick = function() {
         if(wall) wall = wall.remove();
     };
 
