@@ -42,5 +42,10 @@ modes.move = (function(self) {
         active = prev = origin = null;
     };
 
+    self.escPress = function(e) {
+        active.shift(origin.minus(prev));
+        active = prev = origin = null;
+    };
+
     return mode(self);
 })({});
