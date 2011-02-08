@@ -1,3 +1,7 @@
+var modes = (function(self) {
+    return self;
+})(modes || {});
+
 var mode = function(self) {
     var engaged = false;
 

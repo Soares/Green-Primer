@@ -1,15 +1,12 @@
 modes.move = (function(self) {
     var active, prev, origin;
 
-    self.type = modes.MOVE;
     self.button = '#move';
 
     var recordMove = actions.make(function(dump) {
-        var elem = dump.maker.load(dump);
-        elem.shift(dump.delta);
+        Elem.load(dump).shift(dump.delta);
     }, function(dump) {
-        var elem = dump.maker.load(dump);
-        elem.shift(dump.delta.negate());
+        Elem.load(dump).shift(dump.delta.inverse());
     });
 
     self.jointClick = function(e, click, joints) {
@@ -20,10 +17,6 @@ modes.move = (function(self) {
     self.wallClick = function(e, click, wall) {
         if(active) return self.canvasClick(e, click);
         active = wall;
-        prev = origin = layout.point(click);
-    };
-    self.ventClick = function(e, click, vent) {
-        active = vent;
         prev = origin = layout.point(click);
     };
     self.canvasMove = function(e, click) {
@@ -37,18 +30,19 @@ modes.move = (function(self) {
         var delta = next.minus(prev);
         if(delta.x === 0 && delta.y === 0) return;
         if(active instanceof Wall) {
-            var valid = active.valid(active.source.position.plus(delta),
-                                     active.dest.position.plus(delta));
+            var valid = active.valid(
+                active.source.point.plus(delta),
+                active.dest.point.plus(delta));
             if(!valid) return;
             active.shift(delta);
             active.update();
         } else if(active instanceof Joint) {
-            var pos = active.position;
+            var pos = active.point;
             active.shift(delta);
             var valid = true;
-            for(var i = 0; i < layout.walls.all.length; i++) {
-                var wall = layout.walls.all[i];
-                valid = wall.valid(wall.source.position, wall.dest.position); 
+            for(var i = 0; i < walls.all.length; i++) {
+                var wall = walls.all[i];
+                valid = wall.valid();
                 if(!valid) break;
             }
             if(!valid) active.move(pos);
@@ -65,7 +59,6 @@ modes.move = (function(self) {
         self.canvasMove(e, click);
         var dump = active.dump();
         dump.delta = point.minus(origin);
-        active.shift(dump.delta.negate());
         recordMove(dump);
         active = prev = origin = null;
     };

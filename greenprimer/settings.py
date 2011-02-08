@@ -228,7 +228,6 @@ MEDIA_BUNDLES = (
         'analyzer/actions/action.js',
         'analyzer/actions/stack.js',
 
-        'analyzer/mode/modes.js',
         'analyzer/mode/mode.js',
         'analyzer/mode/delete.js',
         'analyzer/mode/move.js',

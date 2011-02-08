@@ -1,16 +1,21 @@
 modes['delete'] = (function(self) {
-    self.type = modes.SELECT;
-
     self.button = '#delete';
 
-    var remove = actions.make(function(dump) {
-        dump.maker.find(dump).remove();
+    var recordRemove = actions.make(function(dump) {
+        Elem.load(dump).remove();
     }, function(dump) {
-        dump.maker.load(dump);
+        Elem.load(dump);
     });
 
-    self.wallClick = self.ventClick = function(e, click, elem) {
-        remove(elem.dump());
+    self.wallClick = function(e, click, elem) {
+        recordRemove(elem.dump());
+        elem.remove();
+    };
+    self.jointClick = function(e, click, joints) {
+        $.each(joints, function(key, joint) {
+            recordRemove(joint.dump());
+            joint.remove();
+        });
     };
 
     return mode(self);

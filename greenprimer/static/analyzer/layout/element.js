@@ -38,7 +38,7 @@ var Elem = function(type, group, binding) {
             group: group,
             creator: type,
             id: this.id,
-            object: this.serialize(),
+            object: this.serialize.apply(this, arguments),
         };
     };
 
@@ -62,6 +62,6 @@ var Elem = function(type, group, binding) {
 
     return type;
 };
-Element.load = function(dump) {
+Elem.load = function(dump) {
     return dump.group.find(dump.id) || dump.creator.deserialize(dump.object, dump.id);
 };

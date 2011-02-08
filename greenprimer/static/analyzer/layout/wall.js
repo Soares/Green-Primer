@@ -2,27 +2,29 @@ var walls = (function(self) {
     return elements(self);
 })(walls || {});
 
-var Wall = Elem(function(source, dest, id) {
-    this.source = source.attach(this);
-    this.dest = dest.attach(this);
-    this.line = gp.svg.path('M0 0L1 1');
+var Wall = function(source, dest, id) {
     this.segment = new Line(source.point, dest.point);
+    this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
     this.elements = [];
-    this.update();
 
     var self = this;
     this.$.addClass('wall').click(function(e) {
         gp.layout.trigger('wall.click', [e, self]);
     });
+
     this.init(id);
-}, walls);
+    this.source = source.attach(this);
+    this.dest = dest.attach(this);
+    this.update();
+};
+Elem(Wall, walls);
 
 Wall.deserialize = function(object, id) {
-    return new Wall(Element.load(object.source), Element.load(object.dest), id);
+    return new Wall(Elem.load(object.source), Elem.load(object.dest), id);
 };
 Wall.prototype.serialize = function() {
-    return {'source': this.source.dump(), 'dest': this.dest.dump()};
+    return {'source': this.source.dump(true), 'dest': this.dest.dump(true)};
 };
 
 Wall.prototype.matches = function(source, dest) {
@@ -30,6 +32,8 @@ Wall.prototype.matches = function(source, dest) {
         || this.dest.point.equals(source) && this.source.point.equals(dest);
 };
 Wall.prototype.valid = function(source, dest) {
+    source = source || this.source.point;
+    dest = dest || this.dest.point;
     if(source.equals(dest)) return false;
     var line = new Line(source, dest);
     for(var i = 0; i < walls.all.length; i++) {

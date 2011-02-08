@@ -29,3 +29,14 @@ Point.prototype.equals = function(point) {
 Point.prototype.distanceFrom = function(point) {
     return Math.sqrt(this.x * point.x + this.y * point.y);
 };
+
+Point.prototype.inverse = function(point) {
+    return new Point(-this.x, -this.y);
+};
+
+Point.prototype.minus = function(point) {
+    return new Point(this.x - point.x, this.y - point.y);
+};
+Point.prototype.plus = function(point) {
+    return new Point(this.x + point.x, this.y + point.y);
+};
