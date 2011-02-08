@@ -7,7 +7,7 @@ modes['delete'] = (function(self) {
         Elem.load(dump);
     });
 
-    self.wallClick = function(e, click, elem) {
+    self.wallClick = self.windowClick = function(e, click, elem) {
         recordRemove(elem.dump());
         elem.remove();
     };

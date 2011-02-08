@@ -1,26 +1,43 @@
-var Window = function(point, id) {
-    var handle = this;
-    layout.register(layout.WINDOW, this, id);
-    this.position = point;
-    this.circle = gp.svg.circle(this.position.x, this.position.y, 7);
-    this.$ = $(this.circle.node).addClass('window');
-    this.$.click(function(e) {
-        gp.layout.trigger('window.click', [e, handle]);
+var windows = (function(self) {
+    return elements(self);
+})(windows || {});
+
+var Window = function(wall, offset, length, id) {
+    this.offset = offset;
+    this.length = length || 1;
+    this.line = gp.svg.path('M0 0L1 1');
+    this.$ = $(this.line.node);
+
+    var self = this;
+    this.$.addClass('window').click(function() {
+        gp.layout.trigger('window.click', [e, self]);
     });
 
-    return this;
+    this.init(id);
+    this.wall = wall.attach(this);
+    this.update();
 };
-Window.load = function(dump) {
-    return Window.find(dump) || new Window(dump.point, dump.id);
+Elem(Window, windows);
+
+Window.deserialize = function(object, id) {
+    var wall = walls.find(object.wallid);
+    return new Window(wall, object.offset, object.length, id);
 };
-Window.find = function(dump) {
-    return layout.windows.get(dump.id);
+Window.prototype.serialize = function(shallow) {
+    var object = {offset: this.offset, length: this.length};
+    object.wallid = this.wall.id;
+    return object;
 };
 
-Window.prototype.dump = function() {
-    return {
-        maker: Window,
-        id: this.id,
-        point: this.point,
-    };
+Window.prototype.update = function() {
+    var start = this.wall.alongBy(this.offset);
+    var end = this.wall.alongBy(this.offset + this.length);
+    this.line.animate({path: [['M', start.x, start.y], ['L', end.x, end.y]]});
+    return this;
+};
+Window.prototype.remove = function() {
+    this.wall.detach(this);
+    this.line.remove();
+    windows.forget(this);
+    return null;
 };

@@ -10,7 +10,7 @@ var mode = function(self) {
             'joint.click': self.jointClick || function() {},
             'wall.click': self.wallClick || function() {},
             'vent.click': self.ventClick || function() {},
-            'window.click': self.ventClick || function() {},
+            'window.click': self.windowClick || function() {},
             'canvas.click': self.canvasClick || function() {},
 
             'canvas.mousemove': self.canvasMove || function() {},

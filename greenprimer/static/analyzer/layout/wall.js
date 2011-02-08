@@ -24,7 +24,18 @@ Wall.deserialize = function(object, id) {
     return new Wall(Elem.load(object.source), Elem.load(object.dest), id);
 };
 Wall.prototype.serialize = function() {
-    return {'source': this.source.dump(true), 'dest': this.dest.dump(true)};
+    return {source: this.source.dump(true), dest: this.dest.dump(true)};
+};
+
+Wall.prototype.attach = function(element) {
+    this.elements.push(element);
+    return this;
+};
+Wall.prototype.detach = function(element) {
+    for(var i = 0; i < this.elements.length; i++) {
+        if(this.elements[i] === element) break;
+    }
+    this.elements.splice(i, 1);
 };
 
 Wall.prototype.matches = function(source, dest) {
@@ -64,6 +75,7 @@ Wall.prototype.update = function() {
         ['L', this.dest.point.x, this.dest.point.y]]});
     this.line.backward(3);
     this.segment = new Line(this.source.point, this.dest.point);
+    for(var i = 0; i < this.elements.length; i++) this.elements[i].update();
     return this;
 };
 Wall.prototype.move = function(source, dest) {
@@ -104,4 +116,14 @@ Wall.prototype.cut = function() {
     this.swap(this.dest, mid);
     this.update();
     return this;
+};
+
+
+Wall.prototype.alongBy = function(n) {
+    var point = this.dest.point.minus(this.source.point);
+    var vector = new Vector(point.x, point.y);
+    vector.normalize();
+    vector.scale(n);
+    vector.add(this.source.point);
+    return vector;
 };

@@ -31,8 +31,7 @@ Vector.prototype.snap = function(a, b) {
     if(b === undefined) b = a;
     return new Vector(parseInt(this.x/a)*a, parseInt(this.y/b)*b);
 };
-Vector.prototype.distanceFrom = function(/* vector */) {
-    var vector = Vector.from.apply(this, arguments);
+Vector.prototype.distanceFrom = function(vector) {
     var dx = this.x - vector.x, dy = this.y - vector.y;
     return Math.sqrt((dx * dx) + (dy * dy));
 };
