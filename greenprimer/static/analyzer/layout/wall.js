@@ -19,7 +19,7 @@ var Wall = Elem(function(source, dest, id) {
 }, walls);
 
 Wall.deserialize = function(object, id) {
-    return new Wall(Element.load(dump.source), Element.load(dump.dest), id);
+    return new Wall(Element.load(object.source), Element.load(object.dest), id);
 };
 Wall.prototype.serialize = function() {
     return {'source': this.source.dump(), 'dest': this.dest.dump()};

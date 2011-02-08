@@ -2,9 +2,9 @@ modes.wall = (function(self) {
     var wall = null;
 
     var recordWall = actions.make(function(dump) {
-        Wall.load(dump);
+        Element.load(dump);
     }, function(dump) {
-        Wall.find(dump).remove();
+        Element.load(dump).remove();
     });
 
     var getJoint = function(point) {
