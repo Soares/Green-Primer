@@ -1,5 +1,8 @@
-var Wall = function(source, dest, id) {
-    var handle = this;
+var walls = (function(self) {
+    return element(self);
+})(walls || {});
+
+var Wall = Element(function(source, dest, id) {
     layout.register(layout.WALL, this, id);
     this.source = source.attach(this);
     this.dest = dest.attach(this);
@@ -9,12 +12,12 @@ var Wall = function(source, dest, id) {
     this.elements = [];
     this.update();
 
+    var self = this;
     this.$.addClass('wall').click(function(e) {
-        gp.layout.trigger('wall.click', [e, handle]);
-    }).data('id', this.id);
-
-    return this;
-};
+        gp.layout.trigger('wall.click', [e, self]);
+    });
+    this.init(id);
+}, walls);
 
 Wall.find = function(dump) {
     return layout.walls.get(dump.id);

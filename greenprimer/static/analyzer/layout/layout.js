@@ -52,7 +52,9 @@ var layout = (function(self) {
 
     self.point = function(e) {
         var coords = util.eventCoords(e, true);
-        return Vector.from.apply(this, coords).snapToGrid();
+        var vector = new Vector(coords[0], coords[1]);
+        vector.snapToGrid();
+        return vector;
     };
 
     self.joints = {

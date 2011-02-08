@@ -1,23 +1,77 @@
-var Joint = function(position, id) {
-    layout.register(layout.JOINT, this, id);
+var joints = (function(self) {
+    self.at = function(point) {
+        return $.grep(self.all, function(joint) {
+            return joint.isAt(point) && joint.isReal();
+        });
+    };
+
+    self.merge = function(point) {
+        var joints = self.at(point);
+        var survivor = joints.pop();
+        $.each(joints, function(key, joint) { joint.dieInto(survivor); });
+    };
+
+    return element(self);
+})(joints || {});
+
+
+var Joint = Element(function(point, id) {
     this.walls = [];
-    this.position = Vector.from(position);
-    this.circle = gp.svg.circle(this.position.x, this.position.y, 4);
+    this.point = point;
+    this.circle = gp.svg.circle(this.point.x, this.point.y, 4);
     this.$ = $(this.circle.node);
     this.$.addClass('joint');
-    return this;
+    this.init(id);
+}, joints);
+
+/* Serialization */
+Joint.deserialize = function(object, id) {
+    return new Joint(object.point, id);
+};
+Joint.prototype.serialize = function() {
+    return {'point': this.point};
 };
 
-Joint.load = function(dump) {
-    return Joint.find(dump) || new Joint(dump.point, dump.id);
-};
-Joint.find = function(dump) {
-    return layout.joints.get(dump.id);
-};
-Joint.prototype.placeholder = function() {
-    this.$.addClass('surreal');
+/* Internal Functions */
+Joint.prototype.update = function() {
+    this.circle.animate({cx: this.point.x, cy: this.point.y});
+    $.each(this.walls, function(key, wall) { wall.update(); });
     return this;
 };
+Joint.prototype.destroy = function() {
+    /* Destructor. Clean up all resources. */
+    this.circle.remove();
+    joints.forget(this);
+    return null;
+};
+
+/* Joint Functions */
+Joint.prototype.move = function(point) {
+    this.point.move(point);
+    return this.update();
+};
+Joint.prototype.shift = function(point) {
+    this.point.shift(point);
+    return this.update();
+};
+Joint.prototype.split = function() {
+    for(var i = 1; i < this.walls.length; i++) {
+        this.detach(this.walls[i]);
+        this.walls[i].swap(this, new Joint(this.point.copy()));
+    }
+};
+Joint.prototype.dieInto = function(dest) {
+    /* Die after giving the `dest` joint all your walls */
+    var self = this;
+    $.each(this.walls, function(key, wall) { wall.swap(self, dest); });
+    return null;
+};
+Joint.prototype.remove = function() {
+    $.each(this.walls, function(key, wall) { wall.remove(); });
+    return null;
+};
+
+/* Wall Manipulation */
 Joint.prototype.attach = function(wall) {
     /* Add a wall coming from / going to this joint */
     this.walls.push(wall);
@@ -34,35 +88,6 @@ Joint.prototype.detach = function(wall) {
     this.walls.splice(i, 1);
     return this.walls.length? this : this.destroy();
 };
-Joint.prototype.destroy = function() {
-    /* Destructor. Clean up all resources. */
-    this.circle.remove();
-    layout.forget(this);
-    return null;
-};
-Joint.prototype.move = function(point) {
-    /* Move the joint and all attached walls */
-    this.position = Vector.from(point);
-    this.circle.animate({cx: this.position.x, cy: this.position.y});
-    $.each(this.walls, function(key, wall) { wall.update(); });
-    return this;
-};
-Joint.prototype.shift = function(point) {
-    /* Shift this joint and all attached walls */
-    return this.move(point.plus(this.position));
-};
-
-Joint.prototype.split = function() {
-    /* Split this point so that each connected wall has a separate joint */
-    var self = this, usedSelf = false;
-    $.each(this.walls, function(key, wall) {
-        self.detach(wall);
-        var next = usedSelf? new Joint(self.position.copy()) : self;
-        wall.swap(self, next);
-        usedSelf = true;
-    });
-    return null;
-};
 Joint.prototype.combine = function() {
     /* If there are only two attached lines, combine them and die.
      * Return true if the combine happened, false otherwise. */
@@ -72,24 +97,4 @@ Joint.prototype.combine = function() {
     b.update();
     a.remove();
     return true;
-};
-Joint.prototype.remove = function() {
-    /* Remove this joint and all attached walls */
-    // The last call to wall.remove() will trigger the joint's destroy().
-    $.each(this.walls, function(key, wall) { wall.remove(); });
-    return null;
-};
-Joint.prototype.dieInto = function(dest) {
-    /* Die after giving the `dest` joint all your walls */
-    var self = this;
-    $.each(this.walls, function(key, wall) { wall.swap(self, dest); });
-    // The last call to wall.swap() will trigger the joint's destroy().
-    return null;
-};
-Joint.prototype.dump = function() {
-    return {
-        maker: Joint,
-        point: this.position,
-        id: this.id,
-    };
 };
