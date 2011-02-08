@@ -221,7 +221,7 @@ MEDIA_BUNDLES = (
         'analyzer/layout/window.js',
         'analyzer/layout/door.js',
         'analyzer/layout/stair.js',
-        #'analyzer/layout/vent.js',
+        'analyzer/layout/vent.js',
         'analyzer/layout/save.js',
         'analyzer/layout/load.js',
 

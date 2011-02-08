@@ -1,32 +1,35 @@
 modes.vent = (function(self) {
     var vent = null;
 
-    self.type = modes.VENT;
-    self.button = '#vent';
-    self.dot = true;
+    var makeVent = actions.make(function(dump) {
+        Elem.load(dump);
+    }, function(dump) {
+        Elem.load(dump).remove();
+    });
 
     var startVent = function(point) {
-        return new Vent(point).placeholder();
+        var vent = new Vent(point);
+        vent.placehold();
+        return vent;
     };
 
-    var makeVent = actions.make(function(dump) {
-        Vent.load(dump);
-    }, function(dump) {
-        Vent.find(dump).remove();
-    });
+    self.button = '#vent';
+    self.dot = true;
 
     self.canvasClick = function(e, click) {
         var point = layout.point(click);
         if(vent) {
             var dump = vent.dump();
-            vent = vent.remove();
+            vent.graduate();
             makeVent(dump);
+            vent = null;
         } else vent = startVent(point);
     };
 
     self.canvasMove = function(e, click) {
         if(!vent) return;
-        vent.reorient(layout.point(click).minus(vent.position));
+        vent.direction = layout.point(click).minus(vent.point);
+        vent.reorient();
     };
 
     self.escPress = self.offClick = function() {
@@ -35,4 +38,3 @@ modes.vent = (function(self) {
 
     return mode(self);
 })({});
-
