@@ -1,0 +1,14 @@
+{%extends "base.hisp"}
+{% block title ~ Physics Demo}
+
+{%block body ~
+(#view
+  (#layout
+    (canvas#canvas (:width "1024") (:height "512"))))}
+
+{%load media}
+(%addto[links] {%include_media "demo.css"})
+(%addto[scripts]
+  {%include_media "box.js"}
+  {%include_media "utils.js"}
+  {%include_media "demo.js"})
