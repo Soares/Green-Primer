@@ -39,6 +39,30 @@ Wall.prototype.serialize = function(shallow) {
     }
     return object;
 };
+Wall.prototype.save = function() {
+    var elements = [];
+    for(var i = 0; i < this.elements.length; i++) {
+        elements.push(this.elements[i].save());
+    }
+    return {
+        id: this.id,
+        source: this.source.save(),
+        dest: this.dest.save(),
+        elements: elements,
+    };
+};
+Wall.load = function(save) {
+    var source = Joint.load(save.source);
+    var dest = Joint.load(save.dest);
+    var wall = walls.find(save.id) || new Wall(source, dest, save.id);
+    for(var i = 0; i < save.elements.length; i++) {
+        var element = save.elements[i];
+        if(element.type === 'door') Door.load(wall, element);
+        if(element.type === 'vent') Vent.load(wall, element);
+        if(element.type === 'window') Window.load(wall, element);
+    }
+    return wall;
+};
 
 Wall.prototype.attach = function(element) {
     this.elements.push(element);

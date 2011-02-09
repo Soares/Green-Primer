@@ -28,6 +28,17 @@ Door.prototype.serialize = function() {
     object.wallid = this.wall.id;
     return object;
 };
+Door.prototype.save = function() {
+    return {
+        type: 'door',
+        offset: this.offset,
+        length: this.length,
+        id: this.id,
+    };
+};
+Door.load = function(wall, save) {
+    return new Door(wall, save.offset, save.length, save.id);
+};
 
 Door.prototype.start = function() {
     return this.wall.alongBy(this.offset - (this.length / 2));

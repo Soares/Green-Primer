@@ -40,6 +40,16 @@ Joint.prototype.serialize = function(shallow) {
     }
     return data;
 };
+Joint.prototype.save = function() {
+    return {
+        x: this.point.x,
+        y: this.point.y,
+        id: this.id,
+    };
+};
+Joint.load = function(save) {
+    return joints.find(save.id) || new Joint(new Point(save.x, save.y), {}, save.id);
+};
 
 /* Internal Functions */
 Joint.prototype.update = function() {

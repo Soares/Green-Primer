@@ -28,6 +28,17 @@ Window.prototype.serialize = function() {
     object.wallid = this.wall.id;
     return object;
 };
+Window.prototype.save = function() {
+    return {
+        type: 'window',
+        offset: this.offset,
+        length: this.length,
+        id: this.id,
+    };
+};
+Window.load = function(wall, save) {
+    return new Window(wall, save.offset, save.length, save.id);
+};
 
 Window.prototype.start = function() {
     return this.wall.alongBy(this.offset - (this.length / 2));

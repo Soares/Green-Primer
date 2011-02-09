@@ -32,6 +32,19 @@ Vent.prototype.serialize = function() {
     object.wallid = this.wall.id;
     return object;
 };
+Vent.prototype.save = function() {
+    return {
+        type: 'vent',
+        offset: this.offset,
+        dx: this.direction.x,
+        dy: this.direction.y,
+        id: this.id,
+    };
+};
+Vent.load = function(wall, save) {
+    var direction = new Vector(save.dx, save.dy);
+    return new Vent(wall, save.offset, direction, save.id);
+};
 
 Vent.prototype.start = function() {
     return this.wall.alongBy(this.offset - (this.length / 2));
