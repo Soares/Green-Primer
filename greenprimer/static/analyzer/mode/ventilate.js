@@ -1,7 +1,6 @@
 modes.ventilate = (function(self) {
     var canvas, context, interval;
 
-    self.type = modes.VENTILATE;
     self.button = '#internal-flow';
     self.dot = false;
 
@@ -11,21 +10,19 @@ modes.ventilate = (function(self) {
     };
 
     self.engage = function() {
-        interval = setInterval(update, 200);
+        physics.reset();
+        for(var i = 0; i < walls.all.length; i++) {
+            walls.all[i].simulate();
+        }
+        for(var i = 0; i < vents.all.length; i++) {
+            vents.all[i].simulate();
+        }
+        physics.start();
     };
 
     self.disengage = function() {
-        if(interval); clearInterval(interval);
-        layout.vents.reset();
-        context.clearRect(0, 0, gp.WIDTH, gp.HEIGHT);
+        physics.stop();
     };
-
-    $(function() {
-        canvas = document.getElementById('canvas');
-        context = canvas.getContext('2d');
-        // Consider 'source-over', 'lighter', 'darker', and 'xor'
-        context.globalCompositeOperation = 'source-over';
-    });
 
     return mode(self);
 })({});

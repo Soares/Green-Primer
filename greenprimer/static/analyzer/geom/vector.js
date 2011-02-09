@@ -85,3 +85,11 @@ Vector.prototype.liesOn = function(line) {
     return this.x >= left && this.x <= right &&
            this.y >= below && this.y <= above;
 };
+Vector.prototype.rotate = function(theta) {
+    this.normalize();
+    var cos = Math.cos(theta), sin = Math.sin(theta);
+    var x = (this.x * cos) - (this.y * sin);
+    var y = (this.x * sin) + (this.y * cos);
+    this.x = x;
+    this.y = y;
+};

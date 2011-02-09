@@ -1379,9 +1379,10 @@ $.widget("ui.draggable", $.ui.mouse, {
                 var dy = pageY - this.offset.click.top - this.originalPosition.top - par.top;
                 var vector = new Vector(dx, dy);
                 if(vector.length() > o.maxdist) {
-                    var max = vector.unit().scale(o.maxdist);
-                    pageX = this.originalPosition.left + par.left + this.offset.click.left + max.x;
-                    pageY = this.originalPosition.top + par.top +  this.offset.click.top + max.y;
+                    vector.normalize();
+                    vector.scale(o.maxdist);
+                    pageX = this.originalPosition.left + par.left + this.offset.click.left + vector.x;
+                    pageY = this.originalPosition.top + par.top +  this.offset.click.top + vector.y;
                 }
             }
 

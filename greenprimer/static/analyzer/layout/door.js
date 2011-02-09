@@ -3,8 +3,8 @@ var doors = (function(self) {
 })(doors || {});
 
 var Door = function(wall, offset, length, id) {
+    this.length = length || 20;
     this.offset = offset;
-    this.length = length || 1;
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
 
@@ -23,15 +23,24 @@ Door.deserialize = function(object, id) {
     var wall = walls.find(object.wallid);
     return new Door(wall, object.offset, object.length, id);
 };
-Door.prototype.serialize = function(shallow) {
+Door.prototype.serialize = function() {
     var object = {offset: this.offset, length: this.length};
     object.wallid = this.wall.id;
     return object;
 };
 
+Door.prototype.start = function() {
+    return this.wall.alongBy(this.offset - (this.length / 2));
+};
+Door.prototype.center = function() {
+    return this.wall.alongBy(this.offset);
+}
+Door.prototype.end = function() {
+    return this.wall.alongBy(this.offset + (this.length / 2));
+};
+
 Door.prototype.update = function() {
-    var start = this.wall.alongBy(this.offset);
-    var end = this.wall.alongBy(this.offset + this.length);
+    var start = this.start(), end = this.end();
     this.line.animate({path: [['M', start.x, start.y], ['L', end.x, end.y]]});
     return this;
 };

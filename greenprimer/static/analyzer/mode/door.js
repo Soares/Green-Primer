@@ -16,7 +16,8 @@ modes.door = (function(self) {
         var coords = util.eventCoords(click, true);
         var vector = new Vector(coords[0], coords[1]);
         var offset = vector.distanceFrom(wall.source.point);
-        var door = new Door(wall, offset - 10, 20);
+        var length = 30;
+        var door = new Door(wall, offset, length);
         makeDoor(door.dump());
     };
     self.doorClick = function(e, click, door) {

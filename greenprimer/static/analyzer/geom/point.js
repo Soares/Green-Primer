@@ -27,7 +27,8 @@ Point.prototype.equals = function(point) {
     return this.x === point.x && this.y === point.y;
 };
 Point.prototype.distanceFrom = function(point) {
-    return Math.sqrt(this.x * point.x + this.y * point.y);
+    var dx = this.x - point.x, dy = this.y - point.y;
+    return Math.sqrt((dx * dx) + (dy * dy));
 };
 
 Point.prototype.inverse = function(point) {

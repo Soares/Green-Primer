@@ -16,7 +16,8 @@ modes['window'] = (function(self) {
         var coords = util.eventCoords(click, true);
         var vector = new Vector(coords[0], coords[1]);
         var offset = vector.distanceFrom(wall.source.point);
-        var win = new Window(wall, offset - 10, 20);
+        var length = 20;
+        var win = new Window(wall, offset, length);
         makeWindow(win.dump());
     };
     self.windowClick = function(e, click, win) {

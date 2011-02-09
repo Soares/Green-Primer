@@ -23,15 +23,24 @@ Window.deserialize = function(object, id) {
     var wall = walls.find(object.wallid);
     return new Window(wall, object.offset, object.length, id);
 };
-Window.prototype.serialize = function(shallow) {
+Window.prototype.serialize = function() {
     var object = {offset: this.offset, length: this.length};
     object.wallid = this.wall.id;
     return object;
 };
 
+Window.prototype.start = function() {
+    return this.wall.alongBy(this.offset - (this.length / 2));
+};
+Window.prototype.center = function() {
+    return this.wall.alongBy(this.offset);
+}
+Window.prototype.end = function() {
+    return this.wall.alongBy(this.offset + (this.length / 2));
+};
+
 Window.prototype.update = function() {
-    var start = this.wall.alongBy(this.offset);
-    var end = this.wall.alongBy(this.offset + this.length);
+    var start = this.start(), end = this.end();
     this.line.animate({path: [['M', start.x, start.y], ['L', end.x, end.y]]});
     return this;
 };

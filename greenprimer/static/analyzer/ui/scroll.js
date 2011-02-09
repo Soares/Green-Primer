@@ -7,6 +7,7 @@ var scroll = (function(self) {
     var SCROLL_AMOUNT = 10; // How much to scroll each time
     var MAX_SPEED = 100; // Miliseconds between max speed scroll
     var left, up, speed, interval;
+    var origin = new Vector(0, 0);
 
     self.drag = function(e, ui) {
         var pos = new Vector(
@@ -31,7 +32,7 @@ var scroll = (function(self) {
     };
 
     var getSpeed = function(pos) {
-        var distance = Math.round(pos.distanceFrom(0, 0));
+        var distance = Math.round(pos.distanceFrom(origin));
         if(distance < SCALE_THRESHOLD) return 0;
         var lowToHigh = (distance - SCALE_THRESHOLD);
         var highToLow = SCALE_RANGE - lowToHigh;

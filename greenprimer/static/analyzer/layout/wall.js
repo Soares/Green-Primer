@@ -142,3 +142,35 @@ Wall.prototype.alongBy = function(n) {
     vector.add(this.source.point);
     return vector;
 };
+
+Wall.prototype.doors = function() {
+    var doors = [];
+    for(var i = 0; i < this.elements.length; i++) {
+        if(this.elements[i] instanceof Door) doors.push(this.elements[i]);
+    }
+    var start = this.source.point;
+    doors.sort(function(a, b) {
+        var adist = a.start().distanceFrom(start);
+        var bdist = b.start().distanceFrom(start);
+        return adist - bdist;
+    });
+    return doors;
+};
+Wall.prototype.segments = function() {
+    var start = this.source.point, doors = this.doors();
+    if(!doors.length) return [this.segment];
+    var segments = [];
+    for(var i = 0; i < doors.length; i++) {
+        segments.push(new Line(start, doors[i].start()));
+        start = doors[i].end();
+    }
+    segments.push(new Line(start, this.dest.point));
+    return segments;
+};
+Wall.prototype.simulate = function() {
+    var segments = this.segments();
+    for(var i = 0; i < segments.length; i++) {
+        physics.addLine(segments[i], 6);
+    }
+    return segments;
+};

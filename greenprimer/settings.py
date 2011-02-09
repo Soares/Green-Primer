@@ -115,13 +115,20 @@ MEDIA_BUNDLES = (
         'analyzer/sass/toolbar.sass',
         'analyzer/sass/dashboard.sass',
     ),
+    ('demo.css',
+        'analyzer/sass/demo.sass',
+        'analyzer/sass/layout.sass',
+        'analyzer/sass/key.sass',
+        'analyzer/sass/toolbar.sass',
+        'analyzer/sass/dashboard.sass',
+    ),
     ('main.js',
         'jquery/1.4.4.min.js',
         'jquery/ui/1.8.7.dev.js',
         'modernizr/1.6.min.js',
         'modernizr/1.6.min.js',
     ),
-    ('analyzer.js',
+    ('box.js',
         # Box2D JS
         'box2D/lib/prototype-1.6.0.2.js',
         'box2D/js/box2d/common/b2Settings.js',
@@ -188,7 +195,8 @@ MEDIA_BUNDLES = (
         'box2D/js/box2d/dynamics/joints/b2PulleyJointDef.js',
         'box2D/js/box2d/dynamics/joints/b2RevoluteJoint.js',
         'box2D/js/box2d/dynamics/joints/b2RevoluteJointDef.js',
-
+    ),
+    ('utils.js',
         # 3rd Party
         'raphael/raphael.js',
         'raphael/arrange.js',
@@ -196,6 +204,8 @@ MEDIA_BUNDLES = (
         'jquery/tools/tools.min.js',
         'jquery/svg.js',
         'jquery/svgdom.js',
+    ),
+    ('analyzer.js',
 
         # Green Primer
         'analyzer/gp.js',
@@ -204,14 +214,14 @@ MEDIA_BUNDLES = (
         'analyzer/base/utilities.js',
         'analyzer/base/notify.js',
 
+        'analyzer/geom/vector.js',
+        'analyzer/geom/point.js',
+        'analyzer/geom/line.js',
+
         'analyzer/ui/key.js',
         'analyzer/ui/toolbar.js',
         'analyzer/ui/dashboard.js',
             'analyzer/ui/scroll.js',
-
-        'analyzer/geom/vector.js',
-        'analyzer/geom/point.js',
-        'analyzer/geom/line.js',
 
         'analyzer/layout/layout.js',
         'analyzer/layout/element.js',
@@ -243,7 +253,11 @@ MEDIA_BUNDLES = (
         'analyzer/analyze/pressure.js',
 
         'analyzer/init.js',
-        #'analyzer/physics.js',
+        'analyzer/physics.js',
+    ),
+    ('demo.js',
+        'analyzer/gp.js',
+        'analyzer/demo.js',
     ),
 )
 

@@ -15,7 +15,6 @@ var gp = (function(self) {
         self.canvas.data('top', self.canvas.css('top'));
         self.canvas.data('left', self.canvas.css('left'));
 
-
         self.svg = Raphael(document.getElementById('layout'), gp.WIDTH, gp.HEIGHT);
         self.svg.canvas.id = 'svg';
 

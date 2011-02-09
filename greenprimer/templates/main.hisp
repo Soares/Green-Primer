@@ -66,14 +66,18 @@
           (button Second Floor)
           (button Third Floor))))
     (#modes
-      (button.upper#internal-flow Internal)
+      (button.whole#internal-flow Ventilate)
+      (!(button.upper#internal-flow Internal)
       (button.lower#external-flow External)
-      (button.middle#no-flow None))))
+      (button.middle#no-flow None)!))))
 
 (#view
   (#layout
-    (canvas#canvas (:width "1024") (:height "512"))))}
+    (canvas#canvas (:width "2048") (:height "2048"))))}
 
 {%load media}
 (%addto[links] {%include_media "analyzer.css"})
-(%addto[scripts] {%include_media "analyzer.js"})
+(%addto[scripts]
+  {%include_media "box.js"}
+  {%include_media "utils.js"}
+  {%include_media "analyzer.js"})

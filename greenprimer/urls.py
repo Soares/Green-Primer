@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^layout/(?P<pk>\d+)$', 'layouts.views.layout'),
     (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'main.hisp'}),
+    (r'^demo/$', 'django.views.generic.simple.direct_to_template', {'template': 'demo.hisp'}),
 )
 
 if settings.DEBUG:
