@@ -1,6 +1,7 @@
 {%extends "main.hisp"}
 {% block title ~ Green Primer: Home}
 
+{% block toolbar ~ (a#logout (:href '{% url users.views.logout %}') logout)}
 {% block main ~
   (a#create (:href '{% url layouts.views.new %}') New Layout)
   (table#options
