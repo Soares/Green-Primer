@@ -1,0 +1,5 @@
+{%extends "main.hisp"}
+{% block title ~ Green Primer: Home}
+
+{% block main ~
+  (a#create (:href '{% url layouts.views.new %}') New Layout)}

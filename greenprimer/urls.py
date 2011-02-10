@@ -6,9 +6,22 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
-    (r'^layout/(?P<pk>\d+)$', 'layouts.views.layout'),
-    (r'^$', 'django.views.generic.simple.direct_to_template', {'template': 'main.hisp'}),
-    (r'^demo/$', 'django.views.generic.simple.direct_to_template', {'template': 'demo.hisp'}),
+)
+
+urlpatterns += patterns('layouts.views',
+    (r'^layout/(?P<pk>\d+)$', 'layout'),
+)
+
+urlpatterns += patterns('users.views',
+    (r'^$', 'main'),
+    (r'^home/$', 'home'),
+    (r'^register/$', 'register'),
+    (r'^logout/$', 'logout'),
+)
+
+urlpatterns += patterns('django.views.generic.simple',
+    (r'^layout/$', 'direct_to_template', {'template': 'layout.hisp'}),
+    (r'^demo/$', 'direct_to_template', {'template': 'demo.hisp'}),
 )
 
 if settings.DEBUG:
