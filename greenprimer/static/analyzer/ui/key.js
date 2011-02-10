@@ -20,14 +20,22 @@ $(document).ready(function() {
     hide.hide();
     show.show();
   });
-  var saved;
   save.click(function() {
-    saved = layout.save();
-    console.log(saved);
+    push(layout.save());
   });
   load.click(function() {
-    layout.reset();
-    if(saved) layout.load(saved);
+    push(layout.save(), function() {
+      window.location.replace('/home/');
+    });
   });
-  $('#exit').click(function() { layout.reset(); });
+  $('#exit').click(function() {
+    window.location.replace('/home/');
+  });
+
+  var push = function(contents, success) {
+    console.log(JSON.stringify(contents));
+    $.post(global.save_url, {
+      'data': JSON.stringify(contents),
+    }, success, 'json');
+  };
 });

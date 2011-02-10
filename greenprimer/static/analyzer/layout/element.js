@@ -4,6 +4,7 @@ var elements = function(self) {
     self.all = [];
 
     self.register = function(object, ident) {
+        if(ident) id = Math.max(id, ident + 1);
         object.id = ident || (id++);
         self.all.push(object);
         return object;

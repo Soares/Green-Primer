@@ -216,6 +216,7 @@ MEDIA_BUNDLES = (
         'analyzer/base/exceptions.js',
         'analyzer/base/utilities.js',
         'analyzer/base/notify.js',
+        'analyzer/base/json.js',
 
         'analyzer/geom/vector.js',
         'analyzer/geom/point.js',
@@ -235,8 +236,6 @@ MEDIA_BUNDLES = (
         'analyzer/layout/door.js',
         'analyzer/layout/stair.js',
         'analyzer/layout/vent.js',
-        'analyzer/layout/save.js',
-        'analyzer/layout/load.js',
 
         'analyzer/actions/action.js',
         'analyzer/actions/stack.js',
@@ -369,7 +368,9 @@ def INSTALLED_APPS():
     #if DEBUG:
     #   yield 'debug_toolbar'
 
-    # Equatize
+    # Green Primer
+    yield 'users'
+    yield 'layouts'
 
 LOGIN_REDIRECT_URL = '/'
 

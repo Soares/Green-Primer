@@ -9,7 +9,13 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('layouts.views',
-    (r'^layout/(?P<pk>\d+)$', 'layout'),
+    (r'^layouts/(?P<pk>\d+)$', 'layout'),
+    (r'^layouts/new/$', 'new'),
+    (r'^layouts/properties/(?P<pk>\d+)$', 'properties'),
+    (r'^layouts/duplicate/(?P<pk>\d+)$', 'duplicate'),
+    (r'^layouts/delete/(?P<pk>\d+)$', 'delete'),
+    (r'^layouts/save/(?P<pk>\d+)$', 'save'),
+    (r'^layouts/js/(?P<pk>\d+)$', 'js'),
 )
 
 urlpatterns += patterns('users.views',

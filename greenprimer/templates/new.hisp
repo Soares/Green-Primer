@@ -1,0 +1,10 @@
+{%extends "main.hisp"}
+{% block title ~ Green Primer: Home}
+
+{% block main ~
+  (%internal (table
+    {%for field in form ~
+      (tr (td (label {field.label})) (td {field}))
+      {%if field.errors ~
+        (tr.errors (td (:colspan 2) {field.errors}))}})
+    (%submit (:value Create)))}

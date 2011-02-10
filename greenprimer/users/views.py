@@ -1,10 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from users.forms import LoginForm, RegistrationForm
-from django.shortcuts import redirect, render_to_response
-from django.template import RequestContext
-
-def render(request, template, context=None):
-    return render_to_response(template, context, RequestContext(request))
+from django.shortcuts import redirect
+from utils import render
 
 def main(request):
     if request.method == 'POST':
@@ -28,7 +25,9 @@ def register(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.hisp')
+    return render(request, 'home.hisp', {
+        'layouts': request.user.layouts.all(),
+    })
 
 @login_required
 def logout(request):

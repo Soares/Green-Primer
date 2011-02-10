@@ -1,0 +1,8 @@
+{%extends "main.hisp"}
+{% block title ~ Delete {layout}}
+
+{% block main ~
+  Are you sure?
+  (%internal
+    (%submit (:name delete) (:value "Delete {layout}"))
+    (%submit (:name cancel) (:value "Never mind")))}

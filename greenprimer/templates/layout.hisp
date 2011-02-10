@@ -1,4 +1,5 @@
 {%extends "base.hisp"}
+{% block title ~ {layout.name|title}}
 
 {%block body ~
 (#viewport
@@ -80,4 +81,5 @@
 (%addto[scripts]
   {%include_media "box.js"}
   {%include_media "utils.js"}
-  {%include_media "analyzer.js"})
+  {%include_media "analyzer.js"}
+  (script (:type "text/javascript") (:src '{% url layouts.views.js layout.pk %}')))
