@@ -1,0 +1,49 @@
+{%extends "base.hisp"}
+{% block title ~ {layout.name|title}}
+
+{%block body ~
+(#viewport
+  (#key
+    (button.upper.left#save (:title "Save Now"))
+    (button.upper.right#load (:title "Load"))
+    (button.lower.left#data (:title "Data") ⨀)
+    (button.lower.right#exit (:title "Exit") ⨂)
+    (.center
+      (button.left#undo (:title "Undo") ◀)
+      (button.right#redo (:title "Redo") ▶))
+    (button.bottom#hide (:title "Hide") -)
+    (button.bottom#show (:title "Show") +))
+
+  (#toolbar
+    (#types.options
+      (button#walls Walls)
+      (button#move Move)
+      (button#delete Delete))
+    (#elements.options
+      (button#door Doors)
+      (button#window Windows))
+    (#wall-options.options
+      (button#split Split)
+      (button#merge Merge))
+    (select#window-types
+      {%for window in layer.windows~
+        (option (:value {window.pk}) {window})})
+    (select#door-types
+      {%for door in layer.doors~
+        (option (:value {door.pk}) {door})}))
+
+  (#dashboard
+    (#bounds (.inner (#joystick)))
+    (#modes (button.whole#internal-flow Ventilate))))
+
+(#view
+  (#layout
+    (canvas#canvas (:width "2048") (:height "2048"))))}
+
+{%load media}
+(%addto[links] {%include_media "analyzer.css"})
+(%addto[scripts]
+  {%include_media "box.js"}
+  {%include_media "utils.js"}
+  {%include_media "analyzer.js"}
+  (script (:type "text/javascript") (:src '{% url layouts.views.js layout.pk %}')))

@@ -1,5 +1,5 @@
 var global = {};
-global.save_url = '{% url layouts.views.save layout.pk %}';
+global.save_url = '{{ save }}';
 {% autoescape off %}
-global.data = {% if layout.json %}{{ layout.json }}{% else %}"[]"{% endif %};
+global.data = {% if json %}{{ json }}{% else %}"[]"{% endif %};
 {% endautoescape %}

@@ -9,13 +9,19 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('layouts.views',
-    (r'^layouts/(?P<pk>\d+)$', 'layout'),
     (r'^layouts/new/$', 'new'),
-    (r'^layouts/properties/(?P<pk>\d+)$', 'properties'),
-    (r'^layouts/duplicate/(?P<pk>\d+)$', 'duplicate'),
-    (r'^layouts/delete/(?P<pk>\d+)$', 'delete'),
-    (r'^layouts/save/(?P<pk>\d+)$', 'save'),
-    (r'^layouts/js/(?P<pk>\d+)$', 'js'),
+    (r'^layouts/properties/(?P<layout>\d+)/$', 'properties'),
+    (r'^layouts/duplicate/(?P<layout>\d+)/$', 'duplicate'),
+    (r'^layouts/delete/(?P<layout>\d+)/$', 'delete'),
+
+    (r'^layouts/edit/(?P<layout>\d+)/$', 'outline'),
+    (r'^layouts/edit/(?P<layout>\d+)/(?P<story>\d+)/$', 'floor'),
+
+    (r'^layouts/save/(?P<layout>\d+)/$', 'outersave'),
+    (r'^layouts/save/(?P<layout>\d+)/(?P<story>\d+)/$', 'innersave'),
+
+    (r'^layouts/js/(?P<layout>\d+)/$', 'outerjs'),
+    (r'^layouts/js/(?P<layout>\d+)/(?P<story>\d+)/$', 'innerjs'),
 )
 
 urlpatterns += patterns('users.views',
