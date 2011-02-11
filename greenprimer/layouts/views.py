@@ -58,13 +58,10 @@ def delete(request, pk):
 
 @login_required
 def save(request, pk):
-    print 'accesing', pk
     layout = get_object_or_404(Layout, user=request.user, pk=pk)
-    print 'method', request.method
     if request.method != 'POST':
         raise Http404
     data = request.POST.get('data', '')
-    print 'data', data
     layout.json = data;
     layout.save()
     return HttpResponse('true')
