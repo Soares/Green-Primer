@@ -1,11 +1,14 @@
 from itertools import chain
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Layout(models.Model):
     user = models.ForeignKey(User, related_name='layouts')
     name = models.CharField(max_length=50)
-    stories = models.PositiveSmallIntegerField()
+    stories = models.PositiveSmallIntegerField(default=2, validators=[
+        MaxValueValidator(7), MinValueValidator(1)
+    ])
     budget = models.PositiveIntegerField()
     zip_code = models.CharField(max_length=11)
     outline = models.TextField(default='')
@@ -32,7 +35,10 @@ class Window(models.Model):
     label = models.CharField(max_length=50)
     height = models.PositiveSmallIntegerField(default=100)
     width = models.PositiveSmallIntegerField(default=100)
-    curtain = models.BooleanField()
+
+    @property
+    def curtain(self):
+        return self.width == 0
 
     def __unicode__(self):
         return self.name

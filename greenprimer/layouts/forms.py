@@ -15,14 +15,11 @@ class LayoutForm(forms.ModelForm):
 
 
 class WindowForm(forms.ModelForm):
+    curtain = forms.BooleanField(label='Curtain Wall')
+
     class Meta:
         model = Window
         exclude = 'layout',
-
-    def __init__(self, *args, **kwargs):
-        super(WindowForm, self).__init__(*args, **kwargs)
-        curtain = self.fields['curtain']
-        curtain.label = 'Curtain Wall'
 
     def create(self, layout):
         window = self.save(commit=False)

@@ -30,11 +30,6 @@ td.delete
   input
     margin-bottom: 1em
 
-td.measure
-  ul
-    list-style: none
-    margin: 0
-
 td.width, td.height
   text-align: center
   padding-left: 1em
@@ -42,13 +37,22 @@ td.width, td.height
   padding-top: 1em
 
 td.width input, td.height input
-  width: 5em
+  width: 3em
   clear: left
   padding: 0
-  margin-top: -1em
   font-size: 80%
   font-weight: bold
   text-align: center
+
+span.unit
+  font-size: 80%
+  font-weight: bold
+  display: inline-block
+  margin-left: .3em
+
+.curtain-wall label
+  display: block
+  margin-top: -1em
 
 .ui-slider
   background-color: #ccc
@@ -56,12 +60,37 @@ td.width input, td.height input
   width: 10em
   float: left
 
+  &.ui-disabled
+    background-color: darken(#ccc, 20%)
+    border: 1px solid darken(#aaa, 20%)
+
+    a
+      background-color: lighten(#8f8, 10%)
+      border: 1px solid lighten(#6d6, 10%)
+
   a
     background-color: #8f8
     border: 1px solid #6d6
 
     &:active
       border: 1px solid #6d6
+
+.stories td:last-child
+  text-align: center
+.stories td
+  padding-top: 1em
+.stories .ui-slider
+  width: 12em
+.stories .output
+  width: 3em
+  background: #eee
+  border: 1px solid #ccc
+  clear: left
+  padding: 0
+  font-size: 80%
+  font-weight: bold
+  text-align: center
+  display: inline-block
 
 .formset
   tr.errors
@@ -78,9 +107,6 @@ td.width input, td.height input
   float: left
 
 /* UI Additions */
-.ui-buttonset
-  margin-top: -1em
-
 .ui-state-default
   border: 1px solid #666666
   background: #555555

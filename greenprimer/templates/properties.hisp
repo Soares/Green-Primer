@@ -3,9 +3,9 @@
 
 {%block main~
   (%internal.properties
-    (table
+    (table.main
       {%for field in form~
-        (tr (td (label {field.label})) (td {field}))
+        (tr (:class {field.label|slugify}) (td (label {field.label})) (td {field}))
         {%if field.errors~
           (tr.errors (td (:colspan 2) {field.errors}))}})
     (.door.section (h3 Door Types)
