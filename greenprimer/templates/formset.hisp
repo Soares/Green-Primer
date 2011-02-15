@@ -1,0 +1,8 @@
+{formset.management_form}
+(table.formset
+  {% for form in formset.forms~
+    {%if forloop.first~
+      (tr.labels {% for field in form~ (td (:class {field.label|slugify}) {field.label})})}
+    (tr.inputs {% for field in form~ (td (:class {field.label|slugify}) {field})})
+    {%if formset.errors~
+      (tr.errors {% for field in form~ (td (:class {field.label|slugify}) {field.errors})})}})

@@ -1,10 +1,22 @@
 {%extends "home.hisp"}
-{% block title ~ Edit Properties}
+{%block title~ Edit Properties}
 
-{% block main ~
-  (%internal (table
-    {%for field in form ~
-      (tr (td (label {field.label})) (td {field}))
-      {%if field.errors ~
-        (tr.errors (td (:colspan 2) {field.errors}))}})
-    (%submit (:value Save)))}
+{%block main~
+  (%internal.properties
+    (table
+      {%for field in form~
+        (tr (td (label {field.label})) (td {field}))
+        {%if field.errors~
+          (tr.errors (td (:colspan 2) {field.errors}))}})
+    (.door.section (h3 Door Types)
+      {%with doors as formset~{% include "formset.hisp"}})
+    (.window.section (h3 Window Types)
+      {%with windows as formset~{% include "formset.hisp"}})
+    (a#cancel.button (:href '{% url users.views.home %}') Cancel)
+    (button#save.button (:type "submit") '{% if layout %}Save{% else %}Create{% endif %}'))}
+
+{%load media}
+(%addto[links]
+  {%include_media "properties.css"})
+(%addto[scripts]
+  {%include_media "properties.js"})

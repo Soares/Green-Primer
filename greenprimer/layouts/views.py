@@ -1,33 +1,56 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from layouts.models import Layout, Floor
-from layouts.forms import LayoutForm
+from layouts.forms import LayoutForm, WindowFormSet, DoorFormSet
 from django.shortcuts import redirect
 from django.http import Http404, HttpResponse
-from django.urlresolvers import reverse
+from django.core.urlresolvers import reverse
 from utils import render
 
 @login_required
 def new(request):
     if request.method == 'POST':
         form = LayoutForm(request.POST)
-        if form.is_valid():
-            return redirect(form.create(request))
+        windows = WindowFormSet(request.POST, prefix='windows')
+        doors = DoorFormSet(request.POST, prefix='doors')
+        if form.is_valid() and windows.is_valid() and doors.is_valid():
+            layout = form.create(request)
+            windows.create(layout)
+            doors.create(layout)
+            return redirect(layout)
     else:
         form = LayoutForm()
-    return render(request, 'new.hisp', {'form': form})
+        windows = WindowFormSet(prefix='windows')
+        doors = DoorFormSet(prefix='doors')
+    return render(request, 'properties.hisp', {
+        'form': form,
+        'windows': windows,
+        'doors': doors,
+    })
+       
 
 @login_required
 def properties(request, layout):
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
     if request.method == 'POST':
         form = LayoutForm(request.POST, instance=layout)
-        if form.is_valid():
+        windows = WindowFormSet(request.POST, prefix='windows')
+        doors = DoorFormSet(request.POST, prefix='doors')
+        if form.is_valid() and windows.is_valid() and doors.is_valid():
             form.save()
+            windows.save()
+            doors.save()
             return redirect('users.views.home')
     else:
         form = LayoutForm(instance=layout)
-    return render(request, 'properties.hisp', {'form': form})
+        windows = WindowFormSet(prefix='windows')
+        doors = DoorFormSet(prefix='doors')
+    return render(request, 'properties.hisp', {
+        'layout': layout,
+        'form': form,
+        'windows': windows,
+        'doors': doors,
+    })
 
 @login_required
 def duplicate(request, layout):

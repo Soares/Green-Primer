@@ -29,9 +29,10 @@ class Layout(models.Model):
 
 class Window(models.Model):
     layout = models.ForeignKey(Layout, related_name='windows')
-    name = models.CharField(max_length=50)
-    width = models.PositiveSmallIntegerField()
-    height = models.PositiveSmallIntegerField()
+    label = models.CharField(max_length=50)
+    height = models.PositiveSmallIntegerField(default=100)
+    width = models.PositiveSmallIntegerField(default=100)
+    curtain = models.BooleanField()
 
     def __unicode__(self):
         return self.name
@@ -46,8 +47,8 @@ class Window(models.Model):
 
 class Door(models.Model):
     layout = models.ForeignKey(Layout, related_name='doors')
-    name = models.CharField(max_length=50)
-    width = models.PositiveSmallIntegerField()
+    label = models.CharField(max_length=50)
+    width = models.PositiveSmallIntegerField(default=100)
 
     def __unicode__(self):
         return self.name

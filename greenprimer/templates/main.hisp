@@ -14,7 +14,7 @@
         (%submit (:value Login)))})
   (#main
     {%block main ~
-      (a#register (:href '{% url users.views.register %}') Create an Account)})}
+      (a.large.button#register (:href '{% url users.views.register %}') Create an Account)})}
   
 
 {%load media}

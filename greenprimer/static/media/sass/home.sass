@@ -108,18 +108,24 @@ body, html, #main
         text-decoration: underline
 
 
-#register, #create
+input.button, a.button, button.button
+  height: auto
   border-radius: 9px
   border: 3px solid #080
-  font-size: 150%
-  padding: 1em
+  font-size: 120%
+  padding: .5em 1em
   text-decoration: none
   font-weight: bolder
   color: #cfc
   text-shadow: 0px 0px .2em #000
   background: -webkit-gradient(linear, left bottom, left top, from(#3a3), to(#8f8))
 
+  &.large
+    padding: 1em
+    font-size: 150%
+
   &:hover
     border-color: lighten(#080, 10%)
+    border-width: 3px
     background: -webkit-gradient(linear, left bottom, left top, from(#6d6), to(#afa))
     text-shadow: 0px 0px .2em #080

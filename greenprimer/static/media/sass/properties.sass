@@ -1,0 +1,112 @@
+.properties
+  margin-bottom: 2em
+  overflow: auto
+
+.section
+  margin-top: 1em
+  margin-bottom: 1em
+  margin-bottom: 1em
+  border-top: 2px groove hsla(0, 50%, 0, .2)
+
+  &:last-of-type
+    border-bottom: 2px groove hsla(0, 50%, 0, .2)
+
+  h3
+    float: left
+    margin-left: 2em
+
+tr.labels td
+  text-align: center
+  font-size: 80%
+  font-weight: bold
+  opacity: .5
+
+table.formset td
+  vertical-align: middle
+
+td.delete
+  text-align: center
+
+  input
+    margin-bottom: 1em
+
+td.measure
+  ul
+    list-style: none
+    margin: 0
+
+td.width, td.height
+  text-align: center
+  padding-left: 1em
+  padding-right: 1em
+  padding-top: 1em
+
+td.width input, td.height input
+  width: 5em
+  clear: left
+  padding: 0
+  margin-top: -1em
+  font-size: 80%
+  font-weight: bold
+  text-align: center
+
+.ui-slider
+  background-color: #ccc
+  border: 1px solid #aaa
+  width: 10em
+  float: left
+
+  a
+    background-color: #8f8
+    border: 1px solid #6d6
+
+    &:active
+      border: 1px solid #6d6
+
+.formset
+  tr.errors
+    td
+      font-size: 80%
+      padding: 0
+      text-align: center
+
+#save, #cancel
+  margin: 0 1em
+#save
+  float: right
+#cancel
+  float: left
+
+/* UI Additions */
+.ui-buttonset
+  margin-top: -1em
+
+.ui-state-default
+  border: 1px solid #666666
+  background: #555555
+  font-weight: bold
+  color: #eeeeee
+
+.ui-state-hover
+  border: 1px solid darken(#8f8, 20%)
+  background: #8f8
+  font-weight: bold
+  color: #ffffff
+
+.ui-state-active
+  border: 1px solid darken(#3a3, 20%)
+  background: #3a3
+  font-weight: bold
+  color: #ffffff
+
+.ui-button
+  display: inline-block
+  position: relative
+  padding: 0
+  margin-right: .1em
+  text-decoration: none !important
+  font-size: 80%
+  cursor: pointer
+  text-align: center
+  zoom: 1
+  overflow: visible

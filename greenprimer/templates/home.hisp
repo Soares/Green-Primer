@@ -1,11 +1,11 @@
-{%extends "main.hisp"}
+{% extends "main.hisp"}
 {% block title ~ Green Primer: Home}
 
 {% block toolbar ~ (a#logout (:href '{% url users.views.logout %}') logout)}
 {% block main ~
-  (a#create (:href '{% url layouts.views.new %}') New Layout)
+  (a.large.button#create (:href '{% url layouts.views.new %}') New Layout)
   (table#options
-    {%for layout in layouts~
+    {% for layout in layouts ~
       (tr (:class '{% cycle "odd" "even" %}')
         (td.name (a (:href '{% url layouts.views.layout layout.pk %}') {layout}))
         (td.link (a (:href '{% url layouts.views.properties layout.pk %}') properties))
