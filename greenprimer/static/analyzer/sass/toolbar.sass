@@ -25,52 +25,69 @@ $space: .5em
   .options
     width: 100%
     display: block
-    margin: .5em auto
+    margin: 1em auto
+
+    &#elements
+      margin-bottom: 2em
 
     button
       @include darkbutton
       display: inline-block
-      font-size: 90%
+      font-size: 12px
+      font-weight: bold
       margin: 0
       box-sizing: border-box
       border-radius: 0
       border-width: 1px
+
+    #walls
+      width: $bwidth
+      border-radius: $bradius
+      border-width: 2px
 
     #move
       width: ($bwidth / 2) + 1
       margin-right: -2px
       border-top-left-radius: $bradius
       border-top-width: 2px
+      border-bottom-left-radius: $bradius
+      border-bottom-width: 2px
       border-left-width: 2px
 
     #delete
       width: ($bwidth / 2)
       margin-left: -1px
       border-top-right-radius: $bradius
+      border-bottom-right-radius: $bradius
       border-top-width: 2px
       border-right-width: 2px
-
-    #wall
-      width: ($bwidth / 2) + 1
-      margin-right: -2px
-      border-left-width: 2px
+      border-bottom-width: 2px
 
     #window
-      width: $bwidth / 2
+      width: ($bwidth / 2)
       margin-left: -1px
+      border-top-right-radius: $bradius
+      border-bottom-right-radius: $bradius
+      border-top-width: 2px
       border-right-width: 2px
+      border-bottom-width: 2px
 
     #door
-      width: $bwidth / 3
+      width: ($bwidth / 2) + 1
       margin-right: -2px
-      border-left-width: 2px
-      border-bottom-width: 2px
+      border-top-left-radius: $bradius
+      border-top-width: 2px
       border-bottom-left-radius: $bradius
+      border-bottom-width: 2px
+      border-left-width: 2px
 
     #vent
-      width: $bwidth/3
+      width: ($bwidth / 2)
       margin-left: -1px
-      margin-right: -1px
+      border-top-right-radius: $bradius
+      border-bottom-right-radius: $bradius
+      border-top-width: 2px
+      border-right-width: 2px
       border-bottom-width: 2px
 
   #stair
@@ -138,5 +155,17 @@ $space: .5em
       border-top-right-radius: $bradius
       border-bottom-right-radius: $bradius
 
-  ul
-    display: none
+  label
+    margin-top: 2em
+    display: block
+    text-align: left
+    margin-left: 1em
+
+  select.options
+    @include darkbutton 
+    padding: 0
+    margin: 1em auto
+      top: 0
+    font-size: 12px
+    box-sizing: border-box
+    width: $bwidth

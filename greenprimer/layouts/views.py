@@ -17,6 +17,12 @@ def new(request):
             layout = form.create(request)
             windows.create(layout)
             doors.create(layout)
+            names = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth']
+            names = [n + ' Floor' for n in names]
+            if layout.stories > 2:
+                names.insert(0, 'Basement')
+            for (story, name) in enumerate(names[:layout.stories]):
+                Floor.objects.create(layout=layout, story=story, name=name)
             return redirect(layout)
     else:
         form = LayoutForm()
@@ -31,6 +37,7 @@ def new(request):
 
 @login_required
 def properties(request, layout):
+    from forms import UpdateLayoutForm as LayoutForm
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
     if request.method == 'POST':
         form = LayoutForm(request.POST, instance=layout)
@@ -58,6 +65,7 @@ def duplicate(request, layout):
     if request.method == 'POST':
         form = LayoutForm(request.POST, instance=layout)
         if form.is_valid():
+            raise 'wrong'
             new = form.save(commit=False)
             new.id = None
             new.save()

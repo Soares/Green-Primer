@@ -15,22 +15,27 @@
     (button.bottom#show (:title "Show") +))
 
   (#toolbar
-    (#types.options
-      (button#walls Walls)
-      (button#move Move)
-      (button#delete Delete))
+    (#main.options
+      (button#walls Walls))
     (#elements.options
       (button#door Doors)
       (button#window Windows))
+    (#types.options
+      (button#move Move)
+      (button#delete Delete))
     (#wall-options.options
       (button#split Split)
       (button#merge Merge))
-    (select#window-types
-      {%for window in layer.windows~
-        (option (:value {window.pk}) {window})})
-    (select#door-types
-      {%for door in layer.doors~
-        (option (:value {door.pk}) {door})}))
+    (label Window Type)
+    (select.options#window-types
+      {%for window in layout.windows.all~
+        {%if window.label~
+          (option (:value {window.pk}) {window})}})
+    (label Door Type)
+    (select.options#door-types
+      {%for door in layout.doors.all~
+        {%if door.label~
+          (option (:value {door.pk}) {door})}}))
 
   (#dashboard
     (#bounds (.inner (#joystick)))
@@ -41,9 +46,12 @@
     (canvas#canvas (:width "2048") (:height "2048"))))}
 
 {%load media}
-(%addto[links] {%include_media "analyzer.css"})
+(%addto[links]
+  {%include_media "analyzer.css"}
+  {%include_media "outline.css"})
 (%addto[scripts]
   {%include_media "box.js"}
   {%include_media "utils.js"}
   {%include_media "analyzer.js"}
-  (script (:type "text/javascript") (:src '{% url layouts.views.js layout.pk %}')))
+  {%include_media "outline.js"}
+  (script (:type "text/javascript") (:src '{% url layouts.views.outerjs layout.pk %}')))

@@ -43,18 +43,19 @@ $(function() {
         checkbox.after('<label for="' + checkbox.attr('id') + '">Full Wall</label>');
     }).button().change(function() {
         var checkbox = $(this);
-        var width = checkbox.parents('tr').find('.width');
-        var slider = width.find('.slider'),
-            faders = $('input, .unit', width),
-            input = $('input', width);
+        var row = checkbox.parents('tr');
+        var width = row.find('.width'), height = row.find('.height');
+        var sliders = row.find('.slider'), faders = $('input, .unit', width.add(height));
+        var w = $('input', width), h = $('input', height);
         if(checkbox.is(':checked')) {
-            slider.slider('disable');
+            sliders.slider('disable');
             faders.fadeOut('fast');
-            input.data('old', input.val());
-            input.val(0);
+            w.data('old', w.val()); w.val(0);
+            h.data('old', h.val()); h.val(300);
         } else {
-            slider.slider('enable');
-            input.val(input.data('old'));
+            sliders.slider('enable');
+            w.val(w.data('old'));
+            h.val(h.data('old'));
             faders.fadeIn('fast');
         }
     });

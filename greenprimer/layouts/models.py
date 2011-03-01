@@ -2,6 +2,16 @@ from itertools import chain
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from fields import BudgetField as BudgetFormField
+
+class BudgetField(models.DecimalField):
+    formfield = BudgetFormField
+
+    def __init__(self, *args, **kwargs):
+        kwargs['max_digits'] = 11
+        kwargs['decimal_places'] = 2
+        super(BudgetField, self).__init__(*args, **kwargs)
+
 
 class Layout(models.Model):
     user = models.ForeignKey(User, related_name='layouts')
@@ -9,7 +19,7 @@ class Layout(models.Model):
     stories = models.PositiveSmallIntegerField(default=2, validators=[
         MaxValueValidator(7), MinValueValidator(1)
     ])
-    budget = models.PositiveIntegerField()
+    budget = BudgetField()
     zip_code = models.CharField(max_length=11)
     outline = models.TextField(default='')
 
@@ -18,7 +28,7 @@ class Layout(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'layouts.views.layout', [self.pk]
+        return 'layouts.views.outline', [self.pk]
 
     def duplicate(self):
         layout = Layout.objects.create(
@@ -34,19 +44,19 @@ class Window(models.Model):
     layout = models.ForeignKey(Layout, related_name='windows')
     label = models.CharField(max_length=50)
     height = models.PositiveSmallIntegerField(default=100)
-    width = models.PositiveSmallIntegerField(default=100)
+    width = models.PositiveSmallIntegerField(default=60)
 
     @property
     def curtain(self):
         return self.width == 0
 
     def __unicode__(self):
-        return self.name
+        return self.label
 
     def duplicate(self, layout):
         return Window.objects.create(
             layout=layout,
-            name=self.name,
+            label=self.label,
             width=self.width,
             height=self.height)
 
@@ -54,15 +64,15 @@ class Window(models.Model):
 class Door(models.Model):
     layout = models.ForeignKey(Layout, related_name='doors')
     label = models.CharField(max_length=50)
-    width = models.PositiveSmallIntegerField(default=100)
+    width = models.PositiveSmallIntegerField(default=90)
 
     def __unicode__(self):
-        return self.name
+        return self.label
 
     def duplicate(self, layout):
         return Door.objects.create(
             layout=layout,
-            name=self.name,
+            label=self.label,
             width=self.width)
 
 
