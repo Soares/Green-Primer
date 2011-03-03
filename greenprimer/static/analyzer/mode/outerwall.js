@@ -1,4 +1,4 @@
-modes.wall = (function(self) {
+modes.outerwall = (function(self) {
     var wall = null;
 
     var recordWall = actions.make(function(dump) {
@@ -8,13 +8,13 @@ modes.wall = (function(self) {
     });
 
     var getJoint = function(point) {
-        var js = joints.at(point, global.inner);
+        var js = joints.at(point);
         return js.length == 1? js[0] : new Joint(point);
     };
     var startWall = function(start) {
         var source = getJoint(start), dest = new Joint(start);
         dest.placehold();
-        wall = new Wall(source, dest);
+        wall = new Wall(source, dest, true);
         wall.placehold();
         return wall;
     };

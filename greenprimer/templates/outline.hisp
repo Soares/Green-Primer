@@ -16,26 +16,13 @@
 
   (#toolbar
     (#main.options
-      (button#walls Walls))
-    (#elements.options
-      (button#door Doors)
-      (button#window Windows))
+      (button#wall Walls))
     (#types.options
       (button#move Move)
       (button#delete Delete))
     (#wall-options.options
-      (button#split Split)
-      (button#merge Merge))
-    (label Window Type)
-    (select.options#window-types
-      {%for window in layout.windows.all~
-        {%if window.label~
-          (option (:value {window.pk}) {window})}})
-    (label Door Type)
-    (select.options#door-types
-      {%for door in layout.doors.all~
-        {%if door.label~
-          (option (:value {door.pk}) {door})}}))
+      (button#split.disabled Split)
+      (button#merge.disabled Merge)))
 
   (#dashboard
     (#bounds (.inner (#joystick)))
@@ -43,12 +30,12 @@
       (a#outline.top.disabled (:href #) Outer Walls)
       {%for floor in layout.floors.all~
         {%if forloop.first~
-          (a.bottom.first (:href {floor.get_absolute_url}) {floor.story})
+          (a.bottom.first (:href {floor.get_absolute_url}) {floor.story|add:1})
           {%else}
-          (a.bottom (:href {floor.get_absolute_url}) {floor.story})}}
-      (a#add.bottom (:href #) +)
+          (a.bottom (:href {floor.get_absolute_url}) {floor.story|add:1})}}
+      (a#add.bottom.disabled (:href #) +)
       (#backdrop))
-    (#modes (button.whole#internal-flow Ventilate))))
+    (#modes (button.whole#internal-flow.disabled Ventilate (:disabled)))))
 
 (#view
   (#layout
@@ -59,8 +46,9 @@
   {%include_media "analyzer.css"}
   {%include_media "outline.css"})
 (%addto[scripts]
-  {%include_media "box.js"}
   {%include_media "utils.js"}
-  {%include_media "analyzer.js"}
+  {%include_media "base.js"}
+  {%include_media "ui.js"}
+  {%include_media "shared.js"}
   {%include_media "outline.js"}
   (script (:type "text/javascript") (:src '{% url layouts.views.outerjs layout.pk %}')))

@@ -56,7 +56,11 @@ var layout = (function(self) {
     self.save = function() {
         var out = [];
         for(var i = 0; i < walls.all.length; i++) {
-            if(walls.all[i].isReal()) out.push(walls.all[i].save());
+            if(walls.all[i].isReal()) {
+                if(global.outer || !walls.all[i].outer) {
+                    out.push(walls.all[i].save());
+                }
+            }
         }
         return out;
     };

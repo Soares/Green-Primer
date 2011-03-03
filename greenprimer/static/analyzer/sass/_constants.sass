@@ -24,17 +24,17 @@ $warm-darkest: #679B00
   font-weight: bold
   border: 2px solid $warm-lightest
 
-  &:hover:not([disabled]), &.hover:not([disabled])
+  &:hover:not(.disabled), &.hover:not(.disabled)
     background-color: $cool-light
     border-color: $cool
     color: $cool
 
-  &:active:not([disabled]), &.active:not([disabled])
+  &:active:not(.disabled), &.active:not(.disabled)
     background-color: $lightest
     border-color: $light
     color: $main
 
-  &[disabled], &.disabled
+  &.disabled, &.disabled
     opacity: .4
     cursor: default
 
@@ -45,12 +45,12 @@ $warm-darkest: #679B00
   color: darken($darkest, 10%)
   border-color: $main
 
-  &:hover:not([disabled]), &.hover:not([disabled])
+  &:hover:not(.disabled), &.hover:not(.disabled)
     background-color: $cool
     border-color: $cool-darkest
     color: darken($cool-darkest, 10%)
 
-  &:active:not([disabled]), &.active:not([disabled])
+  &:active:not(.disabled), &.active:not(.disabled)
     background-color: $cool-darkest
     border-color: $cool
     color: $cool-light
@@ -61,12 +61,12 @@ $warm-darkest: #679B00
   color: $cool
   border-color: $cool
 
-  &:hover:not([disabled]), &.hover:not([disabled])
+  &:hover:not(.disabled), &.hover:not(.disabled)
     background-color: $cool
     border-color: $cool-darkest
     color: $cool-darkest
 
-  &:active:not([disabled]), &.active:not([disabled])
+  &:active:not(.disabled), &.active:not(.disabled)
     background-color: $cool-lightest
     border-color: $cool
     color: $cool
@@ -77,12 +77,12 @@ $warm-darkest: #679B00
   color: $warm
   border-color: $warm
 
-  &:hover:not([disabled]), &.hover:not([disabled])
+  &:hover:not(.disabled), &.hover:not(.disabled)
     background-color: $warm
     border-color: $warm-darkest
     color: $warm-darkest
 
-  &:active:not([disabled]), &.active:not([disabled])
+  &:active:not(.disabled), &.active:not(.disabled)
     background-color: $warm-lightest
     border-color: $warm
     color: $warm

@@ -2,16 +2,18 @@ var windows = (function(self) {
     return elements(self);
 })(windows || {});
 
-var Window = function(wall, offset, length, id) {
-    this.offset = offset;
-    this.length = length || 1;
+var Window = function(wall, offset, type, id) {
+    this._offset = offset;
+    this._length = (global.windows[type].width / 100) * 20;
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
+    this.type = type;
 
     var self = this;
-    this.$.addClass('window').click(function(e) {
+    this.$.addClass('window').addClass('outer').click(function(e) {
         gp.layout.trigger('window.click', [e, self]);
     });
+    this.$.addClass('w'+global.windows[type].index);
 
     this.init(id);
     this.wall = wall.attach(this);
@@ -21,33 +23,42 @@ Elem(Window, windows);
 
 Window.deserialize = function(object, id) {
     var wall = walls.find(object.wallid);
-    return new Window(wall, object.offset, object.length, id);
+    return new Window(wall, object.offset, object.type, id);
 };
 Window.prototype.serialize = function() {
-    var object = {offset: this.offset, length: this.length};
+    var object = {offset: this.offset, type: this.type};
     object.wallid = this.wall.id;
     return object;
 };
 Window.prototype.save = function() {
     return {
         type: 'window',
-        offset: this.offset,
-        length: this.length,
+        offset: this._offset,
+        pk: this.type,
         id: this.id,
     };
 };
 Window.load = function(wall, save) {
-    return new Window(wall, save.offset, save.length, save.id);
+    return new Window(wall, save.offset, save.pk, save.id);
+};
+
+Window.prototype.length = function() {
+    if(this._length > 0) return this._length;
+    return this.wall.length();
+};
+Window.prototype.offset = function() {
+    if(this._length > 0) return this._offset;
+    return this.length() / 2;
 };
 
 Window.prototype.start = function() {
-    return this.wall.alongBy(this.offset - (this.length / 2));
+    return this.wall.alongBy(this.offset() - (this.length() / 2));
 };
 Window.prototype.center = function() {
-    return this.wall.alongBy(this.offset);
+    return this.wall.alongBy(this.offset());
 }
 Window.prototype.end = function() {
-    return this.wall.alongBy(this.offset + (this.length / 2));
+    return this.wall.alongBy(this.offset() + (this.length() / 2));
 };
 
 Window.prototype.update = function() {

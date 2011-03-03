@@ -113,8 +113,8 @@ $joy: .4 * $circle
       background: $warm-light
       color: $warm-darkest
       border: $border solid $warm-darkest
-      height: $circle / 3
-      line-height: $circle / 3
+      height: $circle / 2.7
+      line-height: $circle / 2.7
       box-sizing: border-box
       display: inline-block
       vertical-align: middle
@@ -133,7 +133,7 @@ $joy: .4 * $circle
         color: $main
 
       &.disabled
-        opacity: .5
+        opacity: .8
         cursor: default
 
     .top
@@ -152,6 +152,12 @@ $joy: .4 * $circle
       float: left
       position: relative
       z-index: 2
+      cursor: pointer
+
+      &.disabled
+        opacity: .8
+        background-color: transparent
+        cursor: default
 
       &.first
         border-left-width: $border
@@ -164,12 +170,12 @@ $joy: .4 * $circle
 
     #backdrop
       opacity: .8
-      width: 80%
+      width: 100%
+      border-bottom-left-radius: 30px
+      border-bottom-right-radius: 30px
       position: absolute
       top: 50%
       height: 50%
-      left: 10%
       z-index: 1
-      border-width: 0
+      left: 0
       border-top-width: 1px
-      border-bottom-width: $border

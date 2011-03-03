@@ -40,7 +40,7 @@ $space: .5em
       border-radius: 0
       border-width: 1px
 
-    #walls
+    #wall
       width: $bwidth
       border-radius: $bradius
       border-width: 2px
@@ -64,29 +64,25 @@ $space: .5em
       border-bottom-width: 2px
 
     #window
-      width: ($bwidth / 2)
-      margin-left: -1px
-      border-top-right-radius: $bradius
-      border-bottom-right-radius: $bradius
-      border-top-width: 2px
-      border-right-width: 2px
+      width: ($bwidth / 2) + 1
+      margin-right: -1px
+      margin-top: -2px
+      border-bottom-left-radius: $bradius
+      border-left-width: 2px
       border-bottom-width: 2px
 
     #door
-      width: ($bwidth / 2) + 1
-      margin-right: -2px
+      width: $bwidth
       border-top-left-radius: $bradius
+      border-top-right-radius: $bradius
       border-top-width: 2px
-      border-bottom-left-radius: $bradius
-      border-bottom-width: 2px
       border-left-width: 2px
+      border-right-width: 2px
 
     #vent
       width: ($bwidth / 2)
-      margin-left: -1px
-      border-top-right-radius: $bradius
+      margin-left: -2px
       border-bottom-right-radius: $bradius
-      border-top-width: 2px
       border-right-width: 2px
       border-bottom-width: 2px
 
@@ -96,40 +92,6 @@ $space: .5em
     border-right-width: 2px
     border-bottom-width: 2px
     border-bottom-right-radius: $bradius
-
-  #select-options .buttonset
-    width: $bwidth
-    margin: .5em auto
-    margin-top: 2em
-
-    #cut, #copy, #paste
-      width: $bwidth / 3
-      margin: 0
-      border-left-width: 1px
-      border-right-width: 1px
-      border-top-width: 2px
-      border-bottom-width: 1px
-
-    #cut
-      border-left-width: 2px
-      border-top-left-radius: $bradius
-      margin-right: -2px
-
-    #copy
-      margin-left: -1px
-      margin-right: -1px
-
-    #paste
-      margin-left: -2px
-      border-right-width: 2px
-      border-top-right-radius: $bradius
-
-    #delete
-      width: $bwidth
-      border-width: 2px
-      border-top-width: 1px
-      border-bottom-left-radius: $bradius
-      border-bottom-right-radius: $bradius
 
   #wall-options
     width: $bwidth

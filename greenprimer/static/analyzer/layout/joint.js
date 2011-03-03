@@ -1,7 +1,8 @@
 var joints = (function(self) {
-    self.at = function(point) {
+    self.at = function(point, inner) {
         return $.grep(self.all, function(joint) {
-            return joint.isAt(point) && joint.isReal();
+            var allowed = inner? !joint.outer() : true;
+            return allowed && joint.isAt(point) && joint.isReal();
         });
     };
 
@@ -52,6 +53,10 @@ Joint.load = function(save) {
 };
 
 /* Internal Functions */
+Joint.prototype.outer = function() {
+    for(var id in this.walls) if(this.walls[id].outer) return true;
+    return false;
+};
 Joint.prototype.update = function() {
     this.circle.animate({cx: this.point.x, cy: this.point.y});
     for(var id in this.walls) this.walls[id].update();

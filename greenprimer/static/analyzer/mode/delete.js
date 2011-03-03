@@ -7,11 +7,24 @@ modes['delete'] = (function(self) {
         Elem.load(dump);
     });
 
-    self.wallClick = self.windowClick = self.doorClick = function(e, click, elem) {
-        recordRemove(elem.dump());
-        elem.remove();
+    self.wallClick = function(e, click, wall) {
+        if(global.inner && wall.outer) return;
+        recordRemove(wall.dump());
+        wall.remove();
     };
+    self.windowClick = function(e, click, win) {
+        if(global.inner) return;
+        recordRemove(win.dump());
+        win.remove();
+    };
+    self.doorClick = function(e, click, door) {
+        if(global.inner && door.wall.outer) return;
+        recordRemove(door.dump());
+        door.remove();
+    };
+
     self.jointClick = function(e, click, joints) {
+        if(global.inner) return;
         $.each(joints, function(key, joint) {
             recordRemove(joint.dump());
             joint.remove();

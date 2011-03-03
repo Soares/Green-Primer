@@ -11,11 +11,13 @@ modes.move = (function(self) {
 
     self.jointClick = function(e, click, joints) {
         if(active) return self.canvasClick(e, click);
+        if(global.inner && joints[0].outer()) return;
         active = joints[0];
         prev = origin = layout.point(click);
     };
     self.wallClick = function(e, click, wall) {
         if(active) return self.canvasClick(e, click);
+        if(global.inner && (wall.outer || wall.source.outer() || wall.dest.outer())) return;
         active = wall;
         prev = origin = layout.point(click);
     };

@@ -121,6 +121,9 @@ MEDIA_BUNDLES = (
     ('outline.css',
         'analyzer/sass/outline.sass',
     ),
+    ('floor.css',
+        'analyzer/sass/floor.sass',
+    ),
     ('demo.css',
         'analyzer/sass/demo.sass',
         'analyzer/sass/layout.sass',
@@ -217,8 +220,7 @@ MEDIA_BUNDLES = (
         'jquery/svg.js',
         'jquery/svgdom.js',
     ),
-    ('analyzer.js',
-
+    ('base.js',
         # Green Primer
         'analyzer/gp.js',
 
@@ -231,42 +233,52 @@ MEDIA_BUNDLES = (
         'analyzer/geom/point.js',
         'analyzer/geom/line.js',
 
+        'analyzer/actions/action.js',
+        'analyzer/actions/stack.js',
+
+        'analyzer/mode/mode.js',
+    ),
+    ('ui.js',
         'analyzer/ui/key.js',
         'analyzer/ui/toolbar.js',
         'analyzer/ui/dashboard.js',
             'analyzer/ui/scroll.js',
-
+    ),
+    ('shared.js',
         'analyzer/layout/layout.js',
         'analyzer/layout/element.js',
         'analyzer/layout/dot.js',
         'analyzer/layout/joint.js',
         'analyzer/layout/wall.js',
-        'analyzer/layout/window.js',
-        'analyzer/layout/door.js',
-        'analyzer/layout/stair.js',
-        'analyzer/layout/vent.js',
 
-        'analyzer/actions/action.js',
-        'analyzer/actions/stack.js',
-
-        'analyzer/mode/mode.js',
         'analyzer/mode/delete.js',
         'analyzer/mode/move.js',
-        'analyzer/mode/wall.js',
+
         'analyzer/mode/door.js',
-        'analyzer/mode/stair.js',
+    ),
+    ('floor.js',
+        'analyzer/layout/door.js',
+        'analyzer/layout/window.js',
+        'analyzer/layout/vent.js',
+        'analyzer/layout/stair.js',
+
         'analyzer/mode/vent.js',
+        'analyzer/mode/wall.js',
+        'analyzer/mode/window.js',
+        'analyzer/mode/stair.js',
+
         'analyzer/mode/heatflow.js',
         'analyzer/mode/ventilate.js',
 
-        'analyzer/analyze/graph.js',
         'analyzer/analyze/pressure.js',
+        'analyzer/analyze/graph.js',
 
-        'analyzer/init.js',
+        'analyzer/floor.js',
         'analyzer/physics.js',
     ),
     ('outline.js',
-        'analyzer/mode/window.js',
+        'analyzer/mode/outerwall.js',
+        'analyzer/outline.js',
     ),
 )
 

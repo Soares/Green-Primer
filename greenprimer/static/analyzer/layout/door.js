@@ -2,8 +2,9 @@ var doors = (function(self) {
     return elements(self);
 })(doors || {});
 
-var Door = function(wall, offset, length, id) {
-    this.length = length || 20;
+var Door = function(wall, offset, type, id) {
+    this.type = type;
+    this.length = (global.doors[type].width / 100) * 20;
     this.offset = offset;
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
@@ -12,6 +13,8 @@ var Door = function(wall, offset, length, id) {
     this.$.addClass('door').click(function(e) {
         gp.layout.trigger('door.click', [e, self]);
     });
+    if(wall.outer) this.$.addClass('outer');
+    this.$.addClass('d'+global.doors[type].index);
 
     this.init(id);
     this.wall = wall.attach(this);
@@ -21,10 +24,10 @@ Elem(Door, doors);
 
 Door.deserialize = function(object, id) {
     var wall = walls.find(object.wallid);
-    return new Door(wall, object.offset, object.length, id);
+    return new Door(wall, object.offset, object.type, id);
 };
 Door.prototype.serialize = function() {
-    var object = {offset: this.offset, length: this.length};
+    var object = {offset: this.offset, type: this.type};
     object.wallid = this.wall.id;
     return object;
 };
@@ -32,12 +35,12 @@ Door.prototype.save = function() {
     return {
         type: 'door',
         offset: this.offset,
-        length: this.length,
+        pk: this.type,
         id: this.id,
     };
 };
 Door.load = function(wall, save) {
-    return new Door(wall, save.offset, save.length, save.id);
+    return new Door(wall, save.offset, save.pk, save.id);
 };
 
 Door.prototype.start = function() {

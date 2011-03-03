@@ -2,16 +2,18 @@ var walls = (function(self) {
     return elements(self);
 })(walls || {});
 
-var Wall = function(source, dest, id) {
+var Wall = function(source, dest, outer, id) {
     this.segment = new Line(source.point, dest.point);
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
     this.elements = [];
+    this.outer = outer;
 
     var self = this;
     this.$.addClass('wall').click(function(e) {
         gp.layout.trigger('wall.click', [e, self]);
     });
+    if(this.outer) this.$.addClass('outer');
 
     this.init(id);
     this.source = source.attach(this);
@@ -22,7 +24,7 @@ Elem(Wall, walls);
 
 Wall.deserialize = function(object, id) {
     var elements = [];
-    var wall = new Wall(Elem.load(object.source), Elem.load(object.dest), id);
+    var wall = new Wall(Elem.load(object.source), Elem.load(object.dest), object.outer, id);
     for(var i = 0; i < object.elements.length; i++) {
         elements.push(Elem.load(object.elements[i]));
     }
@@ -32,6 +34,7 @@ Wall.prototype.serialize = function(shallow) {
     var object = {
         source: this.source.dump(true),
         dest: this.dest.dump(true),
+        outer: this.outer? true : false,
         elements: [],
     };
     if(!shallow) for(var i = 0; i < this.elements.length; i++) {
@@ -48,13 +51,14 @@ Wall.prototype.save = function() {
         id: this.id,
         source: this.source.save(),
         dest: this.dest.save(),
+        outer: this.outer? true : false,
         elements: elements,
     };
 };
 Wall.load = function(save) {
     var source = Joint.load(save.source);
     var dest = Joint.load(save.dest);
-    var wall = walls.find(save.id) || new Wall(source, dest, save.id);
+    var wall = walls.find(save.id) || new Wall(source, dest, save.outer, save.id);
     for(var i = 0; i < save.elements.length; i++) {
         var element = save.elements[i];
         if(element.type === 'door') Door.load(wall, element);
@@ -64,6 +68,9 @@ Wall.load = function(save) {
     return wall;
 };
 
+Wall.prototype.length = function() {
+    return this.source.point.distanceFrom(this.dest.point);
+};
 Wall.prototype.attach = function(element) {
     this.elements.push(element);
     return this;
@@ -184,7 +191,7 @@ Wall.prototype.segments = function() {
     var start = this.source.point, doors = this.doors();
     if(!doors.length) return [this.segment];
     var segments = [];
-    for(var i = 0; i < doors.length; i++) {
+    if(!this.outer) for(var i = 0; i < doors.length; i++) {
         segments.push(new Line(start, doors[i].start()));
         start = doors[i].end();
     }

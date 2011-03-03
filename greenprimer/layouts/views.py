@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from layouts.models import Layout, Floor
+from layouts.models import Layout, Floor, Window, Door
 from layouts.forms import LayoutForm, WindowFormSet, DoorFormSet
 from django.shortcuts import redirect
+from django.db.transaction import commit_on_success
 from django.http import Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from utils import render
 
+@commit_on_success
 @login_required
 def new(request):
     if request.method == 'POST':
@@ -27,8 +29,8 @@ def new(request):
             return redirect(layout)
     else:
         form = LayoutForm()
-        windows = WindowFormSet(prefix='windows')
-        doors = DoorFormSet(prefix='doors')
+        windows = WindowFormSet(prefix='windows', queryset=Window.objects.none())
+        doors = DoorFormSet(prefix='doors', queryset=Door.objects.none())
     return render(request, 'properties.hisp', {
         'form': form,
         'windows': windows,
@@ -36,6 +38,7 @@ def new(request):
     })
        
 
+@commit_on_success
 @login_required
 def properties(request, layout):
     from forms import UpdateLayoutForm as LayoutForm
@@ -46,13 +49,13 @@ def properties(request, layout):
         doors = DoorFormSet(request.POST, prefix='doors')
         if form.is_valid() and windows.is_valid() and doors.is_valid():
             form.save()
-            windows.save()
-            doors.save()
+            windows.save(layout)
+            doors.save(layout)
             return redirect('users.views.home')
     else:
         form = LayoutForm(instance=layout)
-        windows = WindowFormSet(prefix='windows')
-        doors = DoorFormSet(prefix='doors')
+        windows = WindowFormSet(prefix='windows', queryset=layout.windows.all())
+        doors = DoorFormSet(prefix='doors', queryset=layout.doors.all())
     return render(request, 'properties.hisp', {
         'layout': layout,
         'form': form,
@@ -60,6 +63,7 @@ def properties(request, layout):
         'doors': doors,
     })
 
+@commit_on_success
 @login_required
 def duplicate(request, layout):
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
@@ -75,6 +79,7 @@ def duplicate(request, layout):
         form = LayoutForm(instance=layout, initial={'name': layout.name + ' (copy)'})
     return render(request, 'duplicate.hisp', {'form': form})
 
+@commit_on_success
 @login_required
 def delete(request, layout):
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
@@ -95,6 +100,7 @@ def floor(request, layout, story):
     floor = get_object_or_404(Floor, layout=layout, story=story)
     return render(request, 'layout.hisp', {'layout': layout, 'floor': floor})
 
+@commit_on_success
 @login_required
 def outersave(request, layout):
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
@@ -103,8 +109,9 @@ def outersave(request, layout):
     data = request.POST.get('data', '')
     layout.outline = data;
     layout.save()
-    return HttpResponse('true')
+    return HttpResponse('true', mimetype='application/json')
 
+@commit_on_success
 @login_required
 def innersave(request, layout, story):
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
@@ -114,14 +121,14 @@ def innersave(request, layout, story):
     data = request.POST.get('data', '')
     floor.json = data;
     floor.save()
-    return HttpResponse('true')
+    return HttpResponse('true', mimetype='application/json')
 
 @login_required
 def outerjs(request, layout):
     from django.shortcuts import render_to_response
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
     return render_to_response('layout.js', {
-        'json': layout.outline,
+        'layout': layout,
         'save': reverse('layouts.views.outersave', args=[layout.pk]),
     }, mimetype='text/javascript')
 
@@ -131,6 +138,7 @@ def innerjs(request, layout, story):
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
     floor = get_object_or_404(Floor, layout=layout, story=story)
     return render_to_response('layout.js', {
-        'json': floor.json,
+        'floor': floor,
+        'layout': layout,
         'save': reverse('layouts.views.innersave', args=[layout.pk, floor.story]),
     }, mimetype='text/javascript')

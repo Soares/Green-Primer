@@ -12,4 +12,14 @@ $(document).ready(function() {
   $(document).mouseup(function() {
     scroll.stop();
   });
+  $('#layers a').click(function(e) {
+    var href = $(this).attr('href');
+    $.post(global.save_url, {
+      'data': JSON.stringify(layout.save()),
+    }, function() {
+      window.location.replace(href);
+    }, 'json');
+    e.preventDefault();
+    return false;
+  });
 });

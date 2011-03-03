@@ -13,11 +13,12 @@ modes['window'] = (function(self) {
     });
 
     self.wallClick = function(e, click, wall) {
+        if(!wall.outer) return;
         var coords = util.eventCoords(click, true);
         var vector = new Vector(coords[0], coords[1]);
         var offset = vector.distanceFrom(wall.source.point);
-        var length = 20;
-        var win = new Window(wall, offset, length);
+        var type = $('#window-types :selected').val();
+        var win = new Window(wall, offset, type);
         makeWindow(win.dump());
     };
     self.windowClick = function(e, click, win) {

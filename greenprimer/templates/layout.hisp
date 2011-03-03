@@ -1,5 +1,5 @@
 {%extends "base.hisp"}
-{% block title ~ {layout.name|title}}
+{% block title ~ {layout.name|title} {floor}}
 
 {%block body ~
 (#viewport
@@ -15,71 +15,55 @@
     (button.bottom#show (:title "Show") +))
 
   (#toolbar
-    (#types.options
-      {!(button#select Select)!}
-      (button#move Move)
-      (button#delete Delete)
-      (button#wall Walls)
-      (button#window Windows)
+    (#main.options
+      (button#wall Walls))
+    (#elements.options
       (button#door Doors)
-      (button#vent Vents)
-      (button#stair Stairs))
-    {!(.options#select-options
-      (.buttonset
-        (button#cut Cut)
-        (button#copy Copy)
-        (button#paste Paste)
-        (button#delete Delete)))!}
-    {!(.options#wall-options.buttonset
-      (button#split Split)
-      (button#merge Merge))!}
-    (.options#window-options
-      (ul#window-type
-        (li These)
-        (li Are)
-        (li User)
-        (li Defined)))
-    (.options#door-options
-      (ul#door-type
-        (li These)
-        (li Are)
-        (li User)
-        (li Defined)))
-    (.options#vent-options)
-    (.options#stair-options
-      (ul#stair-type
-        (li These)
-        (li Are)
-        (li User)
-        (li Defined))))
+      (button#window Windows)
+      (button#vent Vents))
+    (#types.options
+      (button#move Move)
+      (button#delete Delete))
+    (#wall-options.options
+      (button#split.disabled Split)
+      (button#merge.disabled Merge))
+    (label Window Type)
+    (select.options#window-types
+      {%for window in layout.windows.all~
+        {%if window.label~
+          (option (:value {window.pk}) {window})}})
+    (label Door Type)
+    (select.options#door-types
+      {%for door in layout.doors.all~
+        {%if door.label~
+          (option (:value {door.pk}) {door})}}))
 
   (#dashboard
     (#bounds (.inner (#joystick)))
     (#layers
-      (a#prevlayer ◀)
-      (a#nextlayer ▶)
-      (.list
-        (.items
-          {!{% for layer in layers ~ (button {layer})}!}
-          (button SubBasement)
-          (button Basement)
-          (button First Floor)
-          (button Second Floor)
-          (button Third Floor))))
-    (#modes
-      (button.whole#internal-flow Ventilate)
-      {!(button.upper#internal-flow Internal)
-      (button.lower#external-flow External)
-      (button.middle#no-flow None)!})))
+      (a#outline.top (:href {layout.get_absolute_url}) Outer Walls)
+      {%for f in layout.floors.all~
+        (a.bottom (:class '{% if forloop.first %}first{% endif %}')
+                  (:class '{% if f.story = floor.story %}disabled{% endif %}')
+                  (:href {f.get_absolute_url})
+                  {f.story|add:1})}
+      (a#add.bottom.disabled (:href #) +)
+      (#backdrop))
+    (#modes (button.whole#internal-flow Ventilate))))
 
 (#view
   (#layout
     (canvas#canvas (:width "2048") (:height "2048"))))}
 
 {%load media}
-(%addto[links] {%include_media "analyzer.css"})
+(%addto[links]
+  {%include_media "analyzer.css"}
+  {%include_media "floor.css"})
 (%addto[scripts]
   {%include_media "box.js"}
   {%include_media "utils.js"}
-  {%include_media "analyzer.js"}
-  (script (:type "text/javascript") (:src '{% url layouts.views.js layout.pk %}')))
+  {%include_media "base.js"}
+  {%include_media "ui.js"}
+  {%include_media "shared.js"}
+  {%include_media "floor.js"}
+  (script (:type "text/javascript") (:src '{% url layouts.views.innerjs layout.pk floor.story %}')))

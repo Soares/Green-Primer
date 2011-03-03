@@ -59,4 +59,7 @@ $(function() {
             faders.fadeIn('fast');
         }
     });
+    $('.window .width [value=0]').each(function() {
+        $(this).parents('tr').find('.curtain-wall :checkbox').attr('checked', true).change();
+    });
 });

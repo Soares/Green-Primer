@@ -33,7 +33,6 @@ $(document).ready(function() {
   });
 
   var push = function(contents, success) {
-    console.log(JSON.stringify(contents));
     $.post(global.save_url, {
       'data': JSON.stringify(contents),
     }, success, 'json');

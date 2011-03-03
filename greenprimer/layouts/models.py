@@ -43,6 +43,9 @@ class Window(models.Model):
     height = models.PositiveSmallIntegerField(default=100)
     width = models.PositiveSmallIntegerField(default=60)
 
+    class Meta:
+        ordering = 'id',
+
     @property
     def curtain(self):
         return self.width == 0
@@ -63,6 +66,9 @@ class Door(models.Model):
     label = models.CharField(max_length=50)
     width = models.PositiveSmallIntegerField(default=90)
 
+    class Meta:
+        ordering = 'id',
+
     def __unicode__(self):
         return self.label
 
@@ -77,10 +83,11 @@ class Floor(models.Model):
     layout = models.ForeignKey(Layout, related_name='floors')
     name = models.CharField(max_length=50)
     story = models.PositiveSmallIntegerField()
-    json = models.TextField(default='"[]"')
+    json = models.TextField(default='')
 
     class Meta:
         unique_together = 'layout', 'story'
+        ordering = 'story',
 
     def __unicode__(self):
         return '%d. %s' % (self.story, self.name)
