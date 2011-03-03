@@ -267,10 +267,6 @@ MEDIA_BUNDLES = (
     ),
     ('outline.js',
         'analyzer/mode/window.js',
-    )
-    ('demo.js',
-        'analyzer/gp.js',
-        'analyzer/demo.js',
     ),
 )
 

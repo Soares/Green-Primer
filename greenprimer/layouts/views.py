@@ -15,13 +15,14 @@ def new(request):
         doors = DoorFormSet(request.POST, prefix='doors')
         if form.is_valid() and windows.is_valid() and doors.is_valid():
             layout = form.create(request)
+            stories = form.cleaned_data['stories']
             windows.create(layout)
             doors.create(layout)
             names = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth']
             names = [n + ' Floor' for n in names]
-            if layout.stories > 2:
+            if stories > 2:
                 names.insert(0, 'Basement')
-            for (story, name) in enumerate(names[:layout.stories]):
+            for (story, name) in enumerate(names[:stories]):
                 Floor.objects.create(layout=layout, story=story, name=name)
             return redirect(layout)
     else:

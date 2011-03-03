@@ -3,6 +3,8 @@ from django.forms.formsets import formset_factory, BaseFormSet
 from layouts.models import Layout, Window, Door
 
 class LayoutForm(forms.ModelForm):
+    stories = forms.IntegerField(min_value=1, max_value=7)
+
     class Meta:
         model = Layout
         exclude = 'outline', 'user'
@@ -17,7 +19,7 @@ class LayoutForm(forms.ModelForm):
 class UpdateLayoutForm(forms.ModelForm):
     class Meta:
         model = Layout
-        exclude = 'outline', 'user', 'stories'
+        exclude = 'outline', 'user'
 
 
 class MultiFormSet(BaseFormSet):

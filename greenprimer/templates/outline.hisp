@@ -39,6 +39,15 @@
 
   (#dashboard
     (#bounds (.inner (#joystick)))
+    (#layers
+      (a#outline.top.disabled (:href #) Outer Walls)
+      {%for floor in layout.floors.all~
+        {%if forloop.first~
+          (a.bottom.first (:href {floor.get_absolute_url}) {floor.story})
+          {%else}
+          (a.bottom (:href {floor.get_absolute_url}) {floor.story})}}
+      (a#add.bottom (:href #) +)
+      (#backdrop))
     (#modes (button.whole#internal-flow Ventilate))))
 
 (#view

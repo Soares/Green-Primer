@@ -16,9 +16,6 @@ class BudgetField(models.DecimalField):
 class Layout(models.Model):
     user = models.ForeignKey(User, related_name='layouts')
     name = models.CharField(max_length=50)
-    stories = models.PositiveSmallIntegerField(default=2, validators=[
-        MaxValueValidator(7), MinValueValidator(1)
-    ])
     budget = BudgetField()
     zip_code = models.CharField(max_length=11)
     outline = models.TextField(default='')
@@ -94,3 +91,7 @@ class Floor(models.Model):
             name=self.name,
             story=self.story,
             json=self.json)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'layouts.views.floor', [self.layout.pk, self.story]

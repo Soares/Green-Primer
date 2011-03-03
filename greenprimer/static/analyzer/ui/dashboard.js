@@ -12,10 +12,4 @@ $(document).ready(function() {
   $(document).mouseup(function() {
     scroll.stop();
   });
-
-  /* Layers */
-  $('#layers').scrollable({
-    next: '#nextlayer',
-    prev: '#prevlayer',
-  });
 });

@@ -103,60 +103,27 @@ $joy: .4 * $circle
   #layers
     width: 286px
     position: absolute
-    bottom: 0
     left: 50%
     margin-left: -140px
     padding: 0
-    top: $pad
+    top: $pad - $border
+    margin-top: 2em
 
-    .list
-      overflow: hidden
-      height: $circle
-      width: 220px
-      position: relative
-      left: 30px
-      border: 3px solid $warm-light
-        top: 0
-        bottom: 0
-        radius: 2em
-
-    .items
-      width: 20000em
-      position: absolute
-      height: $circle
-
-      button
-        float: left
-        margin: 0
-        padding: 0
-        width: 200px
-        margin-left: 10px
-        margin-right: 10px
-        margin-top: $circle / 6
-        height: $circle * 2 / 3
-        line-height: $circle * 2 / 3
-        border: 0
-        color: $warm-dark
-        border-radius: 1em
-        box-sizing: border-box
-        background: $warm-lightest
-        text-decoration: none
-        font-size: 150%
-        font-weight: bold
-
-    #prevlayer, #nextlayer
-      position: absolute
-      height: 60px
-      margin-top: ($circle / 2) - 30px
-      cursor: pointer
-      line-height: 60px
-      font-weight: bold
-      font-size: 200%
-      text-align: center
-      width: 30px
+    .top, .bottom, #backdrop
       background: $warm-light
       color: $warm-darkest
+      border: $border solid $warm-darkest
+      height: $circle / 3
+      line-height: $circle / 3
+      box-sizing: border-box
+      display: inline-block
+      vertical-align: middle
+      font-size: 120%
+      font-weight: bold
+      border-radius: 0
+      text-decoration: none
 
+    .top, .bottom
       &:hover:not(.disabled)
         background: $warm-darkest
         color: $warm
@@ -168,13 +135,41 @@ $joy: .4 * $circle
       &.disabled
         opacity: .5
         cursor: default
-        display: none
 
-    #prevlayer
-      left: 0
+    .top
+      width: 100%
+      border-bottom-width: 1px
       border-top-left-radius: 30px
-      border-bottom-left-radius: 30px
-    #nextlayer
-      right: 0
       border-top-right-radius: 30px
-      border-bottom-right-radius: 30px
+
+    .bottom
+      width: 35px
+      padding: 0
+      margin: 0
+      border-top-width: 1px
+      border-left-width: 1px
+      border-right-width: 1px
+      float: left
+      position: relative
+      z-index: 2
+
+      &.first
+        border-left-width: $border
+        border-bottom-left-radius: 30px
+
+      &#add
+        float: right
+        border-right-width: $border
+        border-bottom-right-radius: 30px
+
+    #backdrop
+      opacity: .8
+      width: 80%
+      position: absolute
+      top: 50%
+      height: 50%
+      left: 10%
+      z-index: 1
+      border-width: 0
+      border-top-width: 1px
+      border-bottom-width: $border
