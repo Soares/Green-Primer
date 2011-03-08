@@ -31,6 +31,6 @@ global.doors['{{ d.pk }}'] = {
 {% autoescape off %}
 global.outline = {% if layout.outline %}{{ layout.outline }}{% else %}[]{% endif %};
 {% if floor %}
-global.floor = {% if floor.json %}{{ floor.json }}{% else %}[]{% endif %};
+global.floor = {% if floor.json %}{{ floor.json }}{% else %}"[]"{% endif %};
 {% endif %}
 {% endautoescape %}

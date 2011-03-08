@@ -9,6 +9,7 @@ var gp = (function(self) {
 
         self.WIDTH = self.layout.outerWidth();
         self.HEIGHT = self.layout.outerHeight();
+        self.SCALE = 40;
 
         self.canvas.data('width', self.WIDTH);
         self.canvas.data('height', self.HEIGHT);

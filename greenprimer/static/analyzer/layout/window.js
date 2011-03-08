@@ -4,7 +4,7 @@ var windows = (function(self) {
 
 var Window = function(wall, offset, type, id) {
     this._offset = offset;
-    this._length = (global.windows[type].width / 100) * 20;
+    this._length = (global.windows[type].width / 100) * gp.SCALE;
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
     this.type = type;
