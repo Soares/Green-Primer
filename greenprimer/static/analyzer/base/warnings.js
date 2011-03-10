@@ -17,7 +17,7 @@ var warnings = (function(self) {
         if(counts[id] == 1) warnings.addClass('L'+levels[id]);
         if(!count) warnings.show();
         warnings.html(++count);
-        if(repeat && repeat > 0) self.warn(id, repeat-1);
+        if(repeat && repeat > 1) self.warn(id, repeat-1);
     };
     self.unwarn = function(id) {
         if(!counts[id]) return;

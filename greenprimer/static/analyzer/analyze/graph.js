@@ -1,5 +1,5 @@
 var graph = (function(self) {
-    var graph, nodes, groups, biggest, counts, map;
+    var graph, nodes, groups, biggest, counts, map, disjointed = [];
 
     var regraph = function() {
         graph = {};
@@ -74,15 +74,18 @@ var graph = (function(self) {
     };
 
     self.update = function() {
-        $('.disjoint').removeClass('disjoint');
-        //warnings.forget(warnings.DISJOINT);
+        for(var i = 0; i < disjointed.length; i++) {
+            disjointed[i].rejoin();
+        }
+        disjointed = [];
+        warnings.forget(warnings.DISJOINT);
         regraph(); walk();
         console.log(groups, counts, map, biggest);
         for(var i = 0; i < groups.length; i++) {
             if(counts[i] === biggest) continue;
-            for(var j in groups[i]) map[j].$.addClass('disjoint');
+            for(var j in groups[i]) disjointed.push(map[j].disjoin());
         }
-        //warnings.warn(warnings.DISJOINT, groups.length-1);
+        warnings.warn(warnings.DISJOINT, groups.length-1);
     };
 
     $(function() {

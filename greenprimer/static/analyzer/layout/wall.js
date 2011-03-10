@@ -73,9 +73,18 @@ Wall.prototype.length = function() {
 };
 Wall.prototype.attach = function(element) {
     this.elements.push(element);
+    if(element instanceof Vent && this.$.is('.disjoint')) {
+        element.$.addClass('disjoint');
+        warnings.warn(warnings.PLACEMENT);
+    }
+    if(this.outer) element.$.addClass('outer');
     return this;
 };
 Wall.prototype.detach = function(element) {
+    if(element instanceof Vent && this.$.is('.disjoint')) {
+        element.$.removeClass('disjoint');
+        warnings.unwarn(warnings.PLACEMENT);
+    }
     for(var i = 0; i < this.elements.length; i++) {
         if(this.elements[i] === element) break;
     }
@@ -218,4 +227,26 @@ Wall.prototype.touches = function(other) {
     if(this.dest.point.equals(other.dest.point)) return true;
     if(this.segment.intersection(other.segment)) return true;
     return false;
+};
+
+
+Wall.prototype.disjoin = function() {
+    this.$.addClass('disjoint');
+    for(var i = 0; i < this.elements.length; i++) {
+        if(this.elements[i] instanceof Vent) {
+            warnings.warn(warnings.PLACEMENT);
+            this.elements[i].$.addClass('disjoint');
+        }
+    }
+    return this;
+};
+Wall.prototype.rejoin = function() {
+    this.$.removeClass('disjoint');
+    for(var i = 0; i < this.elements.length; i++) {
+        if(this.elements[i] instanceof Vent) {
+            warnings.unwarn(warnings.PLACEMENT);
+            this.elements[i].$.removeClass('disjoint');
+        }
+    }
+    return this;
 };
