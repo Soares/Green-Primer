@@ -13,6 +13,7 @@ modes['delete'] = (function(self) {
         if(global.inner && wall.outer) return;
         recordRemove(wall.dump());
         wall.remove();
+        graph.update();
     };
     self.windowClick = function(e, click, win) {
         if(global.inner) return;

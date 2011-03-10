@@ -92,7 +92,16 @@ Wall.prototype.validate = function() {
         if(walls.all[i].id === this.id) continue;
         if(this.overlaps(walls.all[i])) return false;
     }
+    if(this.breaksEnvelope()) return false;
     return true;
+};
+Wall.prototype.breaksEnvelope = function() {
+    for(var i = 0; i < walls.all.length; i++) {
+        if(walls.all[i].id === this.id) continue;
+        if(!walls.all[i].outer) continue;
+        if(this.segment.intersection(walls.all[i].segment)) return true;
+    }
+    return false;
 };
 Wall.prototype.overlaps = function(other) {
     if(Math.abs(this.segment.m) != Math.abs(other.segment.m)) return false;

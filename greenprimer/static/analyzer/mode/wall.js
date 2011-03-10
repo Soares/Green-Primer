@@ -32,12 +32,15 @@ modes.wall = (function(self) {
                 old.remove();
             }
             wall.graduate();
-            if(!wall.validate()) wall.remove();
-            else {
-                recordWall(wall.dump());
-                graph.update();
+            var valid = wall.validate();
+            if(!valid) {
+                wall = wall.remove();
+                return false;
             }
+            recordWall(wall.dump());
+            graph.update();
             wall = null;
+            return true;
         }
     };
 
@@ -54,8 +57,9 @@ modes.wall = (function(self) {
     /* Add a new joint */
     self.canvasClick = function(e, click) {
         var point = layout.point(click);
-        if(wall) endWall(point);
-        startWall(point);
+        if(wall) {
+            if(endWall(point)) startWall(point);
+        } else startWall(point);
     };
 
     /* Move the current wall if any */

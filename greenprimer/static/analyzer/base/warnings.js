@@ -12,11 +12,12 @@ var warnings = (function(self) {
         counts.push(0);
         return i;
     };
-    self.warn = function(id) {
+    self.warn = function(id, repeat) {
         counts[id]++;
         if(counts[id] == 1) warnings.addClass('L'+levels[id]);
         if(!count) warnings.show();
         warnings.html(++count);
+        if(repeat && repeat > 0) self.warn(id, repeat-1);
     };
     self.unwarn = function(id) {
         if(!counts[id]) return;
