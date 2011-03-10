@@ -5,8 +5,10 @@ modes.move = (function(self) {
 
     var recordMove = actions.make(function(dump) {
         Elem.load(dump).shift(dump.delta);
+        graph.update();
     }, function(dump) {
         Elem.load(dump).shift(dump.delta.inverse());
+        graph.update();
     });
 
     self.jointClick = function(e, click, joints) {
@@ -41,6 +43,7 @@ modes.move = (function(self) {
         var dump = active.dump();
         dump.delta = point.minus(origin);
         recordMove(dump);
+        graph.update();
         active = prev = origin = null;
     };
 

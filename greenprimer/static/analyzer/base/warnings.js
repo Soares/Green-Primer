@@ -19,10 +19,15 @@ var warnings = (function(self) {
         warnings.html(++count);
     };
     self.unwarn = function(id) {
+        if(!counts[id]) return;
         counts[id]--;
         warnings.html(--count);
         if(!counts[id]) warnings.removeClass('L'+levels[id]);
         if(!count) warnings.hide();
+    };
+    self.forget = function(id) {
+        var c = counts[id];
+        for(var i = 0; i < c; i++) self.unwarn(id);
     };
 
     var show = function() {

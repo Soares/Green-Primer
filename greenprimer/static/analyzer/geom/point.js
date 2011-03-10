@@ -30,6 +30,11 @@ Point.prototype.distanceFrom = function(point) {
     var dx = this.x - point.x, dy = this.y - point.y;
     return Math.sqrt((dx * dx) + (dy * dy));
 };
+Point.prototype.order = function(m, zero) {
+    /* Hackery and magic */
+    if(m === Infinity || m === -Infinity) return this.y - zero.y;
+    return this.x - zero.x;
+};
 
 Point.prototype.inverse = function(point) {
     return new Point(-this.x, -this.y);

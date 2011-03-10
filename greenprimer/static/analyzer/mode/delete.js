@@ -3,8 +3,10 @@ modes['delete'] = (function(self) {
 
     var recordRemove = actions.make(function(dump) {
         Elem.load(dump).remove();
+        graph.update();
     }, function(dump) {
         Elem.load(dump);
+        graph.update();
     });
 
     self.wallClick = function(e, click, wall) {
@@ -21,6 +23,7 @@ modes['delete'] = (function(self) {
         if(global.inner && door.wall.outer) return;
         recordRemove(door.dump());
         door.remove();
+        graph.update();
     };
 
     self.jointClick = function(e, click, joints) {
@@ -28,6 +31,7 @@ modes['delete'] = (function(self) {
         $.each(joints, function(key, joint) {
             recordRemove(joint.dump());
             joint.remove();
+            graph.update();
         });
     };
 

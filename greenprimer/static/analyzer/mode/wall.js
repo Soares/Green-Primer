@@ -3,8 +3,10 @@ modes.wall = (function(self) {
 
     var recordWall = actions.make(function(dump) {
         Elem.load(dump);
+        graph.update();
     }, function(dump) {
         Elem.load(dump).remove();
+        graph.update();
     });
 
     var getJoint = function(point) {
@@ -30,9 +32,11 @@ modes.wall = (function(self) {
                 old.remove();
             }
             wall.graduate();
-            console.log(wall, wall.validate())
             if(!wall.validate()) wall.remove();
-            else recordWall(wall.dump());
+            else {
+                recordWall(wall.dump());
+                graph.update();
+            }
             wall = null;
         }
     };

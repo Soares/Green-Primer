@@ -97,9 +97,12 @@ Wall.prototype.validate = function() {
 Wall.prototype.overlaps = function(other) {
     if(Math.abs(this.segment.m) != Math.abs(other.segment.m)) return false;
     if(this.segment.b != other.segment.b) return false;
-    var end = this.dest.point.distanceFrom(this.source.point);
-    var one = other.source.point.distanceFrom(this.source.point);
-    var two = other.dest.point.distanceFrom(this.source.point);
+    if(Math.abs(this.segment.m) === Infinity
+        && this.source.point.x != other.source.point.x) return false;
+    var m = this.segment.m, zero = this.source.point;
+    var end = this.dest.point.order(m, zero);
+    var one = other.source.point.order(m, zero);
+    var two = other.dest.point.order(m, zero);
     if(end < 0) { end *= -1; one *= -1; two *= -1; }
     if(one > 0 && one < end) return true;
     if(two > 0 && two < end) return true;
@@ -198,4 +201,12 @@ Wall.prototype.simulate = function() {
         physics.addLine(segments[i], 6);
     }
     return segments;
+};
+Wall.prototype.touches = function(other) {
+    if(this.source.point.equals(other.source.point)) return true;
+    if(this.source.point.equals(other.dest.point)) return true;
+    if(this.dest.point.equals(other.source.point)) return true;
+    if(this.dest.point.equals(other.dest.point)) return true;
+    if(this.segment.intersection(other.segment)) return true;
+    return false;
 };
