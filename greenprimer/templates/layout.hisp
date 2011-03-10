@@ -3,6 +3,15 @@
 
 {%block body ~
 (#viewport
+  (#warnings)
+  (#dialog.dialog
+    (.title (.text "This is a warning") (button.x (:type button) x))
+    (.message "I'm only going to warn you once."))
+  (#errors.dialog
+    (.title (.text "Warnings and Errors"))
+    (ul.message))
+  (#overlay)
+
   (#key
     (button.upper.left#save (:title "Save Now"))
     (button.upper.right#load (:title "Load"))

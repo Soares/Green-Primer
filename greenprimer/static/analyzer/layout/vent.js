@@ -19,6 +19,7 @@ var Vent = function(wall, offset, direction, id) {
 
     this.init(id);
     this.wall = wall.attach(this);
+    if(wall.outer) warnings.warn(warnings.EXTERIOR);
     this.update();
 };
 Elem(Vent, vents);
@@ -78,6 +79,8 @@ Vent.prototype.reorient = function() {
     return this;
 };
 Vent.prototype.remove = function() {
+    if(this.wall.outer) warnings.unwarn(warnings.EXTERIOR);
+    this.wall.detach(this);
     this.pointer.remove();
     this.line.remove();
     vents.forget(this);

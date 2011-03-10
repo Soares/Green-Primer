@@ -117,6 +117,7 @@ MEDIA_BUNDLES = (
         'analyzer/sass/key.sass',
         'analyzer/sass/toolbar.sass',
         'analyzer/sass/dashboard.sass',
+        'analyzer/sass/other.sass',
     ),
     ('outline.css',
         'analyzer/sass/outline.sass',
@@ -227,6 +228,7 @@ MEDIA_BUNDLES = (
         'analyzer/base/exceptions.js',
         'analyzer/base/utilities.js',
         'analyzer/base/notify.js',
+        'analyzer/base/warnings.js',
         'analyzer/base/json.js',
 
         'analyzer/geom/vector.js',

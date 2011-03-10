@@ -86,32 +86,26 @@ Wall.prototype.matches = function(source, dest) {
     return this.source.point.equals(source) && this.dest.point.equals(dest)
         || this.dest.point.equals(source) && this.source.point.equals(dest);
 };
-Wall.prototype.valid = function(source, dest) {
-    source = source || this.source.point;
-    dest = dest || this.dest.point;
-    if(source.equals(dest)) return false;
-    var line = new Line(source, dest);
+Wall.prototype.validate = function() {
+    if(this.dest.point.distanceFrom(this.source.point) === 0) return false;
     for(var i = 0; i < walls.all.length; i++) {
-        var wall = walls.all[i];
-        if(wall.id === this.id) continue;
-        if(wall.matches(source, dest)) return false;
-        if(Math.abs(line.m) === Math.abs(wall.segment.m)) {
-            var ss = wall.source.point.distanceFrom(source);
-            var sd = wall.source.point.distanceFrom(dest);
-            var ds = wall.dest.point.distanceFrom(source);
-            var dd = wall.dest.point.distanceFrom(dest);
-            var len = wall.segment.length;
-            if(wall.source.point.equals(source)) return dd > len;
-            if(wall.source.point.equals(dest)) return ds > len;
-            if(wall.dest.point.equals(source)) return sd > len;
-            if(wall.dest.point.equals(dest)) return ss > len;
-        } else if(wall.source.point.equals(source)
-               || wall.source.point.equals(dest)
-               || wall.dest.point.equals(source)
-               || wall.dest.point.equals(dest)) {
-        } else if(wall.segment.intersection(line)) return false;
+        if(walls.all[i].id === this.id) continue;
+        if(this.overlaps(walls.all[i])) return false;
     }
     return true;
+};
+Wall.prototype.overlaps = function(other) {
+    if(Math.abs(this.segment.m) != Math.abs(other.segment.m)) return false;
+    if(this.segment.b != other.segment.b) return false;
+    var end = this.dest.point.distanceFrom(this.source.point);
+    var one = other.source.point.distanceFrom(this.source.point);
+    var two = other.dest.point.distanceFrom(this.source.point);
+    if(end < 0) { end *= -1; one *= -1; two *= -1; }
+    if(one > 0 && one < end) return true;
+    if(two > 0 && two < end) return true;
+    if(one <= 0 && two >= end) return true;
+    if(two <= 0 && one >= end) return true;
+    return false;
 };
 Wall.prototype.update = function() {
     this.line.animate({path: [

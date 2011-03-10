@@ -30,7 +30,9 @@ modes.wall = (function(self) {
                 old.remove();
             }
             wall.graduate();
-            recordWall(wall.dump());
+            console.log(wall, wall.validate())
+            if(!wall.validate()) wall.remove();
+            else recordWall(wall.dump());
             wall = null;
         }
     };
