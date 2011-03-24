@@ -137,6 +137,7 @@ MEDIA_BUNDLES = (
     ),
     ('properties.js',
         'media/js/properties.js',
+        'media/js/zones.js',
     ),
     ('main.js',
         'jquery/1.4.4.min.js',
@@ -392,6 +393,7 @@ def INSTALLED_APPS():
     # Green Primer
     yield 'users'
     yield 'layouts'
+    yield 'costing'
 
 LOGIN_REDIRECT_URL = '/'
 

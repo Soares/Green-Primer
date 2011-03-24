@@ -80,7 +80,6 @@ var graph = (function(self) {
         disjointed = [];
         warnings.forget(warnings.DISJOINT);
         regraph(); walk();
-        console.log(groups, counts, map, biggest);
         for(var i = 0; i < groups.length; i++) {
             if(counts[i] === biggest) continue;
             for(var j in groups[i]) disjointed.push(map[j].disjoin());

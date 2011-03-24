@@ -75,4 +75,4 @@
   {%include_media "ui.js"}
   {%include_media "shared.js"}
   {%include_media "floor.js"}
-  (script (:type "text/javascript") (:src '{% url layouts.views.innerjs layout.pk floor.story %}')))
+  (script (:type "text/javascript") (:src '{% url "layouts.views.innerjs" layout.pk floor.story %}')))

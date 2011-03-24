@@ -1,16 +1,16 @@
 {% extends "main.hisp"}
 {% block title ~ Green Primer: Home}
 
-{% block toolbar ~ (a#logout (:href '{% url users.views.logout %}') logout)}
+{% block toolbar ~ (a#logout (:href '{% url "users.views.logout" %}') logout)}
 {% block main ~
-  (a.large.button#create (:href '{% url layouts.views.new %}') New Layout)
+  (a.large.button#create (:href '{% url "layouts.views.new" %}') New Layout)
   (table#options
     {% for layout in layouts ~
       (tr (:class '{% cycle "odd" "even" %}')
-        (td.name (a (:href '{% url layouts.views.outline layout.pk %}') {layout}))
+        (td.name (a (:href '{% url "layouts.views.outline" layout.pk %}') {layout}))
         (td.floors
           {% for floor in layout.floors.all ~
-            (a (:href '{% url layouts.views.floor layout.pk floor.story %}') {floor.story|add:1})})
-        (td.link (a (:href '{% url layouts.views.properties layout.pk %}') properties))
-        {!(td.link (a (:href '{% url layouts.views.duplicate layout.pk %}') duplicate))!}
-        (td.link (a (:href '{% url layouts.views.delete layout.pk %}') delete)))})}
+            (a (:href '{% url "layouts.views.floor" layout.pk floor.story %}') {floor.story|add:1})})
+        (td.link (a (:href '{% url "layouts.views.properties" layout.pk %}') properties))
+        {!(td.link (a (:href '{% url "layouts.views.duplicate" layout.pk %}') duplicate))!}
+        (td.link (a (:href '{% url "layouts.views.delete" layout.pk %}') delete)))})}

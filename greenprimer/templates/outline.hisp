@@ -60,4 +60,4 @@
   {%include_media "ui.js"}
   {%include_media "shared.js"}
   {%include_media "outline.js"}
-  (script (:type "text/javascript") (:src '{% url layouts.views.outerjs layout.pk %}')))
+  (script (:type "text/javascript") (:src '{% url "layouts.views.outerjs" layout.pk %}')))

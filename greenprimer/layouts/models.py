@@ -1,7 +1,6 @@
 from itertools import chain
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
 from fields import BudgetField as BudgetFormField
 
 class BudgetField(models.DecimalField):
@@ -17,7 +16,7 @@ class Layout(models.Model):
     user = models.ForeignKey(User, related_name='layouts')
     name = models.CharField(max_length=50)
     budget = BudgetField()
-    zip_code = models.CharField(max_length=11)
+    zone = models.PositiveSmallIntegerField(default=1)
     outline = models.TextField(default='')
 
     def __unicode__(self):

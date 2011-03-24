@@ -62,4 +62,10 @@ $(function() {
     $('.window .width [value=0]').each(function() {
         $(this).parents('tr').find('.curtain-wall :checkbox').attr('checked', true).change();
     });
+
+    $('#id_zone').attr('disabled', true).after(
+        '<input type="hidden" name="zone" value="'+$('#id_zone').val()+'">'
+    ).after(
+        '<button type="button" id="choose_zone">Choose</button>'
+    );
 });

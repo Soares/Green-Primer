@@ -2,6 +2,20 @@
 {%block title~ Edit Properties}
 
 {%block main~
+  (#zoning
+    (#overlay)
+    (#bg
+      (.zoneimgs
+        (img (:class "zoneimg") (:id "z1") (:src {MEDIA_URL} media/img/1.png))
+        (img (:class "zoneimg") (:id "z2") (:src {MEDIA_URL} media/img/2.png))
+        (img (:class "zoneimg") (:id "z3") (:src {MEDIA_URL} media/img/3.png))
+        (img (:class "zoneimg") (:id "z4") (:src {MEDIA_URL} media/img/4.png))
+        (img (:class "zoneimg") (:id "z5") (:src {MEDIA_URL} media/img/5.png))
+        (img (:class "zoneimg") (:id "z6") (:src {MEDIA_URL} media/img/6.png))
+        (img (:class "zoneimg") (:id "z7") (:src {MEDIA_URL} media/img/7.png)))
+      (.fields
+        (.slider#zone_slider)
+        (button#select_zone (:type button) "Select Zone"))))
   (%internal.properties
     (table.main
       {%for field in form~
@@ -12,7 +26,7 @@
       {%with doors as formset~{% include "formset.hisp"}})
     (.window.section (h3 Window Types)
       {%with windows as formset~{% include "formset.hisp"}})
-    (a#cancel.button (:href '{% url users.views.home %}') Cancel)
+    (a#cancel.button (:href '{% url "users.views.home" %}') Cancel)
     (button#save.button (:type "submit") '{% if layout %}Save{% else %}Create{% endif %}'))}
 
 {%load media}

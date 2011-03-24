@@ -6,7 +6,7 @@
   (#toolbar
     {% block toolbar ~
       {%if form.errors ~ (#errors 'Incorrect. Please try again.')}
-      (%internal#login (:action '{%url users.views.main %}')
+      (%internal#login (:action '{%url "users.views.main" %}')
         (span.ui-icon.ui-icon-person)
         (%text (:name username))
         (span.ui-icon.ui-icon-key)
@@ -14,7 +14,7 @@
         (%submit (:value Login)))})
   (#main
     {%block main ~
-      (a.large.button#register (:href '{% url users.views.register %}') Create an Account)})}
+      (a.large.button#register (:href '{% url "users.views.register" %}') Create an Account)})}
   
 
 {%load media}
