@@ -1,4 +1,3 @@
-from itertools import chain
 from django.db import models
 from django.contrib.auth.models import User
 from fields import BudgetField as BudgetFormField
@@ -16,8 +15,40 @@ class Layout(models.Model):
     user = models.ForeignKey(User, related_name='layouts')
     name = models.CharField(max_length=50)
     budget = BudgetField()
+    story_height = models.FloatField()
     zone = models.PositiveSmallIntegerField(default=1)
     outline = models.TextField(default='')
+
+    perimiter = models.FloatField(null=True)
+    floor_area = models.FloatField(null=True)
+
+    @property
+    def stories(self):
+        return self.floors.count()
+
+    @property
+    def square_feet(self):
+        return self.area * self.stories
+
+    @property
+    def height(self):
+        return self.story_height * self.stories
+
+    @property
+    def side_area(self):
+        return self.perimiter * self.height
+
+    @property
+    def door_area(self):
+        return sum(d.area for d in self.doors.all())
+
+    @property
+    def window_area(self):
+        return sum(w.area for w in self.windows.all())
+
+    @property
+    def wall_area(self):
+        return self.side_area - self.door_area - self.window_area
 
     def __unicode__(self):
         return self.name
@@ -26,14 +57,14 @@ class Layout(models.Model):
     def get_absolute_url(self):
         return 'layouts.views.outline', [self.pk]
 
-    def duplicate(self):
-        layout = Layout.objects.create(
-            user=self.user, name=self.name + ' (copy)',
-            stories=self.stories, budget=self.budget,
-            zip_code=self.zip_code, outline=self.outline)
-        for elem in chain(self.floors.all(), self.windows.all(), self.doors.all()):
-            elem.duplicate(layout)
-        return layout
+    def cost(self, standard):
+        from costing import models as costing
+        requirements = costing.Requirements.get(standard=standard, zone=self.zone)
+        wall = requirements.wall().cost * self.side_area
+        roof = requirements.roof().cost * self.floor_area
+        windows = [requirements.window(w.width) * w.area for w in self.windows.all()]
+        return wall + roof + sum(windows)
+
 
 
 class Window(models.Model):
@@ -41,9 +72,16 @@ class Window(models.Model):
     label = models.CharField(max_length=50)
     height = models.PositiveSmallIntegerField(default=100)
     width = models.PositiveSmallIntegerField(default=60)
+    count = models.PositiveSmallIntegerField(default=0)
+    curtain = models.BooleanField(default=False)
 
     class Meta:
         ordering = 'id',
+
+    @property
+    def area(self):
+        return self.width * self.height * self.count
+        
 
     @property
     def curtain(self):
@@ -52,30 +90,22 @@ class Window(models.Model):
     def __unicode__(self):
         return self.label
 
-    def duplicate(self, layout):
-        return Window.objects.create(
-            layout=layout,
-            label=self.label,
-            width=self.width,
-            height=self.height)
-
 
 class Door(models.Model):
     layout = models.ForeignKey(Layout, related_name='doors')
     label = models.CharField(max_length=50)
     width = models.PositiveSmallIntegerField(default=90)
+    count = models.PositiveSmallIntegerField(default=0)
+
+    @property
+    def area(self):
+        return self.width * self.layout.story_height * self.count
 
     class Meta:
         ordering = 'id',
 
     def __unicode__(self):
         return self.label
-
-    def duplicate(self, layout):
-        return Door.objects.create(
-            layout=layout,
-            label=self.label,
-            width=self.width)
 
 
 class Floor(models.Model):
@@ -90,13 +120,6 @@ class Floor(models.Model):
 
     def __unicode__(self):
         return '%d. %s' % (self.story, self.name)
-
-    def duplicate(self, layout):
-        return Floor.objects.create(
-            layout=layout,
-            name=self.name,
-            story=self.story,
-            json=self.json)
 
     @models.permalink
     def get_absolute_url(self):

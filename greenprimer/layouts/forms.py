@@ -7,7 +7,7 @@ class LayoutForm(forms.ModelForm):
 
     class Meta:
         model = Layout
-        exclude = 'outline', 'user'
+        exclude = 'outline', 'user', 'perimiter', 'area'
 
     def create(self, request):
         layout = self.save(commit=False)
@@ -43,7 +43,7 @@ class WindowForm(forms.ModelForm):
 
     class Meta:
         model = Window
-        exclude = 'layout', 'id'
+        exclude = 'layout', 'id', 'count'
 
     def create(self, layout):
         window = self.save(commit=False)
@@ -59,7 +59,7 @@ class DoorForm(forms.ModelForm):
 
     class Meta:
         model = Door
-        exclude = 'layout', 'id'
+        exclude = 'layout', 'id', 'count'
 
     def create(self, layout):
         window = self.save(commit=False)
