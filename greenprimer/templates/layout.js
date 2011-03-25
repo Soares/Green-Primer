@@ -11,6 +11,7 @@ global.windows['{{ w.pk }}'] = {
     label: '{{ w.label }}',
     height: {{ w.height }},
     width: {{ w.width }},
+    curtain: {% if w.curtain %}true{% else %}false{% endif %},
     index: i++
 };
 {% endif %}

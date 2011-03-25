@@ -12,7 +12,7 @@ class Standard(models.Model):
 
 
 class Requirements(models.Model):
-    standard = models.ForeginKey(Standard)
+    standard = models.ForeignKey(Standard)
     zone = models.PositiveSmallIntegerField()
     wall_r = models.FloatField()
     roof_r = models.FloatField()

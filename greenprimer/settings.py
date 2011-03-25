@@ -230,7 +230,7 @@ MEDIA_BUNDLES = (
         'analyzer/base/utilities.js',
         'analyzer/base/notify.js',
         'analyzer/base/warnings.js',
-        'analyzer/base/json.js',
+        # 'analyzer/base/json.js',
 
         'analyzer/geom/vector.js',
         'analyzer/geom/point.js',
@@ -343,7 +343,7 @@ def MIDDLEWARE_CLASSES():
     yield 'django.middleware.http.ConditionalGetMiddleware'
     yield 'django.middleware.common.CommonMiddleware'
     yield 'django.contrib.sessions.middleware.SessionMiddleware'
-    yield 'django.middleware.csrf.CsrfViewMiddleware'
+    # yield 'django.middleware.csrf.CsrfViewMiddleware'
     # yield 'django.middleware.locale.LocaleMiddleware',
     yield 'django.contrib.auth.middleware.AuthenticationMiddleware'
     #if DEBUG:

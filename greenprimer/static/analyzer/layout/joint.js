@@ -20,7 +20,7 @@ var Joint = function(point, walls, id) {
     this.walls = walls || {};
     this.count = 0;
     this.point = point.copy();
-    this.circle = gp.svg.circle(this.point.x, this.point.y, 4);
+    this.circle = gp.svg.circle(this.point.x, this.point.y, 3);
     this.$ = $(this.circle.node);
     this.$.addClass('joint');
     this.init(id);

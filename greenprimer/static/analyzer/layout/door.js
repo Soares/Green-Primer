@@ -4,7 +4,7 @@ var doors = (function(self) {
 
 var Door = function(wall, offset, type, id) {
     this.type = type;
-    this.length = (global.doors[type].width / 100) * gp.SCALE;
+    this.length = (global.doors[type].width / 48) * gp.SCALE;
     this.offset = offset;
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);

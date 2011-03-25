@@ -15,12 +15,12 @@ class Layout(models.Model):
     user = models.ForeignKey(User, related_name='layouts')
     name = models.CharField(max_length=50)
     budget = BudgetField()
-    story_height = models.FloatField()
     zone = models.PositiveSmallIntegerField(default=1)
+    story_height = models.FloatField(default=8)
     outline = models.TextField(default='')
 
-    perimiter = models.FloatField(null=True)
-    floor_area = models.FloatField(null=True)
+    perimiter = models.FloatField(default=0)
+    floor_area = models.FloatField(default=0)
 
     @property
     def stories(self):
@@ -70,10 +70,13 @@ class Layout(models.Model):
 class Window(models.Model):
     layout = models.ForeignKey(Layout, related_name='windows')
     label = models.CharField(max_length=50)
-    height = models.PositiveSmallIntegerField(default=100)
-    width = models.PositiveSmallIntegerField(default=60)
-    count = models.PositiveSmallIntegerField(default=0)
+    height = models.PositiveSmallIntegerField(default=36)
+    width = models.PositiveSmallIntegerField(default=24)
     curtain = models.BooleanField(default=False)
+
+    @property
+    def count(self):
+        return sum(c.count for c in self.counts.all())
 
     class Meta:
         ordering = 'id',
@@ -81,11 +84,6 @@ class Window(models.Model):
     @property
     def area(self):
         return self.width * self.height * self.count
-        
-
-    @property
-    def curtain(self):
-        return self.width == 0
 
     def __unicode__(self):
         return self.label
@@ -94,12 +92,16 @@ class Window(models.Model):
 class Door(models.Model):
     layout = models.ForeignKey(Layout, related_name='doors')
     label = models.CharField(max_length=50)
-    width = models.PositiveSmallIntegerField(default=90)
-    count = models.PositiveSmallIntegerField(default=0)
+    width = models.PositiveSmallIntegerField(default=38)
+
+    @property
+    def count(self):
+        return sum(c.count for c in self.counts.all())
 
     @property
     def area(self):
-        return self.width * self.layout.story_height * self.count
+        width = sum(c.width for c in self.counts.all()) if self.curtain else self.width
+        return width * self.layout.story_height * self.count
 
     class Meta:
         ordering = 'id',
@@ -124,3 +126,22 @@ class Floor(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'layouts.views.floor', [self.layout.pk, self.story]
+
+
+class WindowCount(models.Model):
+    floor = models.ForeignKey(Floor)
+    window = models.ForeignKey(Window, related_name='counts')
+    count = models.PositiveSmallIntegerField()
+    width = models.FloatField(default=0)
+
+    def __unicode__(self):
+        return '%d %ss on %s' % (self.count, self.window, self.floor)
+
+
+class DoorCount(models.Model):
+    floor = models.ForeignKey(Floor)
+    door = models.ForeignKey(Door, related_name='counts')
+    count = models.PositiveSmallIntegerField()
+
+    def __unicode__(self):
+        return '%d %ss on %s' % (self.count, self.door, self.floor)

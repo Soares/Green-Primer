@@ -12,24 +12,39 @@ $(function() {
         'value': val,
     });
 
+    var storyheight = $('table.main .story-height input');
+    var val = storyheight.val();
+    storyheight.before('<div class="slider"></div><br>').after('<div class="output">'+val+' ft</div>').hide();
+    $('table.main .story-height .slider').slider({
+        'min': 4,
+        'max': 12,
+        'slide': function(e, ui) {
+            $(this).siblings('input').val(ui.value);
+            $(this).siblings('.output').html(ui.value);
+        },
+        'value': val,
+    });
+
+
     /* Width/Height Slider Creation */
     var formsets = $('.window, .door')
     var rows = $('tr:not(.labels)', formsets);
     var whs = $('.width, .height', rows);
-    $('input', whs).before('<div class="slider"></div><br>').change(function() {
-        var slider = $(this).siblings('.slider');
-        slider.slider('value', parseInt($(this).val()));
-    });
+    $('input', whs).before('<div class="slider"></div><br>').after('<div class="output"></div>').each(function() {
+        $(this).siblings('.output').html(imperial($(this).val()));
+    }).hide();
     $('.slider', '.width, .height').slider({
-        'min': 10,
-        'max': 300,
-        'step': 10,
-        'slide': function(e, ui) { $(this).siblings('input').val(ui.value); },
+        'min': 6,
+        'max': 120,
+        'slide': function(e, ui) {
+            $(this).siblings('input').val(ui.value);
+            $(this).siblings('.output').html(imperial(ui.value));
+        },
     });
-    $('.width .slider').slider('option', 'max', 500);
-
-    /* Width/Height Slider Initialization */
-    $('input', '.width, .height').after('<span class="unit">cm</span>').change();
+    $('.window .width .slider').slider('option', 'max', 60);
+    $('input', whs).each(function() {
+        $(this).siblings('.slider').slider('value', $(this).val());
+    });
 
     /* Create the standard default */
     $('.window, .door').find('tr:eq(1) td.label input').each(function() {
@@ -37,31 +52,30 @@ $(function() {
     });
 
     /* Curtain Wall Toggle */
-    $('.labels .curtain-wall label').hide();
-    $('.curtain-wall :checkbox').each(function() {
+    $('.labels .curtain label').hide();
+    $('.curtain :checkbox').each(function() {
         var checkbox = $(this);
         checkbox.after('<label for="' + checkbox.attr('id') + '">Full Wall</label>');
     }).button().change(function() {
         var checkbox = $(this);
         var row = checkbox.parents('tr');
         var width = row.find('.width'), height = row.find('.height');
-        var sliders = row.find('.slider'), faders = $('input, .unit', width.add(height));
+        var sliders = row.find('.slider'), faders = $('.output', width.add(height));
         var w = $('input', width), h = $('input', height);
         if(checkbox.is(':checked')) {
-            sliders.slider('disable');
+            sliders.each(function() {
+                max = $(this).slider('option', 'max');
+                $(this).slider('value', max);
+                $(this).siblings('input').val(max);
+                $(this).siblings('.output').html(imperial(max));
+            }).slider('disable');
             faders.fadeOut('fast');
-            w.data('old', w.val()); w.val(0);
-            h.data('old', h.val()); h.val(300);
         } else {
             sliders.slider('enable');
-            w.val(w.data('old'));
-            h.val(h.data('old'));
             faders.fadeIn('fast');
         }
     });
-    $('.window .width [value=0]').each(function() {
-        $(this).parents('tr').find('.curtain-wall :checkbox').attr('checked', true).change();
-    });
+    $('.curtain :checkbox:checked').change();
 
     $('#id_zone').attr('disabled', true).after(
         '<input type="hidden" name="zone" value="'+$('#id_zone').val()+'">'
@@ -69,3 +83,9 @@ $(function() {
         '<button type="button" id="choose_zone">Choose</button>'
     );
 });
+
+var imperial = function(val) {
+    ft = ~~(val / 12);
+    inch = val - (ft * 12);
+    return ft + "'" + inch + '"';
+};

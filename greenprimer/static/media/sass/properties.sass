@@ -24,6 +24,9 @@ tr.labels td
 table.formset td
   vertical-align: middle
 
+  &.id
+    display: none
+
 td.delete
   text-align: center
 
@@ -50,7 +53,7 @@ span.unit
   display: inline-block
   margin-left: .3em
 
-.curtain-wall label
+.curtain label
   display: block
   margin-top: -1em
 
@@ -75,13 +78,16 @@ span.unit
     &:active
       border: 1px solid #6d6
 
-.stories td:last-child
-  text-align: center
-.stories td
-  padding-top: 1em
-.stories .ui-slider
-  width: 12em
-.stories .output
+.stories, .story-height
+  td:last-child
+    text-align: center
+  td
+    padding-top: 1em
+
+  .ui-slider
+    width: 12em
+
+.output
   width: 3em
   background: #eee
   border: 1px solid #ccc

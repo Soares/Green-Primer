@@ -108,7 +108,12 @@ Wall.prototype.breaksEnvelope = function() {
     for(var i = 0; i < walls.all.length; i++) {
         if(walls.all[i].id === this.id) continue;
         if(!walls.all[i].outer) continue;
+        var intersection = this.segment.intersection(walls.all[i].segment);
+        if(!intersection) continue;
+        if(this.source.point.equals(intersection)) continue;
+        if(this.dest.point.equals(intersection)) continue;
         if(this.segment.intersection(walls.all[i].segment)) return true;
+        continue;
     }
     return false;
 };

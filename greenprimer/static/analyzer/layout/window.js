@@ -3,8 +3,9 @@ var windows = (function(self) {
 })(windows || {});
 
 var Window = function(wall, offset, type, id) {
+    this.curtain = global.windows[type].curtain;
     this._offset = offset;
-    this._length = (global.windows[type].width / 100) * gp.SCALE;
+    this._length = (global.windows[type].width / 48) * gp.SCALE;
     this.line = gp.svg.path('M0 0L1 1');
     this.$ = $(this.line.node);
     this.type = type;
@@ -43,12 +44,10 @@ Window.load = function(wall, save) {
 };
 
 Window.prototype.length = function() {
-    if(this._length > 0) return this._length;
-    return this.wall.length();
+    return this.curtain? this.wall.length() : this._length;
 };
 Window.prototype.offset = function() {
-    if(this._length > 0) return this._offset;
-    return this.length() / 2;
+    return this.curtain? this.length() / 2 : this._offset;
 };
 
 Window.prototype.start = function() {

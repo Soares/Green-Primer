@@ -7,7 +7,7 @@ class LayoutForm(forms.ModelForm):
 
     class Meta:
         model = Layout
-        exclude = 'outline', 'user', 'perimiter', 'area'
+        exclude = 'outline', 'user', 'perimiter', 'floor_area'
 
     def create(self, request):
         layout = self.save(commit=False)
@@ -19,7 +19,7 @@ class LayoutForm(forms.ModelForm):
 class UpdateLayoutForm(forms.ModelForm):
     class Meta:
         model = Layout
-        exclude = 'outline', 'user'
+        exclude = 'outline', 'user', 'perimiter', 'floor_area'
 
 
 class MultiFormSet(BaseModelFormSet):
@@ -38,12 +38,9 @@ class MultiFormSet(BaseModelFormSet):
 
 
 class WindowForm(forms.ModelForm):
-    label = forms.CharField(max_length=50, required=False)
-    curtain = forms.BooleanField(label='Curtain Wall', required=False)
-
     class Meta:
         model = Window
-        exclude = 'layout', 'id', 'count'
+        exclude = 'layout', 'id'
 
     def create(self, layout):
         window = self.save(commit=False)
@@ -59,7 +56,7 @@ class DoorForm(forms.ModelForm):
 
     class Meta:
         model = Door
-        exclude = 'layout', 'id', 'count'
+        exclude = 'layout', 'id'
 
     def create(self, layout):
         window = self.save(commit=False)
