@@ -22,6 +22,7 @@ class Requirements(models.Model):
 
     class Meta:
         unique_together = 'standard', 'zone'
+        verbose_name_plural = 'requirement sets'
 
     def __unicode__(self):
         return 'Zone %d requirements for %s' % (self.zone, self.standard)
@@ -44,6 +45,9 @@ class Component(models.Model):
     cost = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length=100)
 
+    class Meta:
+        abstract = True
+
     def __unicode__(self):
         return self.description
 
@@ -54,6 +58,13 @@ class WallInsulation(Component):
     class Meta:
         ordering = 'r',
 
+    def __unicode__(self):
+        if self.cost < 1:
+            price = u'%02d\u00A2' % (self.cost * 100)
+        else:
+            price = '$%.2f' % self.cost
+        return 'r%.2f %s (%s)' % (self.r, self.description, price)
+
 
 class RoofInsulation(Component):
     r = models.FloatField()
@@ -61,12 +72,31 @@ class RoofInsulation(Component):
     class Meta:
         ordering = 'r',
 
+    def __unicode__(self):
+        if self.cost < 1:
+            price = u'%02d\u00A2' % (self.cost * 100)
+        else:
+            price = '$%.2f' % self.cost
+        return 'r%.2f %s (%s)' % (self.r, self.description, price)
 
-class Window(Component):
+
+class Window(models.Model):
+    description = models.CharField(max_length=150)
+    cost = models.DecimalField(max_digits=5, decimal_places=2)
     u = models.FloatField()
     shgc = models.FloatField()
     vt = models.FloatField()
-    max_size = models.FloatField()
+    operability = models.PositiveSmallIntegerField(choices=(
+        (0, 'Fixed'),
+        (1, 'Operable'),
+        (2, 'Curtain Wall'),
+    ))
+    coatings = models.CharField(max_length=50)
+    frame = models.CharField(max_length=50)
+    film = models.CharField(max_length=50)
 
     class Meta:
         ordering = 'u', 'shgc', 'vt'
+
+    def __unicode__(self):
+        return '%s, %s, %s, %s ($%.2f)' % (self.get_operability_display(), self.description, self.frame, self.film, self.cost)
