@@ -33,9 +33,10 @@ $(document).ready(function() {
   });
 
   var push = function(contents, success) {
-    console.log(contents, contents instanceof Array, typeof contents);
     $.post(global.save_url, {
-      'data': JSON.stringify(contents),
+      'data': JSON.stringify(contents.data),
+      'windows': JSON.stringify(contents.windows),
+      'doors': JSON.stringify(contents.doors),
     }, success, 'json');
   };
 });

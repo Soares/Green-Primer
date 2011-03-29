@@ -14,8 +14,11 @@ $(document).ready(function() {
   });
   $('#layers a').click(function(e) {
     var href = $(this).attr('href');
+    var contents = layout.save();
     $.post(global.save_url, {
-      'data': JSON.stringify(layout.save()),
+      'data': JSON.stringify(contents.data),
+      'windows': JSON.stringify(contents.windows),
+      'doors': JSON.stringify(contents.doors),
     }, function() {
       window.location.replace(href);
     }, 'json');

@@ -60,7 +60,20 @@ var layout = (function(self) {
                 out.push(walls.all[i].save());
             }
         }
-        return out;
+        if(global.outer) return {'data': out, 'doors': {}, 'windows': {}};
+        var dout = {}, wout = {};
+        for(var i in global.doors) dout[i] = 0;
+        for(var i in global.windows) wout[i] = {count: 0, length: 0}
+        $.each(doors.all, function(i, d) { dout[d.type]++; });
+        $.each(windows.all, function(i, w) {
+            wout[w.type].count++;
+            wout[w.type].length += (w.length() / gp.SCALE) * 48;
+        });
+        return {
+            'data': out,
+            'doors': dout,
+            'windows': wout,
+        };
     };
     self.load = function(walls) {
         for(var i = 0; i < walls.length; i++) Wall.load(walls[i]);

@@ -114,6 +114,7 @@ def outersave(request, layout):
 @commit_on_success
 @login_required
 def innersave(request, layout, story):
+    import json
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
     floor = get_object_or_404(Floor, layout=layout, story=story)
     if request.method != 'POST':
@@ -121,6 +122,28 @@ def innersave(request, layout, story):
     data = request.POST.get('data', '')
     floor.json = data;
     floor.save()
+
+    windows = json.loads(request.POST.get('windows', '{}'))
+    for (wpk, info) in windows.items():
+        window = get_object_or_404(layout.windows, pk=wpk)
+        counter, _ = window.counts.get_or_create(floor=floor)
+        try:
+            counter.count = int(info['count'])
+            counter.width = float(info['length'])
+        except ValueError:
+            raise Http404
+        counter.save()
+
+    doors = json.loads(request.POST.get('doors', '{}'))
+    for (dpk, count) in doors.items():
+        door = get_object_or_404(layout.doors, pk=dpk)
+        counter, _ = door.counts.get_or_create(floor=floor)
+        try:
+            counter.count = int(count)
+        except ValueError:
+            raise Http404
+        counter.save()
+
     return HttpResponse('true', mimetype='application/json')
 
 @login_required

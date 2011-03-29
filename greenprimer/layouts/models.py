@@ -131,8 +131,11 @@ class Floor(models.Model):
 class WindowCount(models.Model):
     floor = models.ForeignKey(Floor)
     window = models.ForeignKey(Window, related_name='counts')
-    count = models.PositiveSmallIntegerField()
+    count = models.PositiveSmallIntegerField(default=0)
     width = models.FloatField(default=0)
+
+    class Meta:
+        unique_together = 'floor', 'window'
 
     def __unicode__(self):
         return '%d %ss on %s' % (self.count, self.window, self.floor)
@@ -141,7 +144,10 @@ class WindowCount(models.Model):
 class DoorCount(models.Model):
     floor = models.ForeignKey(Floor)
     door = models.ForeignKey(Door, related_name='counts')
-    count = models.PositiveSmallIntegerField()
+    count = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        unique_together = 'floor', 'door'
 
     def __unicode__(self):
         return '%d %ss on %s' % (self.count, self.door, self.floor)
