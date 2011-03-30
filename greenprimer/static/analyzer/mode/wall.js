@@ -33,7 +33,6 @@ modes.wall = (function(self) {
             }
             wall.graduate();
             var valid = wall.validate();
-            console.log('valid?', valid);
             if(!valid) {
                 wall = wall.remove();
                 return false;
