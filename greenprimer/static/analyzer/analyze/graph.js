@@ -84,7 +84,7 @@ var graph = (function(self) {
             if(counts[i] === biggest) continue;
             for(var j in groups[i]) disjointed.push(map[j].disjoin());
         }
-        warnings.warn(warnings.DISJOINT, groups.length-1);
+        if(groups.length > 1) warnings.warn(warnings.DISJOINT, groups.length-1);
     };
 
     $(function() {
