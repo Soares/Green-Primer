@@ -19,6 +19,7 @@ $(document).ready(function() {
       'data': JSON.stringify(contents.data),
       'windows': JSON.stringify(contents.windows),
       'doors': JSON.stringify(contents.doors),
+      'perimiter': JSON.stringify(contents.perimiter),
     }, function() {
       window.location.replace(href);
     }, 'json');

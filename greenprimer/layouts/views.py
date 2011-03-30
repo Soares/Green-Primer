@@ -107,7 +107,13 @@ def outersave(request, layout):
     if request.method != 'POST':
         raise Http404
     data = request.POST.get('data', '')
-    layout.outline = data;
+    perimiter = request.POST.get('perimiter', '')
+    try:
+        perimiter = float(perimiter)
+    except ValueError:
+        raise Http404
+    layout.outline = data
+    layout.perimiter = perimiter
     layout.save()
     return HttpResponse('true', mimetype='application/json')
 

@@ -55,12 +55,14 @@ var layout = (function(self) {
     };
     self.save = function() {
         var out = [];
+        var length = 0;
         for(var i = 0; i < walls.all.length; i++) {
             if(walls.all[i].isReal()) {
+                length += walls.all[i].length();
                 out.push(walls.all[i].save());
             }
         }
-        if(global.outer) return {'data': out, 'doors': {}, 'windows': {}};
+        if(global.outer) return {'data': out, 'doors': {}, 'windows': {}, 'perimiter': length};
         var dout = {}, wout = {};
         for(var i in global.doors) dout[i] = 0;
         for(var i in global.windows) wout[i] = {count: 0, length: 0}
@@ -73,6 +75,7 @@ var layout = (function(self) {
             'data': out,
             'doors': dout,
             'windows': wout,
+            'perimiter': null,
         };
     };
     self.load = function(walls) {
