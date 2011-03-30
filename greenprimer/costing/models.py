@@ -33,9 +33,16 @@ class Requirements(models.Model):
     def roof(self):
         return RoofInsulation.objects.filter(r__gte=self.roof_r).first()
 
-    def window(self, size):
+    def window(self, size, curtain):
+        # Yay! Magic numbers!
+        if curtain:
+            operability = 2
+        elif size < 24:
+            operability = 0
+        else:
+            operability = 1
         return Window.objects.filter(
-                max_size__gte=size,
+                operability=operability,
                 u__lte=self.window_u,
                 shgc__lte=self.window_shgc,
                 vt__lte=self.window_vt).first()

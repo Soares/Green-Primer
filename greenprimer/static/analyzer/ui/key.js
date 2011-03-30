@@ -30,19 +30,19 @@ $(document).ready(function() {
     });
   });
   data.click(function() {
+    $('#dialog .red').removeClass('red');
+    $('#dialog .content').html('Loading...');
     $('#dialog, #overlay').show();
-    $('#accordion').accordion('resize');
+    $.get('/costing/statistics/' + global.layout_pk + '/', function(data) {
+      $('#statistics').next('.content').html(data);
+      $('#accordion').accordion('resize');
+    });
   });
   $('#exit').click(function() {
     window.location.replace('/home/');
   });
 
   var push = function(contents, success) {
-    $.post(global.save_url, {
-      'data': JSON.stringify(contents.data),
-      'windows': JSON.stringify(contents.windows),
-      'doors': JSON.stringify(contents.doors),
-      'perimiter': JSON.stringify(contents.perimiter),
-    }, success, 'json');
+    $.post(global.save_url, gp.prepare(contents), success, 'json');
   };
 });

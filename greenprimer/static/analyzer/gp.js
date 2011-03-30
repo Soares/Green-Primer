@@ -9,7 +9,7 @@ var gp = (function(self) {
 
         self.WIDTH = self.layout.outerWidth();
         self.HEIGHT = self.layout.outerHeight();
-        self.SCALE = 40;
+        self.SCALE = 20;
 
         self.canvas.data('width', self.WIDTH);
         self.canvas.data('height', self.HEIGHT);
@@ -21,6 +21,18 @@ var gp = (function(self) {
 
         self.body = $('body');
     });
+
+    self.prepare = function(contents) {
+        var data = {'data': JSON.stringify(contents.data)};
+        if(global.outer) {
+          data.perimiter = JSON.stringify(contents.perimiter);
+          data.area = JSON.stringify(contents.area);
+        } else {
+          data.windows = JSON.stringify(contents.windows);
+          data.doors = JSON.stringify(contents.doors);
+        }
+        return data;
+    };
 
     return self;
 })(gp || {});

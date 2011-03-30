@@ -58,24 +58,29 @@ var layout = (function(self) {
         var length = 0;
         for(var i = 0; i < walls.all.length; i++) {
             if(walls.all[i].isReal()) {
-                length += walls.all[i].length();
+                length += (walls.all[i].length() / gp.SCALE);
                 out.push(walls.all[i].save());
             }
         }
-        if(global.outer) return {'data': out, 'doors': {}, 'windows': {}, 'perimiter': length};
+        if(global.outer) return {
+            'data': out,
+            'perimiter': length,
+            'area': area.internal(),
+        };
         var dout = {}, wout = {};
         for(var i in global.doors) dout[i] = 0;
         for(var i in global.windows) wout[i] = {count: 0, length: 0}
-        $.each(doors.all, function(i, d) { dout[d.type]++; });
+        $.each(doors.all, function(i, d) {
+            if(d.wall.outer) dout[d.type]++;
+        });
         $.each(windows.all, function(i, w) {
             wout[w.type].count++;
-            wout[w.type].length += (w.length() / gp.SCALE) * 48;
+            wout[w.type].length += (w.length() / gp.SCALE);
         });
         return {
             'data': out,
             'doors': dout,
             'windows': wout,
-            'perimiter': null,
         };
     };
     self.load = function(walls) {

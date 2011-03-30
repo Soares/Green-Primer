@@ -1,6 +1,12 @@
 (#statistics
-  (.line "{layout}, ${layout.budget}, {layout.square_feet} ft²")
-  (.line "{layout.height} ft high, {layout.perimiter} ft perimiter")
-  (.line "{layout.wall_area} ft² of wall")
-  (.line "{layout.window_area} ft² of window")
+  (.line "{layout}, ${layout.budget}, {layout.square_feet|floatformat} ft²")
+  (.line "{layout.height|floatformat} ft high, {layout.perimiter|floatformat} ft perimiter")
+  (.line "{layout.window_area|floatformat} ft² of window")
+  {%for window in layout.windows.all~
+    (.line.tab "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{window.area|floatformat} ft² of {window|lower} windows")}
+  (.line "{layout.door_area|floatformat} ft² of door")
+  {%for door in layout.doors.all~
+    (.line.tab "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{door.area|floatformat} ft² of {door|lower} doors")}
+  (.line "{layout.wall_area|floatformat} ft² of wall")
+  (.line "{layout.floor_area|floatformat} ft² of floor")
   (.line "Climate Zone {layout.zone}"))

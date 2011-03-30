@@ -1,5 +1,6 @@
 var global = {};
 global.save_url = '{{ save }}';
+global.layout_pk = '{{ layout.pk }}';
 global.outer = {% if floor %}false{% else %}true{% endif %};
 global.inner = !global.outer;
 

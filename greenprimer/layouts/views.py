@@ -108,12 +108,15 @@ def outersave(request, layout):
         raise Http404
     data = request.POST.get('data', '')
     perimiter = request.POST.get('perimiter', '')
+    area = request.POST.get('area', '')
     try:
         perimiter = float(perimiter)
+        area = float(area)
     except ValueError:
         raise Http404
     layout.outline = data
     layout.perimiter = perimiter
+    layout.floor_area = area
     layout.save()
     return HttpResponse('true', mimetype='application/json')
 

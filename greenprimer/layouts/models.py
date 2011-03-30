@@ -28,7 +28,7 @@ class Layout(models.Model):
 
     @property
     def square_feet(self):
-        return self.area * self.stories
+        return self.floor_area * self.stories
 
     @property
     def height(self):
@@ -48,7 +48,7 @@ class Layout(models.Model):
 
     @property
     def wall_area(self):
-        return self.side_area - self.window_area
+        return self.side_area - self.window_area - self.door_area
 
     def __unicode__(self):
         return self.name
@@ -57,14 +57,48 @@ class Layout(models.Model):
     def get_absolute_url(self):
         return 'layouts.views.outline', [self.pk]
 
-    def cost(self, standard):
+    #######################################################
+    # Standard Compliance
+    
+    def wall_insulation(self, standard):
         from costing import models as costing
         requirements = costing.Requirements.get(standard=standard, zone=self.zone)
-        wall = requirements.wall().cost * self.side_area
-        roof = requirements.roof().cost * self.floor_area
-        windows = [requirements.window(w.width) * w.area for w in self.windows.all()]
-        return wall + roof + sum(windows)
+        return requirements.wall()
 
+    def roof_insulation(self, standard):
+        from costing import models as costing
+        requirements = costing.Requirements.get(standard=standard, zone=self.zone)
+        return requirements.roof()
+
+    def windows_for(self, standard):
+        from costing import models as costing
+        requirements = costing.Requirements.get(standard=standard, zone=self.zone)
+        return dict((w, requirements.window(w.width, w.curtain)) for w in self.windows.all())
+
+    def cost_for(self, standard):
+        wall = self.wall_insulation(standard).cost * self.wall_area
+        roof = self.roof_insulation(standard).cost * self.floor_area
+        windows = sum(w.area * c.cost for (w, c) in self.windows_for(standard).items())
+        return wall + roof + windows
+
+    #######################################################
+    # Budget Compliance
+    
+    @property
+    def wall(self):
+        pass
+
+    @property
+    def roof(self):
+        pass
+
+    @property
+    def windows(self):
+        pass
+
+    @property
+    def price(self):
+        pass
 
 
 class Window(models.Model):
@@ -83,7 +117,11 @@ class Window(models.Model):
 
     @property
     def area(self):
-        return self.width * self.height * self.count
+        if self.curtain:
+            width = sum(c.width for c in self.counts.all())
+        else:
+            width = self.width
+        return (width / 12) * (self.height / 12) * self.count
 
     def __unicode__(self):
         return self.label
@@ -100,8 +138,7 @@ class Door(models.Model):
 
     @property
     def area(self):
-        width = sum(c.width for c in self.counts.all()) if self.curtain else self.width
-        return width * self.layout.story_height * self.count
+        return (self.width / 12) * self.layout.story_height * self.count
 
     class Meta:
         ordering = 'id',

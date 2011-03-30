@@ -25,6 +25,10 @@ urlpatterns += patterns('layouts.views',
 
 urlpatterns += patterns('costing.views',
     (r'^costing/statistics/(?P<layout>\d+)/$', 'statistics'),
+    (r'^costing/materials/(?P<layout>\d+)/$', 'materials'),
+    (r'^costing/materials/(?P<layout>\d+)/leftover/$', 'leftover'),
+    (r'^costing/materials/(?P<layout>\d+)/(?P<year>\d{4})/$', 'standard'),
+    (r'^costing/materials/(?P<layout>\d+)/(?P<year>\d{4})/diff/$', 'diff'),
 )
 
 urlpatterns += patterns('users.views',

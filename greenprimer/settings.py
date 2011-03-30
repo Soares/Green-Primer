@@ -258,6 +258,8 @@ MEDIA_BUNDLES = (
         'analyzer/mode/move.js',
 
         'analyzer/mode/door.js',
+
+        'analyzer/analyze/area.js',
     ),
     ('floor.js',
         'analyzer/layout/door.js',
