@@ -1,0 +1,6 @@
+(#statistics
+  (.line "{layout}, ${layout.budget}, {layout.square_feet} ft²")
+  (.line "{layout.height} ft high, {layout.perimiter} ft perimiter")
+  (.line "{layout.wall_area} ft² of wall")
+  (.line "{layout.window_area} ft² of window")
+  (.line "Climate Zone {layout.zone}"))

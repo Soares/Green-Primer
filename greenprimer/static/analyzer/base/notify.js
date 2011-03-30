@@ -24,6 +24,7 @@ var notify = (function(self) {
     $(function() {
         var dia = $('#dialog, #overlay');
         $('#dialog .x').click(function() { dia.hide(); });
+        $('#accordion').accordion();
     });
 
     return self;

@@ -23,6 +23,10 @@ urlpatterns += patterns('layouts.views',
     (r'^layouts/js/(?P<layout>\d+)/(?P<story>\d+)/$', 'innerjs'),
 )
 
+urlpatterns += patterns('costing.views',
+    (r'^costing/statistics/(?P<layout>\d+)/$', 'statistics'),
+)
+
 urlpatterns += patterns('users.views',
     (r'^$', 'main'),
     (r'^home/$', 'home'),

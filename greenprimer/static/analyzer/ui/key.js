@@ -2,7 +2,8 @@ $(document).ready(function() {
   var view = $('#view'), key = $('#key'),
       dash = $('#dashboard'), tools = $('#toolbar');
       show = $('#show'), hide = $('#hide'),
-      save = $('#save'), load = $('#load');
+      save = $('#save'), load = $('#load'),
+      data = $('#data');
   show.click(function() {
     key.animate({'top': '0'});
     dash.animate({'bottom': '0'});
@@ -27,6 +28,10 @@ $(document).ready(function() {
     push(layout.save(), function() {
       window.location.replace('/home/');
     });
+  });
+  data.click(function() {
+    $('#dialog, #overlay').show();
+    $('#accordion').accordion('resize');
   });
   $('#exit').click(function() {
     window.location.replace('/home/');

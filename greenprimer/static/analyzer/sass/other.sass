@@ -119,3 +119,41 @@
 
     li.L3
       color: #C00
+
+#dialog
+  h3
+    background: $main
+    cursor: pointer
+    margin-bottom: 0
+
+    a
+      color: $darkest
+      text-decoration: none
+
+    &:hover
+      background: $light
+      a
+        color: $dark
+
+    &.ui-state-active
+      background: $darkest
+      a
+        color: $light
+
+  .ui-accordion-content
+    border: 1px solid $darkest
+
+  h3.red
+    background: $main-red
+    a
+      color: $darkest-red
+    &:hover
+      background: $light-red
+      a
+        color: $dark-red
+    &.ui-state-active
+      background: $darkest-red
+      a
+        color: $light-red
+  .ui-accordion-content.red
+    border-color: $darkest-red 

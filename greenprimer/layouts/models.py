@@ -48,7 +48,7 @@ class Layout(models.Model):
 
     @property
     def wall_area(self):
-        return self.side_area - self.door_area - self.window_area
+        return self.side_area - self.window_area
 
     def __unicode__(self):
         return self.name
