@@ -1,8 +1,8 @@
 var actions = (function(self) {
     var stack = [], pointer = -1, max = pointer;
     var undoButton = null, redoButton = null;
-    var disable = function(button) { button.attr('disabled', true); };
-    var enable = function(button) { button.removeAttr('disabled'); };
+    var disable = function(button) { button.attr('disabled', true).addClass('disabled'); };
+    var enable = function(button) { button.removeAttr('disabled').removeClass('disabled'); };
 
     self.redo = function(done) {
         if(pointer >= max) return;
