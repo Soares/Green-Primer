@@ -144,6 +144,7 @@ class Layout(models.Model):
         roof_money = roof_ratio * budget
         roof_price = roof_money / self.floor_area
         roof = RoofInsulation.objects.filter(cost__lte=roof_price).order_by('-r').first()
+        roof = roof or RoofInsulation.objects.filter(r__gt=0).order_by('cost')[0]
         roof_cost = float(roof.cost) * self.floor_area
         budget -= roof_cost
 
@@ -282,7 +283,7 @@ class WindowCount(models.Model):
 
     def duplicate(self, window):
         return WindowCount.objects.create(
-                floor=self.floor,
+                floor=window.layout.floors.get(story=self.floor.story),
                 window=window,
                 count=self.count,
                 width=self.width)
@@ -301,6 +302,6 @@ class DoorCount(models.Model):
 
     def duplicate(self, door):
         return DoorCount.objects.create(
-                floor=self.floor,
+                floor=door.layout.floors.get(story=self.floor.story),
                 door=door,
                 count=self.count)
