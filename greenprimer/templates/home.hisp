@@ -12,5 +12,5 @@
           {% for floor in layout.floors.all ~
             (a (:href '{% url "layouts.views.floor" layout.pk floor.story %}') {floor.story|add:1})})
         (td.link (a (:href '{% url "layouts.views.properties" layout.pk %}') properties))
-        {!(td.link (a (:href '{% url "layouts.views.duplicate" layout.pk %}') duplicate))!}
+        (td.link (a (:href '{% url "layouts.views.duplicate" layout.pk %}') duplicate))
         (td.link (a (:href '{% url "layouts.views.delete" layout.pk %}') delete)))})}

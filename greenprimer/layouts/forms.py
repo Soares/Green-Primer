@@ -40,11 +40,12 @@ class MultiFormSet(BaseModelFormSet):
 class WindowForm(forms.ModelForm):
     class Meta:
         model = Window
-        exclude = 'layout', 'id'
+        exclude = 'layout', 'id', 'index'
 
     def create(self, layout):
         window = self.save(commit=False)
         window.layout = layout
+        window.index = layout.windows.count()
         if window.label:
             window.save()
             return window
@@ -56,11 +57,13 @@ class DoorForm(forms.ModelForm):
 
     class Meta:
         model = Door
-        exclude = 'layout', 'id'
+        exclude = 'layout', 'id', 'index'
 
     def create(self, layout):
-        window = self.save(commit=False)
-        window.layout = layout
-        window.save()
-        return window
+        door = self.save(commit=False)
+        door.layout = layout
+        door.index = layout.doors.count()
+        if door.label:
+            door.save()
+            return door
 DoorFormSet = modelformset_factory(Door, DoorForm, extra=3, max_num=3, formset=MultiFormSet)

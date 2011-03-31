@@ -8,7 +8,7 @@ global.windows = {};
 var i = 0;
 {% for w in layout.windows.all %}
 {% if w.label %}
-global.windows['{{ w.pk }}'] = {
+global.windows['{{ w.index }}'] = {
     label: '{{ w.label }}',
     height: {{ w.height }},
     width: {{ w.width }},
@@ -22,7 +22,7 @@ global.doors = {};
 var i = 0;
 {% for d in layout.doors.all %}
 {% if d.label %}
-global.doors['{{ d.pk }}'] = {
+global.doors['{{ d.index }}'] = {
     label: '{{ d.label }}',
     width: {{ d.width }},
     index: i++

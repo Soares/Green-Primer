@@ -57,6 +57,24 @@ class Layout(models.Model):
     def get_absolute_url(self):
         return 'layouts.views.outline', [self.pk]
 
+    def duplicate(self):
+        new = Layout.objects.create(
+                user=self.user,
+                name=self.name + ' copy',
+                budget=self.budget,
+                zone=self.zone,
+                story_height=self.story_height,
+                outline=self.outline,
+                perimiter=self.perimiter,
+                floor_area=self.floor_area)
+        for floor in self.floors.all():
+            floor.duplicate(new)
+        for window in self.windows.all():
+            window.duplicate(new)
+        for door in self.doors.all():
+            door.duplicate(new)
+        return new
+
     #######################################################
     # Standard Compliance
     
@@ -146,6 +164,7 @@ class Layout(models.Model):
 
 
 class Window(models.Model):
+    index = models.PositiveSmallIntegerField(blank=True)
     layout = models.ForeignKey(Layout, related_name='windows')
     label = models.CharField(max_length=50)
     height = models.PositiveSmallIntegerField(default=36)
@@ -158,6 +177,7 @@ class Window(models.Model):
 
     class Meta:
         ordering = 'id',
+        unique_together = 'index', 'layout'
 
     @property
     def area(self):
@@ -178,8 +198,21 @@ class Window(models.Model):
     def __unicode__(self):
         return self.label
 
+    def duplicate(self, layout):
+        new = Window.objects.create(
+                layout=layout,
+                index=self.index,
+                label=self.label,
+                height=self.height,
+                width=self.width,
+                curtain=self.curtain)
+        for count in self.counts.all():
+            count.duplicate(new)
+        return new
+
 
 class Door(models.Model):
+    index = models.PositiveSmallIntegerField(blank=True)
     layout = models.ForeignKey(Layout, related_name='doors')
     label = models.CharField(max_length=50)
     width = models.PositiveSmallIntegerField(default=38)
@@ -194,9 +227,20 @@ class Door(models.Model):
 
     class Meta:
         ordering = 'id',
+        unique_together = 'index', 'layout'
 
     def __unicode__(self):
         return self.label
+
+    def duplicate(self, layout):
+        new = Door.objects.create(
+                index=self.index,
+                layout=layout,
+                label=self.label,
+                width=self.width)
+        for count in self.counts.all():
+            count.duplicate(new)
+        return new
 
 
 class Floor(models.Model):
@@ -216,6 +260,13 @@ class Floor(models.Model):
     def get_absolute_url(self):
         return 'layouts.views.floor', [self.layout.pk, self.story]
 
+    def duplicate(self, layout):
+        return Floor.objects.create(
+                layout=layout,
+                name=self.name,
+                story=self.story,
+                json=self.json)
+
 
 class WindowCount(models.Model):
     floor = models.ForeignKey(Floor)
@@ -229,6 +280,13 @@ class WindowCount(models.Model):
     def __unicode__(self):
         return '%d %ss on %s' % (self.count, self.window, self.floor)
 
+    def duplicate(self, window):
+        return WindowCount.objects.create(
+                floor=self.floor,
+                window=window,
+                count=self.count,
+                width=self.width)
+
 
 class DoorCount(models.Model):
     floor = models.ForeignKey(Floor)
@@ -240,3 +298,9 @@ class DoorCount(models.Model):
 
     def __unicode__(self):
         return '%d %ss on %s' % (self.count, self.door, self.floor)
+
+    def duplicate(self, door):
+        return DoorCount.objects.create(
+                floor=self.floor,
+                door=door,
+                count=self.count)

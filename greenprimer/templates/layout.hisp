@@ -51,12 +51,12 @@
     (select.options#window-types
       {%for window in layout.windows.all~
         {%if window.label~
-          (option (:value {window.pk}) {window})}})
+          (option (:value {window.index}) {window})}})
     (label Door Type)
     (select.options#door-types
       {%for door in layout.doors.all~
         {%if door.label~
-          (option (:value {door.pk}) {door})}}))
+          (option (:value {door.index}) {door})}}))
 
   (#dashboard
     (#bounds (.inner (#joystick)))

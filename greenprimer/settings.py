@@ -381,10 +381,10 @@ def INSTALLED_APPS():
     
     # Third-Party
     yield 'django_extensions'
-    yield 'indexer'
+    # yield 'indexer'
     yield 'mediagenerator'
     yield 'paging'
-    yield 'sentry'
+    # yield 'sentry'
     yield 'sentry.client'
     yield 'south'
     yield 'hisp'

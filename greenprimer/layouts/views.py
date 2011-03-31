@@ -67,17 +67,8 @@ def properties(request, layout):
 @login_required
 def duplicate(request, layout):
     layout = get_object_or_404(Layout, user=request.user, pk=layout)
-    if request.method == 'POST':
-        form = LayoutForm(request.POST, instance=layout)
-        if form.is_valid():
-            raise 'wrong'
-            new = form.save(commit=False)
-            new.id = None
-            new.save()
-            return redirect(new)
-    else:
-        form = LayoutForm(instance=layout, initial={'name': layout.name + ' (copy)'})
-    return render(request, 'duplicate.hisp', {'form': form})
+    new = layout.duplicate()
+    return redirect('layouts.views.properties', layout=new.pk)
 
 @commit_on_success
 @login_required
@@ -133,8 +124,8 @@ def innersave(request, layout, story):
     floor.save()
 
     windows = json.loads(request.POST.get('windows', '{}'))
-    for (wpk, info) in windows.items():
-        window = get_object_or_404(layout.windows, pk=wpk)
+    for (index, info) in windows.items():
+        window = get_object_or_404(layout.windows, index=index)
         counter, _ = window.counts.get_or_create(floor=floor)
         try:
             counter.count = int(info['count'])
@@ -144,8 +135,8 @@ def innersave(request, layout, story):
         counter.save()
 
     doors = json.loads(request.POST.get('doors', '{}'))
-    for (dpk, count) in doors.items():
-        door = get_object_or_404(layout.doors, pk=dpk)
+    for (index, count) in doors.items():
+        door = get_object_or_404(layout.doors, index=index)
         counter, _ = door.counts.get_or_create(floor=floor)
         try:
             counter.count = int(count)
