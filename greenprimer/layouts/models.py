@@ -60,45 +60,89 @@ class Layout(models.Model):
     #######################################################
     # Standard Compliance
     
-    def wall_insulation(self, standard):
+    def materials_for(self, standard):
         from costing import models as costing
-        requirements = costing.Requirements.get(standard=standard, zone=self.zone)
-        return requirements.wall()
+        requirements = costing.Requirements.objects.get(standard=standard, zone=self.zone)
+        roof = requirements.roof()
+        wall = requirements.wall()
+        windows = dict((w, requirements.window(w.operability)) for w in self.windows.all())
+        
+        roof_cost = float(roof.cost) * self.floor_area
+        wall_cost = float(wall.cost) * self.wall_area
+        window_costs = dict((w, float(c.cost) * w.area) for (w, c) in windows.items())
+        window_cost = sum(window_costs.values())
+        cost = roof_cost + wall_cost + window_cost
 
-    def roof_insulation(self, standard):
-        from costing import models as costing
-        requirements = costing.Requirements.get(standard=standard, zone=self.zone)
-        return requirements.roof()
-
-    def windows_for(self, standard):
-        from costing import models as costing
-        requirements = costing.Requirements.get(standard=standard, zone=self.zone)
-        return dict((w, requirements.window(w.width, w.curtain)) for w in self.windows.all())
-
-    def cost_for(self, standard):
-        wall = self.wall_insulation(standard).cost * self.wall_area
-        roof = self.roof_insulation(standard).cost * self.floor_area
-        windows = sum(w.area * c.cost for (w, c) in self.windows_for(standard).items())
-        return wall + roof + windows
+        leftover = float(self.budget) - cost
+        return {
+            'roof_insulation': roof,
+            'roof_insulation_cost': roof_cost,
+            'wall_insulation': wall,
+            'wall_insulation_cost': wall_cost,
+            'windows': windows,
+            'window_cost': window_cost,
+            'window_costs': window_costs,
+            'cost': cost,
+            'leftover': leftover,
+        }
 
     #######################################################
     # Budget Compliance
     
-    @property
-    def wall(self):
-        pass
+    def best_materials(self):
+        from costing.models import Standard, RoofInsulation, WallInsulation, Window
+        lec = Standard.objects.get(year=2007)
+        lec_data = self.materials_for(lec)
+        lec_cost = lec_data['cost']
+        budget = float(self.budget)
 
-    @property
-    def roof(self):
-        pass
+        windows = {}
+        window_costs = {}
+        for window in self.windows.all():
+            window_ratio = lec_data['window_costs'][window] / lec_cost
+            window_ratio += 0.025 # Window importance bump, compensates for first-loss
+            lec_cost -= lec_data['window_costs'][window]
+            window_money = window_ratio * budget
+            window_price = (window_money / window.area) + 3
+            options = Window.objects.filter(operability=window.operability).order_by('cost')
+            component = options.filter(cost__lte=window_price).order_by('u', 'shgc', 'vt').first()
+            component = component or options[0]
+            window_cost = float(component.cost) * window.area
+            budget -= window_cost
+            windows[window] = component
+            window_costs[window] = window_cost
 
-    @property
-    def windows(self):
-        pass
+        wall_ratio = lec_data['wall_insulation_cost'] / lec_cost
+        lec_cost -= lec_data['wall_insulation_cost']
+        wall_money = wall_ratio * budget
+        wall_price = wall_money / self.wall_area
+        wall = WallInsulation.objects.filter(cost__lte=wall_price).order_by('-r').first()
+        wall = wall or WallInsulation.objects.filter(r__gt=0).order_by('cost')[0]
+        wall_cost = float(wall.cost) * self.wall_area
+        budget -= wall_cost
 
-    @property
-    def price(self):
-        pass
+        roof_ratio = lec_data['roof_insulation_cost'] / lec_cost
+        lec_cost -= lec_data['roof_insulation_cost']
+        roof_money = roof_ratio * budget
+        roof_price = roof_money / self.floor_area
+        roof = RoofInsulation.objects.filter(cost__lte=roof_price).order_by('-r').first()
+        roof_cost = float(roof.cost) * self.floor_area
+        budget -= roof_cost
+
+        cost = roof_cost + wall_cost + sum(window_costs.values())
+
+        leftover = float(self.budget) - cost
+        return {
+            'roof_insulation': roof,
+            'roof_insulation_cost': roof_cost,
+            'wall_insulation': wall,
+            'wall_insulation_cost': wall_cost,
+            'windows': windows,
+            'window_cost': window_cost,
+            'window_costs': window_costs,
+            'cost': cost,
+            'leftover': leftover,
+        }
 
 
 class Window(models.Model):
@@ -122,6 +166,14 @@ class Window(models.Model):
         else:
             width = self.width
         return (width / 12) * (self.height / 12) * self.count
+
+    @property
+    def operability(self):
+        if self.curtain:
+            return 2
+        elif self.width < 24:
+            return 0
+        return 1
 
     def __unicode__(self):
         return self.label

@@ -29,15 +29,7 @@ $(document).ready(function() {
       window.location.replace('/home/');
     });
   });
-  data.click(function() {
-    $('#dialog .red').removeClass('red');
-    $('#dialog .content').html('Loading...');
-    $('#dialog, #overlay').show();
-    $.get('/costing/statistics/' + global.layout_pk + '/', function(data) {
-      $('#statistics').next('.content').html(data);
-      $('#accordion').accordion('resize');
-    });
-  });
+  data.click(function() { notify.go(); });
   $('#exit').click(function() {
     window.location.replace('/home/');
   });

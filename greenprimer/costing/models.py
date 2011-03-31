@@ -28,19 +28,12 @@ class Requirements(models.Model):
         return 'Zone %d requirements for %s' % (self.zone, self.standard)
 
     def wall(self):
-        return WallInsulation.objects.filter(r__gte=self.wall_r).first()
+        return WallInsulation.objects.filter(r__gte=self.wall_r).order_by('cost').first()
 
     def roof(self):
-        return RoofInsulation.objects.filter(r__gte=self.roof_r).first()
+        return RoofInsulation.objects.filter(r__gte=self.roof_r).order_by('cost').first()
 
-    def window(self, size, curtain):
-        # Yay! Magic numbers!
-        if curtain:
-            operability = 2
-        elif size < 24:
-            operability = 0
-        else:
-            operability = 1
+    def window(self, operability):
         return Window.objects.filter(
                 operability=operability,
                 u__lte=self.window_u,
@@ -70,7 +63,7 @@ class WallInsulation(Component):
             price = u'%02d\u00A2' % (self.cost * 100)
         else:
             price = '$%.2f' % self.cost
-        return 'r%.2f %s (%s)' % (self.r, self.description, price)
+        return 'r%.2f %s' % (self.r, self.description)
 
 
 class RoofInsulation(Component):
@@ -84,7 +77,7 @@ class RoofInsulation(Component):
             price = u'%02d\u00A2' % (self.cost * 100)
         else:
             price = '$%.2f' % self.cost
-        return 'r%.2f %s (%s)' % (self.r, self.description, price)
+        return 'r%.2f %s' % (self.r, self.description)
 
 
 class Window(models.Model):
@@ -106,4 +99,4 @@ class Window(models.Model):
         ordering = 'u', 'shgc', 'vt'
 
     def __unicode__(self):
-        return '%s, %s, %s, %s ($%.2f)' % (self.get_operability_display(), self.description, self.frame, self.film, self.cost)
+        return '%s, %s, %s, %s film' % (self.get_operability_display(), self.description, self.frame, self.film)

@@ -8,15 +8,15 @@
     (.title (.text "Data for {layout.name}") (button.x (:type button) x))
     (.message
       (#accordion
-        (h3#materials (a (:href #) "Materials (" (span.dollars) ")"))
+        (h3#materials (a (:href #) "Materials"))
         (.content "Loading...")
         (h3#statistics (a (:href #) "Statistics"))
         (.content "Loading...")
-        (h3#sLEC (a (:href #) "Low Energy Standard (" (span.dollars) ")" ))
+        (h3#s2009 (a (:href #) "Low Energy Standard" (span.dollars)))
         (.content "Loading...")
-        (h3#s2007 (a (:href #) "2007 Standard (" (span.dollars) ")" ))
+        (h3#s2007 (a (:href #) "2007 Standard" (span.dollars)))
         (.content "Loading...")
-        (h3#s2004 (a (:href #) "2004 Standard (" (span.dollars) ")" ))
+        (h3#s2004 (a (:href #) "2004 Standard" (span.dollars)))
         (.content "Loading..."))))
   (#errors.dialog
     (.title (.text "Warnings and Errors"))

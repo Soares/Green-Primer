@@ -1,0 +1,8 @@
+(.materials
+  (table
+    (tr (th "Total Cost: ") (td '$'{cost|floatformat:2}))
+    (tr (th "Leftover Money: ") (td '$'{leftover|floatformat:2}))
+    (tr (th "Wall Insulation: ") (td {wall_insulation}))
+    (tr (th "Roof Insulation: ") (td {roof_insulation}))
+    {%for window, details in windows.items~
+      (tr (th "{window|title} windows: ") (td{details}))}))
