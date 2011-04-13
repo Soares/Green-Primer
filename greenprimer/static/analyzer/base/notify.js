@@ -10,7 +10,7 @@ var notify = (function(self) {
             var excess = parseFloat(data.leftover);
             if(excess < 0) header.add(content).addClass('red');
 
-            var diff = excess - leftover;
+            var diff = excess;
             var sign = diff > 0? '+' : '';
             $('.dollars', header).html('($ ' + sign + diff.toFixed(2) + ')');
 
