@@ -4,7 +4,7 @@ $(function() {
       show = $('#show'), hide = $('#hide'),
       save = $('#save'), load = $('#load'),
       data = $('#data');
-  show.click(function() {
+  var showClick = function() {
     key.animate({'top': '0'});
     dash.animate({'bottom': '0'});
     tools.animate({'right': '0'}, { complete: function() {
@@ -12,23 +12,26 @@ $(function() {
       hide.show();
       show.hide();
     }});
-  });
+  };
+  show.click(showClick);
+
   $(document).keypress(function(e) {
-    console.log(e.keyCode);
     if(e.keyCode === 116) {
-      if(show.is(':visible')) show.click();
-      else if(hide.is(':visible')) hide.click();
+      if(show.is(':visible')) showClick();
+      else if(hide.is(':visible')) hideClick();
     }
   });
 
-  hide.click(function() {
+  var hideClick = function() {
     view.addClass('fullscreen');
     key.animate({'top': '-82px'});
     dash.animate({'bottom': '-150px'});
     tools.animate({'right': '-200px'});
     hide.hide();
     show.show();
-  });
+  };
+  hide.click(hideClick);
+
   save.click(function() {
     push(layout.save());
   });
