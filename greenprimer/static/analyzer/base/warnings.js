@@ -35,7 +35,7 @@ var warnings = (function(self) {
         ul.html('');
         for(var i = 0; i < messages.length; i++) {
             if(!counts[i]) continue;
-            li = '<li class="L'+levels[i]+'">'+messages[i]+' (' + counts[i] + ')</li>';
+            li = '<li class="L'+levels[i]+'"><p>'+messages[i]+' (' + counts[i] + ')</p></li>';
             ul.append(li);
         }
         dialog.show();
