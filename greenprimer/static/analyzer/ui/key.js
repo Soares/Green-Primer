@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
   var view = $('#view'), key = $('#key'),
       dash = $('#dashboard'), tools = $('#toolbar');
       show = $('#show'), hide = $('#hide'),
@@ -13,6 +13,14 @@ $(document).ready(function() {
       show.hide();
     }});
   });
+  $(document).keypress(function(e) {
+    console.log(e.keyCode);
+    if(e.keyCode === 116) {
+      if(show.is(':visible')) show.click();
+      else if(hide.is(':visible')) hide.click();
+    }
+  });
+
   hide.click(function() {
     view.addClass('fullscreen');
     key.animate({'top': '-82px'});

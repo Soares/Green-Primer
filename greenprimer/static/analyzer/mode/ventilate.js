@@ -1,6 +1,13 @@
 modes.ventilate = (function(self) {
     var canvas, context, interval;
 
+    $(function() {
+        $(document).keypress(function(e) {
+            if(e.keyCode != 118) return;
+            $('#internal-flow').click();
+        });
+    });
+
     self.button = '#internal-flow';
     self.dot = false;
 

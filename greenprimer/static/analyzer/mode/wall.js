@@ -77,5 +77,12 @@ modes.wall = (function(self) {
         if(wall) wall = wall.remove();
     };
 
+    $(function() {
+        $(document).keypress(function(e) {
+            if(e.keyCode != 101) return;
+            $('#wall').click();
+        });
+    });
+
     return mode(self);
 })({});
