@@ -40,7 +40,8 @@ the following steps on a unix system:
 
     with a secret key of your chosing and the database password for your database
     user.
-7. Go to the root greenprimer directory and run "manage.py runserver"
+7. run "manage.py syncdb" to sync the database.
+8. Go to the root greenprimer directory and run "manage.py runserver"
 
 Green primer will now be accessible at http://localhost:8000/.
 
@@ -48,6 +49,17 @@ Keep in mind that this is a test sever and should not be used for production.
 If you want to use Green Primer in production, please read djangoproject.com's
 documentation on deploying django projects. I would suggest an nginx or apache
 server working in tandem with a static file server.
+
+At this point the database will be empty. You can load the presentation database
+with the command "manage.py loaddata fixtures/presentation.json". In order to
+do this, you will need to remove some auto generated data that syncdb created, as
+follows:
+
+    $ python manage.py dbshell
+    $> delete from auth_permission;
+    $> delete from django_contenttype;
+    $> \q
+    $ python manage.py loaddata fixtures/presentation.json
 
 
 DEPENDENCIES
