@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>greenprimer.layouts.forms</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="greenprimer-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="greenprimer-module.html">Package&nbsp;greenprimer</a> ::
+        <a href="greenprimer.layouts-module.html">Package&nbsp;layouts</a> ::
+        Module&nbsp;forms
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="greenprimer.layouts.forms-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="greenprimer.layouts.forms-module.html">Module greenprimer.layouts.forms</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">These are all of the html forms found when creating and editing the properties</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">of layouts. These python forms handle generating and parsing their html</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">counterparts.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module greenprimer.layouts.forms=greenprimer.layouts.forms-module.html,Module greenprimer.users.forms=greenprimer.users.forms-module.html"><a title="greenprimer.layouts.forms
+greenprimer.users.forms" class="py-name" href="#" onclick="return doclink('link-0', 'forms', 'link-0');">forms</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name"><a title="greenprimer.layouts.forms
+greenprimer.users.forms" class="py-name" href="#" onclick="return doclink('link-1', 'forms', 'link-0');">forms</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module greenprimer.costing.models=greenprimer.costing.models-module.html,Module greenprimer.layouts.models=greenprimer.layouts.models-module.html"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-2', 'models', 'link-2');">models</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">modelformset_factory</tt><tt class="py-op">,</tt> <tt class="py-name">BaseModelFormSet</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Package greenprimer.layouts=greenprimer.layouts-module.html"><a title="greenprimer.layouts" class="py-name" href="#" onclick="return doclink('link-3', 'layouts', 'link-3');">layouts</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-4', 'models', 'link-2');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class greenprimer.layouts.models.Layout=greenprimer.layouts.models.Layout-class.html"><a title="greenprimer.layouts.models.Layout" class="py-name" href="#" onclick="return doclink('link-5', 'Layout', 'link-5');">Layout</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Class greenprimer.costing.models.Window=greenprimer.costing.models.Window-class.html,Class greenprimer.layouts.models.Window=greenprimer.layouts.models.Window-class.html"><a title="greenprimer.costing.models.Window
+greenprimer.layouts.models.Window" class="py-name" href="#" onclick="return doclink('link-6', 'Window', 'link-6');">Window</a></tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Class greenprimer.layouts.models.Door=greenprimer.layouts.models.Door-class.html"><a title="greenprimer.layouts.models.Door" class="py-name" href="#" onclick="return doclink('link-7', 'Door', 'link-7');">Door</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="LayoutForm"></a><div id="LayoutForm-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="LayoutForm-toggle" onclick="return toggle('LayoutForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.LayoutForm-class.html">LayoutForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LayoutForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LayoutForm-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt id="link-8" class="py-name" targets="Variable greenprimer.layouts.forms.LayoutForm.stories=greenprimer.layouts.forms.LayoutForm-class.html#stories,Method greenprimer.layouts.models.Layout.stories()=greenprimer.layouts.models.Layout-class.html#stories"><a title="greenprimer.layouts.forms.LayoutForm.stories
+greenprimer.layouts.models.Layout.stories" class="py-name" href="#" onclick="return doclink('link-8', 'stories', 'link-8');">stories</a></tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="greenprimer.layouts.forms
+greenprimer.users.forms" class="py-name" href="#" onclick="return doclink('link-9', 'forms', 'link-0');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">IntegerField</tt><tt class="py-op">(</tt><tt class="py-name">min_value</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">max_value</tt><tt class="py-op">=</tt><tt class="py-number">7</tt><tt class="py-op">,</tt> <tt class="py-name">initial</tt><tt class="py-op">=</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="LayoutForm.Meta"></a><div id="LayoutForm.Meta-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="LayoutForm.Meta-toggle" onclick="return toggle('LayoutForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.LayoutForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="LayoutForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LayoutForm.Meta-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt id="link-10" class="py-name" targets="Variable greenprimer.layouts.forms.DoorForm.Meta.model=greenprimer.layouts.forms.DoorForm.Meta-class.html#model,Variable greenprimer.layouts.forms.LayoutForm.Meta.model=greenprimer.layouts.forms.LayoutForm.Meta-class.html#model,Variable greenprimer.layouts.forms.UpdateLayoutForm.Meta.model=greenprimer.layouts.forms.UpdateLayoutForm.Meta-class.html#model,Variable greenprimer.layouts.forms.WindowForm.Meta.model=greenprimer.layouts.forms.WindowForm.Meta-class.html#model"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-10', 'model', 'link-10');">model</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="greenprimer.layouts.models.Layout" class="py-name" href="#" onclick="return doclink('link-11', 'Layout', 'link-5');">Layout</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt id="link-12" class="py-name" targets="Variable greenprimer.layouts.forms.DoorForm.Meta.exclude=greenprimer.layouts.forms.DoorForm.Meta-class.html#exclude,Variable greenprimer.layouts.forms.LayoutForm.Meta.exclude=greenprimer.layouts.forms.LayoutForm.Meta-class.html#exclude,Variable greenprimer.layouts.forms.UpdateLayoutForm.Meta.exclude=greenprimer.layouts.forms.UpdateLayoutForm.Meta-class.html#exclude,Variable greenprimer.layouts.forms.WindowForm.Meta.exclude=greenprimer.layouts.forms.WindowForm.Meta-class.html#exclude"><a title="greenprimer.layouts.forms.DoorForm.Meta.exclude
+greenprimer.layouts.forms.LayoutForm.Meta.exclude
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.exclude
+greenprimer.layouts.forms.WindowForm.Meta.exclude" class="py-name" href="#" onclick="return doclink('link-12', 'exclude', 'link-12');">exclude</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'outline'</tt><tt class="py-op">,</tt> <tt class="py-string">'user'</tt><tt class="py-op">,</tt> <tt class="py-string">'perimiter'</tt><tt class="py-op">,</tt> <tt class="py-string">'floor_area'</tt> </tt>
+</div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="LayoutForm.create"></a><div id="LayoutForm.create-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="LayoutForm.create-toggle" onclick="return toggle('LayoutForm.create');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.layouts.forms.LayoutForm-class.html#create">create</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">request</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LayoutForm.create-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LayoutForm.create-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt id="link-13" class="py-name" targets="Variable greenprimer.layouts.models.Door.layout=greenprimer.layouts.models.Door-class.html#layout,Variable greenprimer.layouts.models.Floor.layout=greenprimer.layouts.models.Floor-class.html#layout,Variable greenprimer.layouts.models.Window.layout=greenprimer.layouts.models.Window-class.html#layout"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-13', 'layout', 'link-13');">layout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method greenprimer.layouts.forms.MultiFormSet.save()=greenprimer.layouts.forms.MultiFormSet-class.html#save"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-14', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-name">commit</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt id="link-15" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-15', 'layout', 'link-13');">layout</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable greenprimer.layouts.models.Layout.user=greenprimer.layouts.models.Layout-class.html#user"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-16', 'user', 'link-16');">user</a></tt> <tt class="py-op">=</tt> <tt class="py-name">request</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-17', 'user', 'link-16');">user</a></tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt id="link-18" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-18', 'layout', 'link-13');">layout</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-19', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-20" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-20', 'layout', 'link-13');">layout</a></tt> </tt>
+</div></div><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="UpdateLayoutForm"></a><div id="UpdateLayoutForm-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="UpdateLayoutForm-toggle" onclick="return toggle('UpdateLayoutForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.UpdateLayoutForm-class.html">UpdateLayoutForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="UpdateLayoutForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="UpdateLayoutForm-expanded"><a name="UpdateLayoutForm.Meta"></a><div id="UpdateLayoutForm.Meta-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="UpdateLayoutForm.Meta-toggle" onclick="return toggle('UpdateLayoutForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.UpdateLayoutForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="UpdateLayoutForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="UpdateLayoutForm.Meta-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt id="link-21" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-21', 'model', 'link-10');">model</a></tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="greenprimer.layouts.models.Layout" class="py-name" href="#" onclick="return doclink('link-22', 'Layout', 'link-5');">Layout</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt id="link-23" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.exclude
+greenprimer.layouts.forms.LayoutForm.Meta.exclude
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.exclude
+greenprimer.layouts.forms.WindowForm.Meta.exclude" class="py-name" href="#" onclick="return doclink('link-23', 'exclude', 'link-12');">exclude</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'outline'</tt><tt class="py-op">,</tt> <tt class="py-string">'user'</tt><tt class="py-op">,</tt> <tt class="py-string">'perimiter'</tt><tt class="py-op">,</tt> <tt class="py-string">'floor_area'</tt> </tt>
+</div></div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="MultiFormSet"></a><div id="MultiFormSet-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="MultiFormSet-toggle" onclick="return toggle('MultiFormSet');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.MultiFormSet-class.html">MultiFormSet</a><tt class="py-op">(</tt><tt class="py-base-class">BaseModelFormSet</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MultiFormSet-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="MultiFormSet-expanded"><a name="MultiFormSet.create"></a><div id="MultiFormSet.create-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="MultiFormSet.create-toggle" onclick="return toggle('MultiFormSet.create');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.layouts.forms.MultiFormSet-class.html#create">create</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">layout</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MultiFormSet.create-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="MultiFormSet.create-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">form</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="greenprimer.layouts.forms
+greenprimer.users.forms" class="py-name" href="#" onclick="return doclink('link-24', 'forms', 'link-0');">forms</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">            <tt class="py-name">form</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method greenprimer.layouts.forms.DoorForm.create()=greenprimer.layouts.forms.DoorForm-class.html#create,Method greenprimer.layouts.forms.LayoutForm.create()=greenprimer.layouts.forms.LayoutForm-class.html#create,Method greenprimer.layouts.forms.MultiFormSet.create()=greenprimer.layouts.forms.MultiFormSet-class.html#create,Method greenprimer.layouts.forms.WindowForm.create()=greenprimer.layouts.forms.WindowForm-class.html#create"><a title="greenprimer.layouts.forms.DoorForm.create
+greenprimer.layouts.forms.LayoutForm.create
+greenprimer.layouts.forms.MultiFormSet.create
+greenprimer.layouts.forms.WindowForm.create" class="py-name" href="#" onclick="return doclink('link-25', 'create', 'link-25');">create</a></tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-26', 'layout', 'link-13');">layout</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="MultiFormSet.save"></a><div id="MultiFormSet.save-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="MultiFormSet.save-toggle" onclick="return toggle('MultiFormSet.save');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.layouts.forms.MultiFormSet-class.html#save">save</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">layout</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MultiFormSet.save-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="MultiFormSet.save-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">form</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="greenprimer.layouts.forms
+greenprimer.users.forms" class="py-name" href="#" onclick="return doclink('link-27', 'forms', 'link-0');">forms</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt id="link-28" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-28', 'model', 'link-10');">model</a></tt> <tt class="py-op">=</tt> <tt class="py-name">form</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-29', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-name">commit</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt id="link-30" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-30', 'model', 'link-10');">model</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-31', 'layout', 'link-13');">layout</a></tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-32', 'layout', 'link-13');">layout</a></tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-33" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-33', 'model', 'link-10');">model</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Variable greenprimer.layouts.forms.DoorForm.label=greenprimer.layouts.forms.DoorForm-class.html#label,Variable greenprimer.layouts.models.Door.label=greenprimer.layouts.models.Door-class.html#label,Variable greenprimer.layouts.models.Window.label=greenprimer.layouts.models.Window-class.html#label"><a title="greenprimer.layouts.forms.DoorForm.label
+greenprimer.layouts.models.Door.label
+greenprimer.layouts.models.Window.label" class="py-name" href="#" onclick="return doclink('link-34', 'label', 'link-34');">label</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt id="link-35" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-35', 'model', 'link-10');">model</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-36', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt id="link-37" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-37', 'model', 'link-10');">model</a></tt><tt class="py-op">.</tt><tt class="py-name">id</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                <tt id="link-38" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-38', 'model', 'link-10');">model</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Function greenprimer.layouts.views.delete()=greenprimer.layouts.views-module.html#delete"><a title="greenprimer.layouts.views.delete" class="py-name" href="#" onclick="return doclink('link-39', 'delete', 'link-39');">delete</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="WindowForm"></a><div id="WindowForm-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="WindowForm-toggle" onclick="return toggle('WindowForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.WindowForm-class.html">WindowForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WindowForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="WindowForm-expanded"><a name="WindowForm.Meta"></a><div id="WindowForm.Meta-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="WindowForm.Meta-toggle" onclick="return toggle('WindowForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.WindowForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="WindowForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="WindowForm.Meta-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt id="link-40" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-40', 'model', 'link-10');">model</a></tt> <tt class="py-op">=</tt> <tt id="link-41" class="py-name"><a title="greenprimer.costing.models.Window
+greenprimer.layouts.models.Window" class="py-name" href="#" onclick="return doclink('link-41', 'Window', 'link-6');">Window</a></tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt id="link-42" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.exclude
+greenprimer.layouts.forms.LayoutForm.Meta.exclude
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.exclude
+greenprimer.layouts.forms.WindowForm.Meta.exclude" class="py-name" href="#" onclick="return doclink('link-42', 'exclude', 'link-12');">exclude</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'layout'</tt><tt class="py-op">,</tt> <tt class="py-string">'id'</tt><tt class="py-op">,</tt> <tt class="py-string">'index'</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="WindowForm.create"></a><div id="WindowForm.create-def"><a name="L50"></a><tt class="py-lineno">50</tt> <a class="py-toggle" href="#" id="WindowForm.create-toggle" onclick="return toggle('WindowForm.create');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.layouts.forms.WindowForm-class.html#create">create</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">layout</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WindowForm.create-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="WindowForm.create-expanded"><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt id="link-43" class="py-name" targets="Method greenprimer.costing.models.Requirements.window()=greenprimer.costing.models.Requirements-class.html#window,Variable greenprimer.layouts.models.WindowCount.window=greenprimer.layouts.models.WindowCount-class.html#window"><a title="greenprimer.costing.models.Requirements.window
+greenprimer.layouts.models.WindowCount.window" class="py-name" href="#" onclick="return doclink('link-43', 'window', 'link-43');">window</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-44', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-name">commit</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt id="link-45" class="py-name"><a title="greenprimer.costing.models.Requirements.window
+greenprimer.layouts.models.WindowCount.window" class="py-name" href="#" onclick="return doclink('link-45', 'window', 'link-43');">window</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-46', 'layout', 'link-13');">layout</a></tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-47', 'layout', 'link-13');">layout</a></tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt id="link-48" class="py-name"><a title="greenprimer.costing.models.Requirements.window
+greenprimer.layouts.models.WindowCount.window" class="py-name" href="#" onclick="return doclink('link-48', 'window', 'link-43');">window</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Variable greenprimer.layouts.models.Door.index=greenprimer.layouts.models.Door-class.html#index,Variable greenprimer.layouts.models.Window.index=greenprimer.layouts.models.Window-class.html#index"><a title="greenprimer.layouts.models.Door.index
+greenprimer.layouts.models.Window.index" class="py-name" href="#" onclick="return doclink('link-49', 'index', 'link-49');">index</a></tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-50', 'layout', 'link-13');">layout</a></tt><tt class="py-op">.</tt><tt class="py-name">windows</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method greenprimer.layouts.models.Door.count()=greenprimer.layouts.models.Door-class.html#count,Variable greenprimer.layouts.models.DoorCount.count=greenprimer.layouts.models.DoorCount-class.html#count,Method greenprimer.layouts.models.Window.count()=greenprimer.layouts.models.Window-class.html#count,Variable greenprimer.layouts.models.WindowCount.count=greenprimer.layouts.models.WindowCount-class.html#count"><a title="greenprimer.layouts.models.Door.count
+greenprimer.layouts.models.DoorCount.count
+greenprimer.layouts.models.Window.count
+greenprimer.layouts.models.WindowCount.count" class="py-name" href="#" onclick="return doclink('link-51', 'count', 'link-51');">count</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-52" class="py-name"><a title="greenprimer.costing.models.Requirements.window
+greenprimer.layouts.models.WindowCount.window" class="py-name" href="#" onclick="return doclink('link-52', 'window', 'link-43');">window</a></tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.label
+greenprimer.layouts.models.Door.label
+greenprimer.layouts.models.Window.label" class="py-name" href="#" onclick="return doclink('link-53', 'label', 'link-34');">label</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">            <tt id="link-54" class="py-name"><a title="greenprimer.costing.models.Requirements.window
+greenprimer.layouts.models.WindowCount.window" class="py-name" href="#" onclick="return doclink('link-54', 'window', 'link-43');">window</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-55', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-56" class="py-name"><a title="greenprimer.costing.models.Requirements.window
+greenprimer.layouts.models.WindowCount.window" class="py-name" href="#" onclick="return doclink('link-56', 'window', 'link-43');">window</a></tt> </tt>
+</div></div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt id="link-57" class="py-name" targets="Variable greenprimer.layouts.forms.WindowFormSet=greenprimer.layouts.forms-module.html#WindowFormSet"><a title="greenprimer.layouts.forms.WindowFormSet" class="py-name" href="#" onclick="return doclink('link-57', 'WindowFormSet', 'link-57');">WindowFormSet</a></tt> <tt class="py-op">=</tt> <tt class="py-name">modelformset_factory</tt><tt class="py-op">(</tt><tt id="link-58" class="py-name"><a title="greenprimer.costing.models.Window
+greenprimer.layouts.models.Window" class="py-name" href="#" onclick="return doclink('link-58', 'Window', 'link-6');">Window</a></tt><tt class="py-op">,</tt> <tt id="link-59" class="py-name" targets="Class greenprimer.layouts.forms.WindowForm=greenprimer.layouts.forms.WindowForm-class.html"><a title="greenprimer.layouts.forms.WindowForm" class="py-name" href="#" onclick="return doclink('link-59', 'WindowForm', 'link-59');">WindowForm</a></tt><tt class="py-op">,</tt> <tt class="py-name">extra</tt><tt class="py-op">=</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">max_num</tt><tt class="py-op">=</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">formset</tt><tt class="py-op">=</tt><tt id="link-60" class="py-name" targets="Class greenprimer.layouts.forms.MultiFormSet=greenprimer.layouts.forms.MultiFormSet-class.html"><a title="greenprimer.layouts.forms.MultiFormSet" class="py-name" href="#" onclick="return doclink('link-60', 'MultiFormSet', 'link-60');">MultiFormSet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
+<a name="DoorForm"></a><div id="DoorForm-def"><a name="L60"></a><tt class="py-lineno">60</tt> <a class="py-toggle" href="#" id="DoorForm-toggle" onclick="return toggle('DoorForm');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.DoorForm-class.html">DoorForm</a><tt class="py-op">(</tt><tt class="py-base-class">forms</tt><tt class="py-op">.</tt><tt class="py-base-class">ModelForm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoorForm-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="DoorForm-expanded"><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt id="link-61" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.label
+greenprimer.layouts.models.Door.label
+greenprimer.layouts.models.Window.label" class="py-name" href="#" onclick="return doclink('link-61', 'label', 'link-34');">label</a></tt> <tt class="py-op">=</tt> <tt id="link-62" class="py-name"><a title="greenprimer.layouts.forms
+greenprimer.users.forms" class="py-name" href="#" onclick="return doclink('link-62', 'forms', 'link-0');">forms</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">50</tt><tt class="py-op">,</tt> <tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="DoorForm.Meta"></a><div id="DoorForm.Meta-def"><a name="L63"></a><tt class="py-lineno">63</tt> <a class="py-toggle" href="#" id="DoorForm.Meta-toggle" onclick="return toggle('DoorForm.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.layouts.forms.DoorForm.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="DoorForm.Meta-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DoorForm.Meta-expanded"><a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt id="link-63" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.model
+greenprimer.layouts.forms.LayoutForm.Meta.model
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.model
+greenprimer.layouts.forms.WindowForm.Meta.model" class="py-name" href="#" onclick="return doclink('link-63', 'model', 'link-10');">model</a></tt> <tt class="py-op">=</tt> <tt id="link-64" class="py-name"><a title="greenprimer.layouts.models.Door" class="py-name" href="#" onclick="return doclink('link-64', 'Door', 'link-7');">Door</a></tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt id="link-65" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.Meta.exclude
+greenprimer.layouts.forms.LayoutForm.Meta.exclude
+greenprimer.layouts.forms.UpdateLayoutForm.Meta.exclude
+greenprimer.layouts.forms.WindowForm.Meta.exclude" class="py-name" href="#" onclick="return doclink('link-65', 'exclude', 'link-12');">exclude</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'layout'</tt><tt class="py-op">,</tt> <tt class="py-string">'id'</tt><tt class="py-op">,</tt> <tt class="py-string">'index'</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="DoorForm.create"></a><div id="DoorForm.create-def"><a name="L67"></a><tt class="py-lineno">67</tt> <a class="py-toggle" href="#" id="DoorForm.create-toggle" onclick="return toggle('DoorForm.create');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.layouts.forms.DoorForm-class.html#create">create</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">layout</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DoorForm.create-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DoorForm.create-expanded"><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt id="link-66" class="py-name" targets="Variable greenprimer.layouts.models.DoorCount.door=greenprimer.layouts.models.DoorCount-class.html#door"><a title="greenprimer.layouts.models.DoorCount.door" class="py-name" href="#" onclick="return doclink('link-66', 'door', 'link-66');">door</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-67', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-name">commit</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt id="link-68" class="py-name"><a title="greenprimer.layouts.models.DoorCount.door" class="py-name" href="#" onclick="return doclink('link-68', 'door', 'link-66');">door</a></tt><tt class="py-op">.</tt><tt id="link-69" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-69', 'layout', 'link-13');">layout</a></tt> <tt class="py-op">=</tt> <tt id="link-70" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-70', 'layout', 'link-13');">layout</a></tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">        <tt id="link-71" class="py-name"><a title="greenprimer.layouts.models.DoorCount.door" class="py-name" href="#" onclick="return doclink('link-71', 'door', 'link-66');">door</a></tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="greenprimer.layouts.models.Door.index
+greenprimer.layouts.models.Window.index" class="py-name" href="#" onclick="return doclink('link-72', 'index', 'link-49');">index</a></tt> <tt class="py-op">=</tt> <tt id="link-73" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-73', 'layout', 'link-13');">layout</a></tt><tt class="py-op">.</tt><tt class="py-name">doors</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name"><a title="greenprimer.layouts.models.Door.count
+greenprimer.layouts.models.DoorCount.count
+greenprimer.layouts.models.Window.count
+greenprimer.layouts.models.WindowCount.count" class="py-name" href="#" onclick="return doclink('link-74', 'count', 'link-51');">count</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-75" class="py-name"><a title="greenprimer.layouts.models.DoorCount.door" class="py-name" href="#" onclick="return doclink('link-75', 'door', 'link-66');">door</a></tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="greenprimer.layouts.forms.DoorForm.label
+greenprimer.layouts.models.Door.label
+greenprimer.layouts.models.Window.label" class="py-name" href="#" onclick="return doclink('link-76', 'label', 'link-34');">label</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">            <tt id="link-77" class="py-name"><a title="greenprimer.layouts.models.DoorCount.door" class="py-name" href="#" onclick="return doclink('link-77', 'door', 'link-66');">door</a></tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet.save" class="py-name" href="#" onclick="return doclink('link-78', 'save', 'link-14');">save</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-79" class="py-name"><a title="greenprimer.layouts.models.DoorCount.door" class="py-name" href="#" onclick="return doclink('link-79', 'door', 'link-66');">door</a></tt> </tt>
+</div></div><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"><tt id="link-80" class="py-name" targets="Variable greenprimer.layouts.forms.DoorFormSet=greenprimer.layouts.forms-module.html#DoorFormSet"><a title="greenprimer.layouts.forms.DoorFormSet" class="py-name" href="#" onclick="return doclink('link-80', 'DoorFormSet', 'link-80');">DoorFormSet</a></tt> <tt class="py-op">=</tt> <tt class="py-name">modelformset_factory</tt><tt class="py-op">(</tt><tt id="link-81" class="py-name"><a title="greenprimer.layouts.models.Door" class="py-name" href="#" onclick="return doclink('link-81', 'Door', 'link-7');">Door</a></tt><tt class="py-op">,</tt> <tt id="link-82" class="py-name" targets="Class greenprimer.layouts.forms.DoorForm=greenprimer.layouts.forms.DoorForm-class.html"><a title="greenprimer.layouts.forms.DoorForm" class="py-name" href="#" onclick="return doclink('link-82', 'DoorForm', 'link-82');">DoorForm</a></tt><tt class="py-op">,</tt> <tt class="py-name">extra</tt><tt class="py-op">=</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">max_num</tt><tt class="py-op">=</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">formset</tt><tt class="py-op">=</tt><tt id="link-83" class="py-name"><a title="greenprimer.layouts.forms.MultiFormSet" class="py-name" href="#" onclick="return doclink('link-83', 'MultiFormSet', 'link-60');">MultiFormSet</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="greenprimer-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri May  6 14:03:11 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

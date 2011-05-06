@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>greenprimer.costing.views</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="greenprimer-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="greenprimer-module.html">Package&nbsp;greenprimer</a> ::
+        <a href="greenprimer.costing-module.html">Package&nbsp;costing</a> ::
+        Module&nbsp;views
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="greenprimer.costing.views-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="greenprimer.costing.views-module.html">Module greenprimer.costing.views</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">This module provides ajaxy responses to data requests.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">These are basically what gets called when the "data" button is pressed.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">contrib</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">.</tt><tt class="py-name">decorators</tt> <tt class="py-keyword">import</tt> <tt class="py-name">login_required</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">shortcuts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">get_object_or_404</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">http</tt> <tt class="py-keyword">import</tt> <tt class="py-name">HttpResponse</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">template</tt><tt class="py-op">.</tt><tt class="py-name">loader</tt> <tt class="py-keyword">import</tt> <tt class="py-name">render_to_string</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package greenprimer.costing=greenprimer.costing-module.html"><a title="greenprimer.costing" class="py-name" href="#" onclick="return doclink('link-0', 'costing', 'link-0');">costing</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module greenprimer.costing.models=greenprimer.costing.models-module.html,Module greenprimer.layouts.models=greenprimer.layouts.models-module.html"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-1', 'models', 'link-1');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class greenprimer.costing.models.Standard=greenprimer.costing.models.Standard-class.html"><a title="greenprimer.costing.models.Standard" class="py-name" href="#" onclick="return doclink('link-2', 'Standard', 'link-2');">Standard</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Package greenprimer.layouts=greenprimer.layouts-module.html"><a title="greenprimer.layouts" class="py-name" href="#" onclick="return doclink('link-3', 'layouts', 'link-3');">layouts</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-4', 'models', 'link-1');">models</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class greenprimer.layouts.models.Layout=greenprimer.layouts.models.Layout-class.html"><a title="greenprimer.layouts.models.Layout" class="py-name" href="#" onclick="return doclink('link-5', 'Layout', 'link-5');">Layout</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name" targets="Module greenprimer.utils=greenprimer.utils-module.html"><a title="greenprimer.utils" class="py-name" href="#" onclick="return doclink('link-6', 'utils', 'link-6');">utils</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Function greenprimer.utils.render()=greenprimer.utils-module.html#render"><a title="greenprimer.utils.render" class="py-name" href="#" onclick="return doclink('link-7', 'render', 'link-7');">render</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Variable greenprimer.layouts.models.Floor.json=greenprimer.layouts.models.Floor-class.html#json"><a title="greenprimer.layouts.models.Floor.json" class="py-name" href="#" onclick="return doclink('link-8', 'json', 'link-8');">json</a></tt> </tt>
+<a name="statistics"></a><div id="statistics-def"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">login_required</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="statistics-toggle" onclick="return toggle('statistics');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.views-module.html#statistics">statistics</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">layout</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="statistics-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="statistics-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable greenprimer.layouts.models.Door.layout=greenprimer.layouts.models.Door-class.html#layout,Variable greenprimer.layouts.models.Floor.layout=greenprimer.layouts.models.Floor-class.html#layout,Variable greenprimer.layouts.models.Window.layout=greenprimer.layouts.models.Window-class.html#layout"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-9', 'layout', 'link-9');">layout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="greenprimer.layouts.models.Layout" class="py-name" href="#" onclick="return doclink('link-10', 'Layout', 'link-5');">Layout</a></tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name" targets="Variable greenprimer.layouts.models.Layout.user=greenprimer.layouts.models.Layout-class.html#user"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-11', 'user', 'link-11');">user</a></tt><tt class="py-op">=</tt><tt class="py-name">request</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-12', 'user', 'link-11');">user</a></tt><tt class="py-op">,</tt> <tt class="py-name">pk</tt><tt class="py-op">=</tt><tt id="link-13" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-13', 'layout', 'link-9');">layout</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-14" class="py-name"><a title="greenprimer.utils.render" class="py-name" href="#" onclick="return doclink('link-14', 'render', 'link-7');">render</a></tt><tt class="py-op">(</tt><tt class="py-name">request</tt><tt class="py-op">,</tt> <tt class="py-string">'statistics.hisp'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'layout'</tt><tt class="py-op">:</tt> <tt id="link-15" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-15', 'layout', 'link-9');">layout</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="materials"></a><div id="materials-def"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">login_required</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="materials-toggle" onclick="return toggle('materials');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.views-module.html#materials">materials</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">layout</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="materials-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="materials-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt id="link-16" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-16', 'layout', 'link-9');">layout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="greenprimer.layouts.models.Layout" class="py-name" href="#" onclick="return doclink('link-17', 'Layout', 'link-5');">Layout</a></tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-18', 'user', 'link-11');">user</a></tt><tt class="py-op">=</tt><tt class="py-name">request</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-19', 'user', 'link-11');">user</a></tt><tt class="py-op">,</tt> <tt class="py-name">pk</tt><tt class="py-op">=</tt><tt id="link-20" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-20', 'layout', 'link-9');">layout</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-21', 'layout', 'link-9');">layout</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method greenprimer.layouts.models.Layout.best_materials()=greenprimer.layouts.models.Layout-class.html#best_materials"><a title="greenprimer.layouts.models.Layout.best_materials" class="py-name" href="#" onclick="return doclink('link-22', 'best_materials', 'link-22');">best_materials</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">HttpResponse</tt><tt class="py-op">(</tt><tt id="link-23" class="py-name"><a title="greenprimer.layouts.models.Floor.json" class="py-name" href="#" onclick="return doclink('link-23', 'json', 'link-8');">json</a></tt><tt class="py-op">.</tt><tt class="py-name">dumps</tt><tt class="py-op">(</tt><tt class="py-op">{</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-string">'html'</tt><tt class="py-op">:</tt> <tt class="py-name">render_to_string</tt><tt class="py-op">(</tt><tt class="py-string">'materials.hisp'</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-string">'leftover'</tt><tt class="py-op">:</tt> <tt class="py-string">'%.2f'</tt> <tt class="py-op">%</tt> <tt class="py-name">data</tt><tt class="py-op">[</tt><tt class="py-string">'leftover'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">mimetype</tt><tt class="py-op">=</tt><tt class="py-string">'text/plain'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="standard"></a><div id="standard-def"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">login_required</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="standard-toggle" onclick="return toggle('standard');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.views-module.html#standard">standard</a><tt class="py-op">(</tt><tt class="py-param">request</tt><tt class="py-op">,</tt> <tt class="py-param">layout</tt><tt class="py-op">,</tt> <tt class="py-param">year</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="standard-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="standard-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt id="link-24" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-24', 'layout', 'link-9');">layout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="greenprimer.layouts.models.Layout" class="py-name" href="#" onclick="return doclink('link-25', 'Layout', 'link-5');">Layout</a></tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-26', 'user', 'link-11');">user</a></tt><tt class="py-op">=</tt><tt class="py-name">request</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="greenprimer.layouts.models.Layout.user" class="py-name" href="#" onclick="return doclink('link-27', 'user', 'link-11');">user</a></tt><tt class="py-op">,</tt> <tt class="py-name">pk</tt><tt class="py-op">=</tt><tt id="link-28" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-28', 'layout', 'link-9');">layout</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt id="link-29" class="py-name" targets="Variable greenprimer.costing.models.Requirements.standard=greenprimer.costing.models.Requirements-class.html#standard,Function greenprimer.costing.views.standard()=greenprimer.costing.views-module.html#standard"><a title="greenprimer.costing.models.Requirements.standard
+greenprimer.costing.views.standard" class="py-name" href="#" onclick="return doclink('link-29', 'standard', 'link-29');">standard</a></tt> <tt class="py-op">=</tt> <tt class="py-name">get_object_or_404</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="greenprimer.costing.models.Standard" class="py-name" href="#" onclick="return doclink('link-30', 'Standard', 'link-2');">Standard</a></tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name" targets="Variable greenprimer.costing.models.Standard.year=greenprimer.costing.models.Standard-class.html#year"><a title="greenprimer.costing.models.Standard.year" class="py-name" href="#" onclick="return doclink('link-31', 'year', 'link-31');">year</a></tt><tt class="py-op">=</tt><tt id="link-32" class="py-name"><a title="greenprimer.costing.models.Standard.year" class="py-name" href="#" onclick="return doclink('link-32', 'year', 'link-31');">year</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name"><a title="greenprimer.layouts.models.Door.layout
+greenprimer.layouts.models.Floor.layout
+greenprimer.layouts.models.Window.layout" class="py-name" href="#" onclick="return doclink('link-33', 'layout', 'link-9');">layout</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method greenprimer.layouts.models.Layout.materials_for()=greenprimer.layouts.models.Layout-class.html#materials_for"><a title="greenprimer.layouts.models.Layout.materials_for" class="py-name" href="#" onclick="return doclink('link-34', 'materials_for', 'link-34');">materials_for</a></tt><tt class="py-op">(</tt><tt id="link-35" class="py-name"><a title="greenprimer.costing.models.Requirements.standard
+greenprimer.costing.views.standard" class="py-name" href="#" onclick="return doclink('link-35', 'standard', 'link-29');">standard</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">HttpResponse</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="greenprimer.layouts.models.Floor.json" class="py-name" href="#" onclick="return doclink('link-36', 'json', 'link-8');">json</a></tt><tt class="py-op">.</tt><tt class="py-name">dumps</tt><tt class="py-op">(</tt><tt class="py-op">{</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-string">'html'</tt><tt class="py-op">:</tt> <tt class="py-name">render_to_string</tt><tt class="py-op">(</tt><tt class="py-string">'materials.hisp'</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-string">'leftover'</tt><tt class="py-op">:</tt> <tt class="py-string">'%.2f'</tt> <tt class="py-op">%</tt> <tt class="py-name">data</tt><tt class="py-op">[</tt><tt class="py-string">'leftover'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">mimetype</tt><tt class="py-op">=</tt><tt class="py-string">'text/plain'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="greenprimer-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri May  6 14:03:11 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

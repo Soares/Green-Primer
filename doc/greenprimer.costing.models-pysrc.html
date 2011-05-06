@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>greenprimer.costing.models</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="greenprimer-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="greenprimer-module.html">Package&nbsp;greenprimer</a> ::
+        <a href="greenprimer.costing-module.html">Package&nbsp;costing</a> ::
+        Module&nbsp;models
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="greenprimer.costing.models-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="greenprimer.costing.models-module.html">Module greenprimer.costing.models</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">These are the database objects holding the ASHRAE and Reeds data that green</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">primer uses to do its material analysis.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">django</tt><tt class="py-op">.</tt><tt class="py-name">db</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module greenprimer.costing.models=greenprimer.costing.models-module.html,Module greenprimer.layouts.models=greenprimer.layouts.models-module.html"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-0', 'models', 'link-0');">models</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="Standard"></a><div id="Standard-def"><a name="L7"></a><tt class="py-lineno">  7</tt> <a class="py-toggle" href="#" id="Standard-toggle" onclick="return toggle('Standard');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Standard-class.html">Standard</a><tt class="py-op">(</tt><tt class="py-base-class">models</tt><tt class="py-op">.</tt><tt class="py-base-class">Model</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Standard-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Standard-expanded"><a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line">    <tt class="py-docstring">""" An ASHRAE energy standard """</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable greenprimer.costing.models.Standard.name=greenprimer.costing.models.Standard-class.html#name,Variable greenprimer.layouts.models.Floor.name=greenprimer.layouts.models.Floor-class.html#name,Variable greenprimer.layouts.models.Layout.name=greenprimer.layouts.models.Layout-class.html#name"><a title="greenprimer.costing.models.Standard.name
+greenprimer.layouts.models.Floor.name
+greenprimer.layouts.models.Layout.name" class="py-name" href="#" onclick="return doclink('link-1', 'name', 'link-1');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-2', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">50</tt><tt class="py-op">,</tt> <tt class="py-name">unique</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Variable greenprimer.costing.models.Standard.year=greenprimer.costing.models.Standard-class.html#year"><a title="greenprimer.costing.models.Standard.year" class="py-name" href="#" onclick="return doclink('link-3', 'year', 'link-3');">year</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-4', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">PositiveSmallIntegerField</tt><tt class="py-op">(</tt><tt class="py-name">unique</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="Standard.Meta"></a><div id="Standard.Meta-def"><a name="L12"></a><tt class="py-lineno"> 12</tt> <a class="py-toggle" href="#" id="Standard.Meta-toggle" onclick="return toggle('Standard.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Standard.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="Standard.Meta-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Standard.Meta-expanded"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">        <tt id="link-5" class="py-name" targets="Variable greenprimer.costing.models.RoofInsulation.Meta.ordering=greenprimer.costing.models.RoofInsulation.Meta-class.html#ordering,Variable greenprimer.costing.models.Standard.Meta.ordering=greenprimer.costing.models.Standard.Meta-class.html#ordering,Variable greenprimer.costing.models.WallInsulation.Meta.ordering=greenprimer.costing.models.WallInsulation.Meta-class.html#ordering,Variable greenprimer.costing.models.Window.Meta.ordering=greenprimer.costing.models.Window.Meta-class.html#ordering,Variable greenprimer.layouts.models.Door.Meta.ordering=greenprimer.layouts.models.Door.Meta-class.html#ordering,Variable greenprimer.layouts.models.Floor.Meta.ordering=greenprimer.layouts.models.Floor.Meta-class.html#ordering,Variable greenprimer.layouts.models.Window.Meta.ordering=greenprimer.layouts.models.Window.Meta-class.html#ordering"><a title="greenprimer.costing.models.RoofInsulation.Meta.ordering
+greenprimer.costing.models.Standard.Meta.ordering
+greenprimer.costing.models.WallInsulation.Meta.ordering
+greenprimer.costing.models.Window.Meta.ordering
+greenprimer.layouts.models.Door.Meta.ordering
+greenprimer.layouts.models.Floor.Meta.ordering
+greenprimer.layouts.models.Window.Meta.ordering" class="py-name" href="#" onclick="return doclink('link-5', 'ordering', 'link-5');">ordering</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'year'</tt><tt class="py-op">,</tt> </tt>
+</div><a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="Standard.__unicode__"></a><div id="Standard.__unicode__-def"><a name="L15"></a><tt class="py-lineno"> 15</tt> <a class="py-toggle" href="#" id="Standard.__unicode__-toggle" onclick="return toggle('Standard.__unicode__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.Standard-class.html#__unicode__">__unicode__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Standard.__unicode__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Standard.__unicode__-expanded"><a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="greenprimer.costing.models.Standard.name
+greenprimer.layouts.models.Floor.name
+greenprimer.layouts.models.Layout.name" class="py-name" href="#" onclick="return doclink('link-6', 'name', 'link-1');">name</a></tt> </tt>
+</div></div><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="Requirements"></a><div id="Requirements-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="Requirements-toggle" onclick="return toggle('Requirements');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Requirements-class.html">Requirements</a><tt class="py-op">(</tt><tt class="py-base-class">models</tt><tt class="py-op">.</tt><tt class="py-base-class">Model</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Requirements-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Requirements-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    The requirements of an ASHRAE energy standard for one specific climate zone</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Variable greenprimer.costing.models.Requirements.standard=greenprimer.costing.models.Requirements-class.html#standard,Function greenprimer.costing.views.standard()=greenprimer.costing.views-module.html#standard"><a title="greenprimer.costing.models.Requirements.standard
+greenprimer.costing.views.standard" class="py-name" href="#" onclick="return doclink('link-7', 'standard', 'link-7');">standard</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-8', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">ForeignKey</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name" targets="Class greenprimer.costing.models.Standard=greenprimer.costing.models.Standard-class.html"><a title="greenprimer.costing.models.Standard" class="py-name" href="#" onclick="return doclink('link-9', 'Standard', 'link-9');">Standard</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Variable greenprimer.costing.models.Requirements.zone=greenprimer.costing.models.Requirements-class.html#zone,Variable greenprimer.layouts.models.Layout.zone=greenprimer.layouts.models.Layout-class.html#zone"><a title="greenprimer.costing.models.Requirements.zone
+greenprimer.layouts.models.Layout.zone" class="py-name" href="#" onclick="return doclink('link-10', 'zone', 'link-10');">zone</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-11', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">PositiveSmallIntegerField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Variable greenprimer.costing.models.Requirements.wall_r=greenprimer.costing.models.Requirements-class.html#wall_r"><a title="greenprimer.costing.models.Requirements.wall_r" class="py-name" href="#" onclick="return doclink('link-12', 'wall_r', 'link-12');">wall_r</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-13', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt id="link-14" class="py-name" targets="Variable greenprimer.costing.models.Requirements.roof_r=greenprimer.costing.models.Requirements-class.html#roof_r"><a title="greenprimer.costing.models.Requirements.roof_r" class="py-name" href="#" onclick="return doclink('link-14', 'roof_r', 'link-14');">roof_r</a></tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-15', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt id="link-16" class="py-name" targets="Variable greenprimer.costing.models.Requirements.window_u=greenprimer.costing.models.Requirements-class.html#window_u"><a title="greenprimer.costing.models.Requirements.window_u" class="py-name" href="#" onclick="return doclink('link-16', 'window_u', 'link-16');">window_u</a></tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-17', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt id="link-18" class="py-name" targets="Variable greenprimer.costing.models.Requirements.window_shgc=greenprimer.costing.models.Requirements-class.html#window_shgc"><a title="greenprimer.costing.models.Requirements.window_shgc" class="py-name" href="#" onclick="return doclink('link-18', 'window_shgc', 'link-18');">window_shgc</a></tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-19', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt id="link-20" class="py-name" targets="Variable greenprimer.costing.models.Requirements.window_vt=greenprimer.costing.models.Requirements-class.html#window_vt"><a title="greenprimer.costing.models.Requirements.window_vt" class="py-name" href="#" onclick="return doclink('link-20', 'window_vt', 'link-20');">window_vt</a></tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-21', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="Requirements.Meta"></a><div id="Requirements.Meta-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="Requirements.Meta-toggle" onclick="return toggle('Requirements.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Requirements.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="Requirements.Meta-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Requirements.Meta-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt id="link-22" class="py-name" targets="Variable greenprimer.costing.models.Requirements.Meta.unique_together=greenprimer.costing.models.Requirements.Meta-class.html#unique_together,Variable greenprimer.layouts.models.Door.Meta.unique_together=greenprimer.layouts.models.Door.Meta-class.html#unique_together,Variable greenprimer.layouts.models.DoorCount.Meta.unique_together=greenprimer.layouts.models.DoorCount.Meta-class.html#unique_together,Variable greenprimer.layouts.models.Floor.Meta.unique_together=greenprimer.layouts.models.Floor.Meta-class.html#unique_together,Variable greenprimer.layouts.models.Window.Meta.unique_together=greenprimer.layouts.models.Window.Meta-class.html#unique_together,Variable greenprimer.layouts.models.WindowCount.Meta.unique_together=greenprimer.layouts.models.WindowCount.Meta-class.html#unique_together"><a title="greenprimer.costing.models.Requirements.Meta.unique_together
+greenprimer.layouts.models.Door.Meta.unique_together
+greenprimer.layouts.models.DoorCount.Meta.unique_together
+greenprimer.layouts.models.Floor.Meta.unique_together
+greenprimer.layouts.models.Window.Meta.unique_together
+greenprimer.layouts.models.WindowCount.Meta.unique_together" class="py-name" href="#" onclick="return doclink('link-22', 'unique_together', 'link-22');">unique_together</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'standard'</tt><tt class="py-op">,</tt> <tt class="py-string">'zone'</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt id="link-23" class="py-name" targets="Variable greenprimer.costing.models.Requirements.Meta.verbose_name_plural=greenprimer.costing.models.Requirements.Meta-class.html#verbose_name_plural"><a title="greenprimer.costing.models.Requirements.Meta.verbose_name_plural" class="py-name" href="#" onclick="return doclink('link-23', 'verbose_name_plural', 'link-23');">verbose_name_plural</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'requirement sets'</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="Requirements.__unicode__"></a><div id="Requirements.__unicode__-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="Requirements.__unicode__-toggle" onclick="return toggle('Requirements.__unicode__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.Requirements-class.html#__unicode__">__unicode__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Requirements.__unicode__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Requirements.__unicode__-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'Zone %d requirements for %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="greenprimer.costing.models.Requirements.zone
+greenprimer.layouts.models.Layout.zone" class="py-name" href="#" onclick="return doclink('link-24', 'zone', 'link-10');">zone</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="greenprimer.costing.models.Requirements.standard
+greenprimer.costing.views.standard" class="py-name" href="#" onclick="return doclink('link-25', 'standard', 'link-7');">standard</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="Requirements.wall"></a><div id="Requirements.wall-def"><a name="L38"></a><tt class="py-lineno"> 38</tt> <a class="py-toggle" href="#" id="Requirements.wall-toggle" onclick="return toggle('Requirements.wall');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.Requirements-class.html#wall">wall</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Requirements.wall-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Requirements.wall-expanded"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-26" class="py-name" targets="Class greenprimer.costing.models.WallInsulation=greenprimer.costing.models.WallInsulation-class.html"><a title="greenprimer.costing.models.WallInsulation" class="py-name" href="#" onclick="return doclink('link-26', 'WallInsulation', 'link-26');">WallInsulation</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">r__gte</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="greenprimer.costing.models.Requirements.wall_r" class="py-name" href="#" onclick="return doclink('link-27', 'wall_r', 'link-12');">wall_r</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">order_by</tt><tt class="py-op">(</tt><tt class="py-string">'cost'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">first</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="Requirements.roof"></a><div id="Requirements.roof-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="Requirements.roof-toggle" onclick="return toggle('Requirements.roof');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.Requirements-class.html#roof">roof</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Requirements.roof-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Requirements.roof-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-28" class="py-name" targets="Class greenprimer.costing.models.RoofInsulation=greenprimer.costing.models.RoofInsulation-class.html"><a title="greenprimer.costing.models.RoofInsulation" class="py-name" href="#" onclick="return doclink('link-28', 'RoofInsulation', 'link-28');">RoofInsulation</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">r__gte</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="greenprimer.costing.models.Requirements.roof_r" class="py-name" href="#" onclick="return doclink('link-29', 'roof_r', 'link-14');">roof_r</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">order_by</tt><tt class="py-op">(</tt><tt class="py-string">'cost'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">first</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="Requirements.window"></a><div id="Requirements.window-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="Requirements.window-toggle" onclick="return toggle('Requirements.window');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.Requirements-class.html#window">window</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">operability</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Requirements.window-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Requirements.window-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-30" class="py-name" targets="Class greenprimer.costing.models.Window=greenprimer.costing.models.Window-class.html,Class greenprimer.layouts.models.Window=greenprimer.layouts.models.Window-class.html"><a title="greenprimer.costing.models.Window
+greenprimer.layouts.models.Window" class="py-name" href="#" onclick="return doclink('link-30', 'Window', 'link-30');">Window</a></tt><tt class="py-op">.</tt><tt class="py-name">objects</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">(</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt id="link-31" class="py-name" targets="Variable greenprimer.costing.models.Window.operability=greenprimer.costing.models.Window-class.html#operability,Method greenprimer.layouts.models.Window.operability()=greenprimer.layouts.models.Window-class.html#operability"><a title="greenprimer.costing.models.Window.operability
+greenprimer.layouts.models.Window.operability" class="py-name" href="#" onclick="return doclink('link-31', 'operability', 'link-31');">operability</a></tt><tt class="py-op">=</tt><tt id="link-32" class="py-name"><a title="greenprimer.costing.models.Window.operability
+greenprimer.layouts.models.Window.operability" class="py-name" href="#" onclick="return doclink('link-32', 'operability', 'link-31');">operability</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-name">u__lte</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="greenprimer.costing.models.Requirements.window_u" class="py-name" href="#" onclick="return doclink('link-33', 'window_u', 'link-16');">window_u</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">shgc__lte</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="greenprimer.costing.models.Requirements.window_shgc" class="py-name" href="#" onclick="return doclink('link-34', 'window_shgc', 'link-18');">window_shgc</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">vt__lte</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="greenprimer.costing.models.Requirements.window_vt" class="py-name" href="#" onclick="return doclink('link-35', 'window_vt', 'link-20');">window_vt</a></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">first</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="Component"></a><div id="Component-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="Component-toggle" onclick="return toggle('Component');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Component-class.html">Component</a><tt class="py-op">(</tt><tt class="py-base-class">models</tt><tt class="py-op">.</tt><tt class="py-base-class">Model</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Component-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Component-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-docstring">""" One material component (abstract base class) """</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt id="link-36" class="py-name" targets="Variable greenprimer.costing.models.Component.cost=greenprimer.costing.models.Component-class.html#cost,Variable greenprimer.costing.models.Window.cost=greenprimer.costing.models.Window-class.html#cost"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-36', 'cost', 'link-36');">cost</a></tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-37', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">DecimalField</tt><tt class="py-op">(</tt><tt class="py-name">max_digits</tt><tt class="py-op">=</tt><tt class="py-number">5</tt><tt class="py-op">,</tt> <tt class="py-name">decimal_places</tt><tt class="py-op">=</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt id="link-38" class="py-name" targets="Variable greenprimer.costing.models.Component.description=greenprimer.costing.models.Component-class.html#description,Variable greenprimer.costing.models.Window.description=greenprimer.costing.models.Window-class.html#description"><a title="greenprimer.costing.models.Component.description
+greenprimer.costing.models.Window.description" class="py-name" href="#" onclick="return doclink('link-38', 'description', 'link-38');">description</a></tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-39', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="Component.Meta"></a><div id="Component.Meta-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="Component.Meta-toggle" onclick="return toggle('Component.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Component.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="Component.Meta-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Component.Meta-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt id="link-40" class="py-name" targets="Variable greenprimer.costing.models.Component.Meta.abstract=greenprimer.costing.models.Component.Meta-class.html#abstract"><a title="greenprimer.costing.models.Component.Meta.abstract" class="py-name" href="#" onclick="return doclink('link-40', 'abstract', 'link-40');">abstract</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="Component.__unicode__"></a><div id="Component.__unicode__-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="Component.__unicode__-toggle" onclick="return toggle('Component.__unicode__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.Component-class.html#__unicode__">__unicode__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Component.__unicode__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Component.__unicode__-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="greenprimer.costing.models.Component.description
+greenprimer.costing.models.Window.description" class="py-name" href="#" onclick="return doclink('link-41', 'description', 'link-38');">description</a></tt> </tt>
+</div></div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="WallInsulation"></a><div id="WallInsulation-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="WallInsulation-toggle" onclick="return toggle('WallInsulation');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.WallInsulation-class.html">WallInsulation</a><tt class="py-op">(</tt><tt class="py-base-class">Component</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WallInsulation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="WallInsulation-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-docstring">""" Wall insulation cost data """</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt id="link-42" class="py-name" targets="Variable greenprimer.costing.models.RoofInsulation.r=greenprimer.costing.models.RoofInsulation-class.html#r,Variable greenprimer.costing.models.WallInsulation.r=greenprimer.costing.models.WallInsulation-class.html#r"><a title="greenprimer.costing.models.RoofInsulation.r
+greenprimer.costing.models.WallInsulation.r" class="py-name" href="#" onclick="return doclink('link-42', 'r', 'link-42');">r</a></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-43', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="WallInsulation.Meta"></a><div id="WallInsulation.Meta-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="WallInsulation.Meta-toggle" onclick="return toggle('WallInsulation.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.WallInsulation.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="WallInsulation.Meta-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="WallInsulation.Meta-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt id="link-44" class="py-name"><a title="greenprimer.costing.models.RoofInsulation.Meta.ordering
+greenprimer.costing.models.Standard.Meta.ordering
+greenprimer.costing.models.WallInsulation.Meta.ordering
+greenprimer.costing.models.Window.Meta.ordering
+greenprimer.layouts.models.Door.Meta.ordering
+greenprimer.layouts.models.Floor.Meta.ordering
+greenprimer.layouts.models.Window.Meta.ordering" class="py-name" href="#" onclick="return doclink('link-44', 'ordering', 'link-5');">ordering</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'r'</tt><tt class="py-op">,</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="WallInsulation.__unicode__"></a><div id="WallInsulation.__unicode__-def"><a name="L71"></a><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="WallInsulation.__unicode__-toggle" onclick="return toggle('WallInsulation.__unicode__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.WallInsulation-class.html#__unicode__">__unicode__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WallInsulation.__unicode__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="WallInsulation.__unicode__-expanded"><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-45', 'cost', 'link-36');">cost</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-name">price</tt> <tt class="py-op">=</tt> <tt class="py-string">u'%02d\u00A2'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-46', 'cost', 'link-36');">cost</a></tt> <tt class="py-op">*</tt> <tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-name">price</tt> <tt class="py-op">=</tt> <tt class="py-string">'$%.2f'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-47', 'cost', 'link-36');">cost</a></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'r%.2f %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="greenprimer.costing.models.RoofInsulation.r
+greenprimer.costing.models.WallInsulation.r" class="py-name" href="#" onclick="return doclink('link-48', 'r', 'link-42');">r</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="greenprimer.costing.models.Component.description
+greenprimer.costing.models.Window.description" class="py-name" href="#" onclick="return doclink('link-49', 'description', 'link-38');">description</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="RoofInsulation"></a><div id="RoofInsulation-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="RoofInsulation-toggle" onclick="return toggle('RoofInsulation');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.RoofInsulation-class.html">RoofInsulation</a><tt class="py-op">(</tt><tt class="py-base-class">Component</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RoofInsulation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RoofInsulation-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-docstring">""" Roof insulation cost data """</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt id="link-50" class="py-name"><a title="greenprimer.costing.models.RoofInsulation.r
+greenprimer.costing.models.WallInsulation.r" class="py-name" href="#" onclick="return doclink('link-50', 'r', 'link-42');">r</a></tt> <tt class="py-op">=</tt> <tt id="link-51" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-51', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="RoofInsulation.Meta"></a><div id="RoofInsulation.Meta-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="RoofInsulation.Meta-toggle" onclick="return toggle('RoofInsulation.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.RoofInsulation.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="RoofInsulation.Meta-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RoofInsulation.Meta-expanded"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt id="link-52" class="py-name"><a title="greenprimer.costing.models.RoofInsulation.Meta.ordering
+greenprimer.costing.models.Standard.Meta.ordering
+greenprimer.costing.models.WallInsulation.Meta.ordering
+greenprimer.costing.models.Window.Meta.ordering
+greenprimer.layouts.models.Door.Meta.ordering
+greenprimer.layouts.models.Floor.Meta.ordering
+greenprimer.layouts.models.Window.Meta.ordering" class="py-name" href="#" onclick="return doclink('link-52', 'ordering', 'link-5');">ordering</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'r'</tt><tt class="py-op">,</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="RoofInsulation.__unicode__"></a><div id="RoofInsulation.__unicode__-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="RoofInsulation.__unicode__-toggle" onclick="return toggle('RoofInsulation.__unicode__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.RoofInsulation-class.html#__unicode__">__unicode__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RoofInsulation.__unicode__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RoofInsulation.__unicode__-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-53', 'cost', 'link-36');">cost</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-name">price</tt> <tt class="py-op">=</tt> <tt class="py-string">u'%02d\u00A2'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-54', 'cost', 'link-36');">cost</a></tt> <tt class="py-op">*</tt> <tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-name">price</tt> <tt class="py-op">=</tt> <tt class="py-string">'$%.2f'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-55', 'cost', 'link-36');">cost</a></tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'r%.2f %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="greenprimer.costing.models.RoofInsulation.r
+greenprimer.costing.models.WallInsulation.r" class="py-name" href="#" onclick="return doclink('link-56', 'r', 'link-42');">r</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="greenprimer.costing.models.Component.description
+greenprimer.costing.models.Window.description" class="py-name" href="#" onclick="return doclink('link-57', 'description', 'link-38');">description</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="Window"></a><div id="Window-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="Window-toggle" onclick="return toggle('Window');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Window-class.html">Window</a><tt class="py-op">(</tt><tt class="py-base-class">models</tt><tt class="py-op">.</tt><tt class="py-base-class">Model</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Window-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Window-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-docstring">""" Window cost data """</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt id="link-58" class="py-name"><a title="greenprimer.costing.models.Component.description
+greenprimer.costing.models.Window.description" class="py-name" href="#" onclick="return doclink('link-58', 'description', 'link-38');">description</a></tt> <tt class="py-op">=</tt> <tt id="link-59" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-59', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">150</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt id="link-60" class="py-name"><a title="greenprimer.costing.models.Component.cost
+greenprimer.costing.models.Window.cost" class="py-name" href="#" onclick="return doclink('link-60', 'cost', 'link-36');">cost</a></tt> <tt class="py-op">=</tt> <tt id="link-61" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-61', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">DecimalField</tt><tt class="py-op">(</tt><tt class="py-name">max_digits</tt><tt class="py-op">=</tt><tt class="py-number">5</tt><tt class="py-op">,</tt> <tt class="py-name">decimal_places</tt><tt class="py-op">=</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt id="link-62" class="py-name" targets="Variable greenprimer.costing.models.Window.u=greenprimer.costing.models.Window-class.html#u"><a title="greenprimer.costing.models.Window.u" class="py-name" href="#" onclick="return doclink('link-62', 'u', 'link-62');">u</a></tt> <tt class="py-op">=</tt> <tt id="link-63" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-63', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt id="link-64" class="py-name" targets="Variable greenprimer.costing.models.Window.shgc=greenprimer.costing.models.Window-class.html#shgc"><a title="greenprimer.costing.models.Window.shgc" class="py-name" href="#" onclick="return doclink('link-64', 'shgc', 'link-64');">shgc</a></tt> <tt class="py-op">=</tt> <tt id="link-65" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-65', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt id="link-66" class="py-name" targets="Variable greenprimer.costing.models.Window.vt=greenprimer.costing.models.Window-class.html#vt"><a title="greenprimer.costing.models.Window.vt" class="py-name" href="#" onclick="return doclink('link-66', 'vt', 'link-66');">vt</a></tt> <tt class="py-op">=</tt> <tt id="link-67" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-67', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">FloatField</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt id="link-68" class="py-name"><a title="greenprimer.costing.models.Window.operability
+greenprimer.layouts.models.Window.operability" class="py-name" href="#" onclick="return doclink('link-68', 'operability', 'link-31');">operability</a></tt> <tt class="py-op">=</tt> <tt id="link-69" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-69', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">PositiveSmallIntegerField</tt><tt class="py-op">(</tt><tt class="py-name">choices</tt><tt class="py-op">=</tt><tt class="py-op">(</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-string">'Fixed'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-string">'Operable'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-string">'Curtain Wall'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt id="link-70" class="py-name" targets="Variable greenprimer.costing.models.Window.coatings=greenprimer.costing.models.Window-class.html#coatings"><a title="greenprimer.costing.models.Window.coatings" class="py-name" href="#" onclick="return doclink('link-70', 'coatings', 'link-70');">coatings</a></tt> <tt class="py-op">=</tt> <tt id="link-71" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-71', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">50</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt id="link-72" class="py-name" targets="Variable greenprimer.costing.models.Window.frame=greenprimer.costing.models.Window-class.html#frame"><a title="greenprimer.costing.models.Window.frame" class="py-name" href="#" onclick="return doclink('link-72', 'frame', 'link-72');">frame</a></tt> <tt class="py-op">=</tt> <tt id="link-73" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-73', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">50</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt id="link-74" class="py-name" targets="Variable greenprimer.costing.models.Window.film=greenprimer.costing.models.Window-class.html#film"><a title="greenprimer.costing.models.Window.film" class="py-name" href="#" onclick="return doclink('link-74', 'film', 'link-74');">film</a></tt> <tt class="py-op">=</tt> <tt id="link-75" class="py-name"><a title="greenprimer.costing.models
+greenprimer.layouts.models" class="py-name" href="#" onclick="return doclink('link-75', 'models', 'link-0');">models</a></tt><tt class="py-op">.</tt><tt class="py-name">CharField</tt><tt class="py-op">(</tt><tt class="py-name">max_length</tt><tt class="py-op">=</tt><tt class="py-number">50</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="Window.Meta"></a><div id="Window.Meta-def"><a name="L110"></a><tt class="py-lineno">110</tt> <a class="py-toggle" href="#" id="Window.Meta-toggle" onclick="return toggle('Window.Meta');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="greenprimer.costing.models.Window.Meta-class.html">Meta</a><tt class="py-op">:</tt> </tt>
+</div><div id="Window.Meta-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Window.Meta-expanded"><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt id="link-76" class="py-name"><a title="greenprimer.costing.models.RoofInsulation.Meta.ordering
+greenprimer.costing.models.Standard.Meta.ordering
+greenprimer.costing.models.WallInsulation.Meta.ordering
+greenprimer.costing.models.Window.Meta.ordering
+greenprimer.layouts.models.Door.Meta.ordering
+greenprimer.layouts.models.Floor.Meta.ordering
+greenprimer.layouts.models.Window.Meta.ordering" class="py-name" href="#" onclick="return doclink('link-76', 'ordering', 'link-5');">ordering</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'u'</tt><tt class="py-op">,</tt> <tt class="py-string">'shgc'</tt><tt class="py-op">,</tt> <tt class="py-string">'vt'</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="Window.__unicode__"></a><div id="Window.__unicode__-def"><a name="L113"></a><tt class="py-lineno">113</tt> <a class="py-toggle" href="#" id="Window.__unicode__-toggle" onclick="return toggle('Window.__unicode__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="greenprimer.costing.models.Window-class.html#__unicode__">__unicode__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Window.__unicode__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Window.__unicode__-expanded"><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'%s, %s, %s, %s film'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">get_operability_display</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="greenprimer.costing.models.Component.description
+greenprimer.costing.models.Window.description" class="py-name" href="#" onclick="return doclink('link-77', 'description', 'link-38');">description</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="greenprimer.costing.models.Window.frame" class="py-name" href="#" onclick="return doclink('link-78', 'frame', 'link-72');">frame</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="greenprimer.costing.models.Window.film" class="py-name" href="#" onclick="return doclink('link-79', 'film', 'link-74');">film</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="greenprimer-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri May  6 14:03:11 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
