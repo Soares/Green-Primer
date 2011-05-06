@@ -44,6 +44,7 @@ the following steps on a unix system:
 8. Go to the root greenprimer directory and run "manage.py runserver"
 
 Green primer will now be accessible at http://localhost:8000/.
+Green Primer is best viewed on a linux system using Google Chrome.
 
 Keep in mind that this is a test sever and should not be used for production.
 If you want to use Green Primer in production, please read djangoproject.com's
