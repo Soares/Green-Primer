@@ -1,3 +1,5 @@
+/* This module handles recieving and displaying warning messages,
+ * as well as disabling warning messages when users fix the problem. */
 var warnings = (function(self) {
     var messages = [];
     var levels = [];

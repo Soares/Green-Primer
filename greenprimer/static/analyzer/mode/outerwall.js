@@ -1,3 +1,5 @@
+/* Wall mode for outer walls. There are different contsraints on inner and
+ * outer walls. */
 modes.outerwall = (function(self) {
     var wall = null;
 

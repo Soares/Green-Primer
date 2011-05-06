@@ -1,3 +1,5 @@
+/* Ventilation mode. Basically the most fun mode.
+ * Just hands everything off to the physics module. */
 modes.ventilate = (function(self) {
     var canvas, context, interval;
 

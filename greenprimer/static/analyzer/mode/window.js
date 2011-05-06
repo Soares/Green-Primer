@@ -1,3 +1,4 @@
+/* Window placement mode. 'window' is a js keyword, hence the ['window'] use. */
 modes['window'] = (function(self) {
     self.button = '#window';
     

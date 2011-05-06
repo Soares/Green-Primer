@@ -1,3 +1,7 @@
+/* Yes, I know that this module shares a lot of code with vector. It's on
+ * my list of things to refactor. This is basically a stripped down
+ * vector that can only be used for integers and is always snapped
+ * to the drawing grid. */
 function Point(x, y) {
     this.x = x || 0;
     this.y = y || 0;

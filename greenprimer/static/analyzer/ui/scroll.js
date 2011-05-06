@@ -1,3 +1,5 @@
+/* This module handles scrolling the screen when the joystick is used.
+ * Jquery UI had to be patched to make this work. */
 var scroll = (function(self) {
     self.MAX_DIST = 35; // pixels to edge of circle
 

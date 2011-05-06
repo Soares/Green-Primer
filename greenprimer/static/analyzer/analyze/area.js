@@ -1,3 +1,10 @@
+/* This file handles all the shady calculations we do to get things like
+ * perimiter size and floor area. I say "shady" because we can't always
+ * be sure what the hell the house looks like. It's almost certainly not
+ * convex, it may not be closed, it may be completely disjoint, and it
+ * might even contain smaller polygons. So the area and perimiter functions
+ * are a bit hackish. This is probably the hairiest module, so approach
+ * with caution. */
 var area = (function(self) {
     self.centroid = function(vertices) {
         return new Vector(vertices[0].x, vertices[0].y);

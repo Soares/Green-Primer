@@ -1,3 +1,5 @@
+/* The key is the round thing in the top center. This module sets up
+ * all of the key buttons. */
 $(function() {
   var view = $('#view'), key = $('#key'),
       dash = $('#dashboard'), tools = $('#toolbar');

@@ -1,3 +1,5 @@
+/* This is the little dot that follows your cursor around to show you where
+ * the current snap-to-grid point is. */
 var Dot = function() {
     this.point = new Point();
     this.circle = gp.svg.circle(0, 0, 4);
@@ -29,8 +31,6 @@ Dot.prototype.jointsUnder = function() {
 };
 
 
-/* Package
- * Will be initialized to contain a follower dot */
 var dot = (function(self) {
     $(function() {
         self.follower = new Dot();

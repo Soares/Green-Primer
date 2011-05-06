@@ -1,3 +1,9 @@
+/* This module handles tracing the walls to see if there are disjoint
+ * sets. It does some bad things with global-ish variables because
+ * I wrote this module during crunch time. After area.js, this is
+ * the next hairiest module, but it's basically just a function
+ * that creates and traverses a graph from the current drawn walls
+ * and figures out the disjoint sets. */
 var graph = (function(self) {
     var graph, nodes, groups, biggest, counts, map, disjointed = [];
 
@@ -86,9 +92,6 @@ var graph = (function(self) {
         }
         if(disjointed.length) warnings.warn(warnings.DISJOINT, groups.length-1);
     };
-
-    $(function() {
-    });
 
     return self;
 })(graph || {});

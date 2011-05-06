@@ -1,3 +1,9 @@
+/* Door data is sent by the server an output directly into the html files,
+ * under globals.doors. Doors are stored as a pointer to the wall, the
+ * type that allows them to look up their width etc. in global.doors,
+ * and their offset along the wall. Like all elements, ID is passed
+ * around because if we redraw a door we need to make sure that it
+ * keeps the same id to protect future redo/undos from confusion. */
 var doors = (function(self) {
     return elements(self);
 })(doors || {});

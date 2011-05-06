@@ -20,3 +20,9 @@ Green Primer the javascript app keeps them in greenprimer/static/analizer.
 The javascript code makes heavy use of jQuery for DOM manipulation and for
 various utilities. Make sure to familiarize yourself with the documentation
 at jquery.com in order to help you understand the jQuery code.
+
+The python documentation can be found in the docs/ directory. You can browse
+to it with a web browser for interactive documentation.
+
+The javascript code is poorly documented, but each file performs a function
+described by the file's name.

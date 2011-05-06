@@ -1,3 +1,4 @@
+/* Door placement mode */
 modes.door = (function(self) {
     self.button = '#door';
     

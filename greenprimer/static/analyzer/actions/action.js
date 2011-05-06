@@ -1,3 +1,9 @@
+/* This is the file that handles undo and redo.
+ * It provides a "make" function, which takes the undo/redo functions and
+ * returns a action function that should be called any time the undo/redoable
+ * action occurs. After calling actions.make with your undo/redo function,
+ * just call the result any time you do the action and this module will
+ * handle the rest. */
 var actions = (function(self) {
     var stack = [], pointer = -1, max = pointer;
     var undoButton = null, redoButton = null;

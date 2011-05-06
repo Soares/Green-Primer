@@ -1,3 +1,4 @@
+/* Move walls etc. around mode */
 modes.move = (function(self) {
     var active, prev, origin;
 

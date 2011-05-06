@@ -1,3 +1,5 @@
+/* The dashboard is the lower bar. This module initializes all the dashboard
+ * elements. */
 $(document).ready(function() {
 
   /* Joystick */

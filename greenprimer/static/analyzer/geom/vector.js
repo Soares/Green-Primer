@@ -1,3 +1,6 @@
+/* This is a vector that can include floats and isn't snapped to the grid. Uses
+ * include scrolling the screen around with the joystick and lots of distance/
+ * direction calculations. */
 function Vector(x, y) {
     this.x = x || 0;
     this.y = y || 0;

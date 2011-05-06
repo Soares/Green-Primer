@@ -1,3 +1,5 @@
+/* This mode is fun because the "redo" action is a destroy, and the "undo"
+ * action is a creation. It's usually the other way around. */
 modes['delete'] = (function(self) {
     self.button = '#delete';
 

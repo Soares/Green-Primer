@@ -1,3 +1,8 @@
+/* Code that is common to all modes.
+ * Modes are like wall placement mode or movement mode, which affect what
+ * your clicks / movements do. The code to actually handle clicks/movement
+ * changes between modes, but all modes have pretty similar event handling
+ * and button updating, which is all done in this module. */
 var modes = (function(self) {
     return self;
 })(modes || {});

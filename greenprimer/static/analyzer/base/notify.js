@@ -1,3 +1,5 @@
+/* This module handles getting and displaying the material results via
+ * ajax calls. */
 var notify = (function(self) {
     var leftover;
 

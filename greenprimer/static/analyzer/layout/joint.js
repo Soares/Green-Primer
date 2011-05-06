@@ -1,3 +1,5 @@
+/* Joints connect walls. Usually they merge instead of stacking, but it's
+ * possible to have multiple in the same place. */
 var joints = (function(self) {
     self.at = function(point, inner) {
         return $.grep(self.all, function(joint) {

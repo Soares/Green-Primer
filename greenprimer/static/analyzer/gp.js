@@ -1,3 +1,4 @@
+/* The globally accessable settings */
 var gp = (function(self) {
     self.GRID = 20;
 

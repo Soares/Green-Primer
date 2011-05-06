@@ -1,3 +1,4 @@
+/* Remember the physics demo at 70%? This is it. */
 var physics = (function(self) {
     var interval, counter = 0, world;
 

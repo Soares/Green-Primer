@@ -1,3 +1,11 @@
+/* This module contains code common to all layout elements, such as walls,
+ * windows, and doors.
+ * Each layout element has both a class ("Window") and a manager ("windows").
+ * The "elements" function initializes a manager, the "Elem" function
+ * initializes a class. "Elem" can't be named "Element" because of a name
+ * conflict with box2d.
+ * These functions basically abstract out the difficulty of registering,
+ * forgetting, serializing, and loading the layout elements. */
 var elements = function(self) {
     var id = 1;
 

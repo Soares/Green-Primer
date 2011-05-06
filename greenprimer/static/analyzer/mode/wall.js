@@ -1,3 +1,4 @@
+/* Wall mode. Slightly more complex than outline wall mode. */
 modes.wall = (function(self) {
     var wall = null;
 

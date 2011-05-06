@@ -263,14 +263,11 @@ MEDIA_BUNDLES = (
         'analyzer/layout/door.js',
         'analyzer/layout/window.js',
         'analyzer/layout/vent.js',
-        'analyzer/layout/stair.js',
 
         'analyzer/mode/vent.js',
         'analyzer/mode/wall.js',
         'analyzer/mode/window.js',
-        'analyzer/mode/stair.js',
 
-        'analyzer/mode/heatflow.js',
         'analyzer/mode/ventilate.js',
 
         'analyzer/analyze/graph.js',

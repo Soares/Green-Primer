@@ -1,3 +1,6 @@
+/* A stripped down geometrical line with just the stuff we need.
+ * Inspired by sylvester, which is still in the code base (3rd party) but
+ * ultimately was too complex for my needs and got removed. */
 var Line = function(start, end) {
     this.start = start;
     this.end = end;

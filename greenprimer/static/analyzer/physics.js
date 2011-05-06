@@ -1,3 +1,4 @@
+/* This module contains the particle emitters which are created for each vent */
 var physics = (function(self) {
     var interval, counter = 0, world, emitters;
     

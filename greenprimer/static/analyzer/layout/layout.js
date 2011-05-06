@@ -1,3 +1,10 @@
+/* Global layout functions that affect all elements, including
+ * event firing and saving. Note that event firing here is a bit wierd, because
+ * the snap-to-grid dot allows you to click stuff when your mouse is close but
+ * not exactly over a small element (such as a joint). We thus can't rely
+ * on the browser events, because they are where the mouse clicked, and we
+ * want the events where the snap-to-grid dot was. Therefore we have to
+ * do a bit of munging to correct the events. */
 var layout = (function(self) {
     var PRECISION = 1e-6;
 
