@@ -1,3 +1,8 @@
+"""
+These are all of the html forms found when creating and editing the properties
+of layouts. These python forms handle generating and parsing their html
+counterparts.
+"""
 from django import forms
 from django.forms.models import modelformset_factory, BaseModelFormSet
 from layouts.models import Layout, Window, Door

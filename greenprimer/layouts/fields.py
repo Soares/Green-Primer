@@ -3,6 +3,11 @@ from django.core.exceptions import ValidationError
 import re
 
 class BudgetField(fields.RegexField):
+    """
+    The budget field parses budgets in a lot of different formats.
+    You can put the dollar sign in front, you can put commas, you can give cents.
+    The budget field handles parsing any such budget to python.
+    """
     def __init__(self, *args, **kwargs):
         self.regex = kwargs['regex'] = re.compile('^\s*\$?\s*(\d{1,3}([,]\d{3}){0,2}|\d{1,9})(\.\d{0,2})?\s*\$?\s*$')
         kwargs['error_message'] = 'Enter a number less than one billion'

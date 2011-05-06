@@ -1,8 +1,20 @@
+"""
+This module is the bulk of the server side code. It contains the layout as well
+as all data attached to the layout that is used to do calculations.
+The actual data that you make on the client side is stored in textfields as
+json. The window and door models that you see below are NOT individual windows
+and doors on the building. Rather, they are TYPES of windows and doors that the
+user specifies, along with counts of how many are used in the building. This is
+enough information to calculate the best materials and so on.
+Each Layout object stores the outline, and has a multitude of Floor objects
+attached, each holding the interior of a specific floor.
+"""
 from django.db import models
 from django.contrib.auth.models import User
 from fields import BudgetField as BudgetFormField
 
 class BudgetField(models.DecimalField):
+    """ Database version of the input-parsing fields.BudgetField """
     formfield = BudgetFormField
 
     def __init__(self, *args, **kwargs):
@@ -12,6 +24,10 @@ class BudgetField(models.DecimalField):
 
 
 class Layout(models.Model):
+    """
+    The base layout, stores a lot of the sent information such as perimiter,
+    outline, height, climate zone, and so on.
+    """
     user = models.ForeignKey(User, related_name='layouts')
     name = models.CharField(max_length=50)
     budget = BudgetField()
@@ -165,6 +181,13 @@ class Layout(models.Model):
 
 
 class Window(models.Model):
+    """
+    A type of window. Has a size, keeps track of how many times it is used in
+    each layout. Because each floor will post the window counts separately,
+    we have to keep window counts in their own tables and sum them when asked.
+    This allows us to easily avoid race conditions, and this is why there's a
+    'WindowCount' model below.
+    """
     index = models.PositiveSmallIntegerField(blank=True)
     layout = models.ForeignKey(Layout, related_name='windows')
     label = models.CharField(max_length=50)
@@ -213,6 +236,7 @@ class Window(models.Model):
 
 
 class Door(models.Model):
+    """ Pretty much the same as Window, for Doors. """
     index = models.PositiveSmallIntegerField(blank=True)
     layout = models.ForeignKey(Layout, related_name='doors')
     label = models.CharField(max_length=50)
@@ -245,6 +269,7 @@ class Door(models.Model):
 
 
 class Floor(models.Model):
+    """ One floor on a layout. Can be named. """
     layout = models.ForeignKey(Layout, related_name='floors')
     name = models.CharField(max_length=50)
     story = models.PositiveSmallIntegerField()
@@ -270,6 +295,13 @@ class Floor(models.Model):
 
 
 class WindowCount(models.Model):
+    """
+    The count of windows on a single floor.
+    The width field is not usually necessary (since most windows are fixed
+    width), but curtain wall windows take up the entire wall (which can be
+    variable width), and thus for curtain windows we need to record the total
+    width.
+    """
     floor = models.ForeignKey(Floor)
     window = models.ForeignKey(Window, related_name='counts')
     count = models.PositiveSmallIntegerField(default=0)
@@ -290,6 +322,7 @@ class WindowCount(models.Model):
 
 
 class DoorCount(models.Model):
+    """ Like WindowCount, for doors, with no variable width stuff. """
     floor = models.ForeignKey(Floor)
     door = models.ForeignKey(Door, related_name='counts')
     count = models.PositiveSmallIntegerField(default=0)
