@@ -1,2 +1,22 @@
 Green Primer
 Software for the Green Architect
+
+Read INSTALL (copied as reports/manual) for installation instructions.
+Read reports/report.pdf for a project overview and report.
+
+The code base is in greenprimer/. The project follows a standard django
+project layout. All python code adheres to django coding conventions. In order
+to become comfortable with these conventions, see the documentation at
+djangoproject.org. It is extensive and will help you understand the use of
+the admin, models, views, forms, and other terminology that is common to
+django projects.
+
+All client side code can be found in greenprimer/static, including third party
+libraries.
+
+Green Primer the website keeps static files in greenprimer/static/media.
+Green Primer the javascript app keeps them in greenprimer/static/analizer.
+
+The javascript code makes heavy use of jQuery for DOM manipulation and for
+various utilities. Make sure to familiarize yourself with the documentation
+at jquery.com in order to help you understand the jQuery code.
