@@ -27,7 +27,7 @@ Window.deserialize = function(object, id) {
     return new Window(wall, object.offset, object.type, id);
 };
 Window.prototype.serialize = function() {
-    var object = {offset: this.offset, type: this.type};
+    var object = {offset: this._offset, type: this.type};
     object.wallid = this.wall.id;
     return object;
 };
