@@ -377,15 +377,15 @@ def INSTALLED_APPS():
     yield 'django.contrib.webdesign' # lorem ipsum generator
     
     # Third-Party
-    yield 'django_extensions'
+    # yield 'django_extensions'
     # yield 'indexer'
     yield 'mediagenerator'
-    yield 'paging'
+    # yield 'paging'
     # yield 'sentry'
-    yield 'sentry.client'
-    yield 'south'
+    # yield 'sentry.client'
+    # yield 'south'
     yield 'hisp'
-    yield 'xframeoptions'
+    # yield 'xframeoptions'
     #if DEBUG:
     #   yield 'debug_toolbar'
 
