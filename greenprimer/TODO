@@ -1,4 +1,0 @@
-validators
-    - no zero-length walls
-    - no identical walls
-    - no crossing walls

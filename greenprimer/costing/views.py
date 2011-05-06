@@ -1,3 +1,7 @@
+"""
+This module provides ajaxy responses to data requests.
+These are basically what gets called when the "data" button is pressed.
+"""
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse

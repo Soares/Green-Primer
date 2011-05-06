@@ -1,17 +1,25 @@
+"""
+These are the database objects holding the ASHRAE and Reeds data that green
+primer uses to do its material analysis.
+"""
 from django.db import models
 
 class Standard(models.Model):
-	name = models.CharField(max_length=50, unique=True)
-	year = models.PositiveSmallIntegerField(unique=True)
-	
-	class Meta:
-		ordering = 'year',
+    """ An ASHRAE energy standard """
+    name = models.CharField(max_length=50, unique=True)
+    year = models.PositiveSmallIntegerField(unique=True)
 
-	def __unicode__(self):
-		return self.name
+    class Meta:
+        ordering = 'year',
+
+    def __unicode__(self):
+        return self.name
 
 
 class Requirements(models.Model):
+    """
+    The requirements of an ASHRAE energy standard for one specific climate zone
+    """
     standard = models.ForeignKey(Standard)
     zone = models.PositiveSmallIntegerField()
     wall_r = models.FloatField()
@@ -42,6 +50,7 @@ class Requirements(models.Model):
 
 
 class Component(models.Model):
+    """ One material component (abstract base class) """
     cost = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length=100)
 
@@ -53,6 +62,7 @@ class Component(models.Model):
 
 
 class WallInsulation(Component):
+    """ Wall insulation cost data """
     r = models.FloatField()
 
     class Meta:
@@ -67,6 +77,7 @@ class WallInsulation(Component):
 
 
 class RoofInsulation(Component):
+    """ Roof insulation cost data """
     r = models.FloatField()
 
     class Meta:
@@ -81,6 +92,7 @@ class RoofInsulation(Component):
 
 
 class Window(models.Model):
+    """ Window cost data """
     description = models.CharField(max_length=150)
     cost = models.DecimalField(max_digits=5, decimal_places=2)
     u = models.FloatField()
