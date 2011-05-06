@@ -226,7 +226,6 @@ MEDIA_BUNDLES = (
         # Green Primer
         'analyzer/gp.js',
 
-        'analyzer/base/exceptions.js',
         'analyzer/base/utilities.js',
         'analyzer/base/notify.js',
         'analyzer/base/warnings.js',
@@ -237,7 +236,6 @@ MEDIA_BUNDLES = (
         'analyzer/geom/line.js',
 
         'analyzer/actions/action.js',
-        'analyzer/actions/stack.js',
 
         'analyzer/mode/mode.js',
     ),
@@ -275,7 +273,6 @@ MEDIA_BUNDLES = (
         'analyzer/mode/heatflow.js',
         'analyzer/mode/ventilate.js',
 
-        'analyzer/analyze/pressure.js',
         'analyzer/analyze/graph.js',
 
         'analyzer/floor.js',
